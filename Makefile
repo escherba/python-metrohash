@@ -31,11 +31,11 @@ OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(SOURCES:.cpp=.o))
 clean:
 	rm -rf ./$(BINDIR)/ ./$(BUILDDIR)/
 
-$(BUILDDIR)/%.o: ./%.cpp
+$(BUILDDIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	$(CC) $(INC) $(CXXFLAGS) -c $< -o $@
 
-$(BINDIR)/%: $(OBJECTS) $(BUILDDIR)/%.o
+$(BINDIR)/%: $(BUILDDIR)/%.o $(OBJECTS)
 	@mkdir -p $(dir $@)
 	$(CXX) $(LIB) $(LDFLAGS) $^ -o $@
 
