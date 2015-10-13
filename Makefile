@@ -1,28 +1,28 @@
 CXX := g++
 CXXFLAGS := -std=c++11 -msse4.2 -O3
 LDFLAGS := -stdlib=libc++
-
-INPUT := ./data/sample_10k.txt
-
-BINDIR = bin
-SRCDIR := src
-TESTDIR := tests
-BUILDDIR := build
+SRCEXT := cpp
 INC := -I include
 LIB := -L lib
 
-ALL_SOURCES := $(wildcard $(SRCDIR)/*.cpp $(TESTDIR)/*.cpp)
+INPUT := ./data/sample_10k.txt
 
-RUN_SOURCES := $(wildcard $(SRCDIR)/*_main.cpp $(TESTDIR)/*_main.cpp)
-RUN_OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(RUN_SOURCES:.cpp=.o))
+BINDIR := bin
+SRCDIR := src
+TESTDIR := tests
+BUILDDIR := build
+ALL_SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT) $(TESTDIR)/*.$(SRCEXT))
+
+RUN_SOURCES := $(wildcard $(SRCDIR)/*_main.$(SRCEXT) $(TESTDIR)/*_main.$(SRCEXT))
+RUN_OBJECTS := $(patsubst %, $(BUILDDIR)/%, $(RUN_SOURCES:.$(SRCEXT)=.o))
 RUN_TARGETS := $(patsubst $(BUILDDIR)/%.o, $(BINDIR)/%, $(RUN_OBJECTS))
 
-TEST_SOURCES := $(wildcard $(TESTDIR)/test_*.cpp)
-TEST_OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(TEST_SOURCES:.cpp=.o))
+TEST_SOURCES := $(wildcard $(TESTDIR)/test_*.$(SRCEXT))
+TEST_OBJECTS := $(patsubst %, $(BUILDDIR)/%, $(TEST_SOURCES:.$(SRCEXT)=.o))
 TEST_TARGETS := $(patsubst $(BUILDDIR)/%.o, $(BINDIR)/%, $(TEST_OBJECTS))
 
 SOURCES := $(filter-out $(RUN_SOURCES) $(TEST_SOURCES), $(ALL_SOURCES))
-OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(SOURCES:.cpp=.o))
+OBJECTS := $(patsubst %, $(BUILDDIR)/%, $(SOURCES:.$(SRCEXT)=.o))
 
 .PHONY: clean test run
 
@@ -31,7 +31,7 @@ OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(SOURCES:.cpp=.o))
 clean:
 	rm -rf ./$(BINDIR)/ ./$(BUILDDIR)/
 
-$(BUILDDIR)/%.o: %.cpp
+$(BUILDDIR)/%.o: %.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	$(CC) $(INC) $(CXXFLAGS) -c $< -o $@
 
@@ -46,4 +46,4 @@ run: $(RUN_TARGETS)
 		done
 
 test: $(TEST_TARGETS)
-	$(foreach target,$^,./$(target);)
+	$(foreach target, $^, ./$(target);)
