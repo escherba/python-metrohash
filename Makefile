@@ -29,15 +29,14 @@ OBJECTS := $(patsubst %,$(BUILDDIR)/%,$(SOURCES:.cpp=.o))
 .SECONDARY: $(RUN_OBJECTS) $(TEST_OBJECTS) $(OBJECTS)
 
 clean:
-	rm -rf $(BINDIR)/ $(BUILDDIR)/
+	rm -rf ./$(BINDIR)/ ./$(BUILDDIR)/
 
-$(BUILDDIR) $(BINDIR):
-	mkdir -p $@/$(SRCDIR) $@/$(TESTDIR)
-
-$(BUILDDIR)/%.o: ./%.cpp | $(BUILDDIR)
+$(BUILDDIR)/%.o: ./%.cpp
+	@mkdir -p $(dir $@)
 	$(CC) $(INC) $(CXXFLAGS) -c $< -o $@
 
-$(BINDIR)/%: $(OBJECTS) $(BUILDDIR)/%.o | $(BINDIR)
+$(BINDIR)/%: $(OBJECTS) $(BUILDDIR)/%.o
+	@mkdir -p $(dir $@)
 	$(CXX) $(LIB) $(LDFLAGS) $^ -o $@
 
 run: $(RUN_TARGETS)
