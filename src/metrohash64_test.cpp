@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Eugene Scherba (es), escherba@gmail.com
+ *         Author:  Eugene Scherba (es)
  *   Organization:  -
  *
  * =====================================================================================
