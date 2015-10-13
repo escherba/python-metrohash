@@ -11,18 +11,18 @@ BUILDDIR := build
 INC := -I include
 LIB := -L lib
 
-ALL_SOURCES := $(wildcard $(SRCDIR)/*.cpp)
+ALL_SOURCES := $(wildcard $(SRCDIR)/*.cpp $(TESTDIR)/*.cpp)
 
 RUN_SOURCES := $(wildcard $(SRCDIR)/*_main.cpp $(TESTDIR)/*_main.cpp)
-RUN_OBJECTS := $(patsubst %,$(BUILDDIR)/%,$(RUN_SOURCES:.cpp=.o))
-RUN_TARGETS := $(patsubst $(BUILDDIR)/%.o,$(BINDIR)/%,$(RUN_OBJECTS))
+RUN_OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(RUN_SOURCES:.cpp=.o))
+RUN_TARGETS := $(patsubst $(BUILDDIR)/%.o, $(BINDIR)/%, $(RUN_OBJECTS))
 
 TEST_SOURCES := $(wildcard $(TESTDIR)/test_*.cpp)
-TEST_OBJECTS := $(patsubst %,$(BUILDDIR)/%,$(TEST_SOURCES:.cpp=.o))
-TEST_TARGETS := $(patsubst $(BUILDDIR)/%.o,$(BINDIR)/%,$(TEST_OBJECTS))
+TEST_OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(TEST_SOURCES:.cpp=.o))
+TEST_TARGETS := $(patsubst $(BUILDDIR)/%.o, $(BINDIR)/%, $(TEST_OBJECTS))
 
-SOURCES := $(filter-out $(RUN_SOURCES),$(ALL_SOURCES))
-OBJECTS := $(patsubst %,$(BUILDDIR)/%,$(SOURCES:.cpp=.o))
+SOURCES := $(filter-out $(RUN_SOURCES) $(TEST_SOURCES), $(ALL_SOURCES))
+OBJECTS := $(patsubst %,$(BUILDDIR)/%, $(SOURCES:.cpp=.o))
 
 .PHONY: clean test run
 
