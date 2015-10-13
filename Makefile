@@ -40,7 +40,10 @@ $(BINDIR)/%: $(OBJECTS) $(BUILDDIR)/%.o
 	$(CXX) $(LIB) $(LDFLAGS) $^ -o $@
 
 run: $(RUN_TARGETS)
-	@for target in $(RUN_TARGETS); do echo $$target >&2; time ./$$target $(INPUT); done
+	@for target in $(RUN_TARGETS); do \
+		echo $$target >&2; \
+		time ./$$target $(INPUT); \
+		done
 
 test: $(TEST_TARGETS)
 	$(foreach target,$^,./$(target);)
