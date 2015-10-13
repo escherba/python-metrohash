@@ -2,7 +2,7 @@ CXX := g++
 CXXFLAGS := -std=c++11 -msse4.2
 LDFLAGS := -stdlib=libc++
 
-INPUT := ../input.txt
+INPUT := ./data/sample_10k.txt
 
 BINDIR = bin
 SRCDIR := src
@@ -13,13 +13,13 @@ LIB := -L lib
 
 ALL_SOURCES := $(wildcard $(SRCDIR)/*.cpp)
 
-RUN_SOURCES := $(wildcard $(SRCDIR)/*_main.cpp)
+RUN_SOURCES := $(wildcard $(SRCDIR)/*_main.cpp $(TESTDIR)/*_main.cpp)
 RUN_OBJECTS := $(patsubst %,$(BUILDDIR)/%,$(RUN_SOURCES:.cpp=.o))
-RUN_TARGETS := $(patsubst $(BUILDDIR)/%,$(BINDIR)/%,$(RUN_OBJECTS))
+RUN_TARGETS := $(patsubst $(BUILDDIR)/%.o,$(BINDIR)/%,$(RUN_OBJECTS))
 
 TEST_SOURCES := $(wildcard $(TESTDIR)/test_*.cpp)
 TEST_OBJECTS := $(patsubst %,$(BUILDDIR)/%,$(TEST_SOURCES:.cpp=.o))
-TEST_TARGETS := $(patsubst $(BUILDDIR)/%,$(BINDIR)/%,$(TEST_OBJECTS))
+TEST_TARGETS := $(patsubst $(BUILDDIR)/%.o,$(BINDIR)/%,$(TEST_OBJECTS))
 
 SOURCES := $(filter-out $(RUN_SOURCES),$(ALL_SOURCES))
 OBJECTS := $(patsubst %,$(BUILDDIR)/%,$(SOURCES:.cpp=.o))
@@ -37,11 +37,11 @@ $(BUILDDIR) $(BINDIR):
 $(BUILDDIR)/%.o: ./%.cpp | $(BUILDDIR)
 	$(CC) $(INC) $(CXXFLAGS) -c $< -o $@
 
-$(BINDIR)/%: $(OBJECTS) $(BUILDDIR)/% | $(BINDIR)
+$(BINDIR)/%: $(OBJECTS) $(BUILDDIR)/%.o | $(BINDIR)
 	$(CXX) $(LIB) $(LDFLAGS) $^ -o $@
 
 run: $(RUN_TARGETS)
-	$(foreach target,$^,./$(target) $(INPUT);)
+	@for target in $(RUN_TARGETS); do echo $$target >&2; time ./$$target $(INPUT); done
 
 test: $(TEST_TARGETS)
 	$(foreach target,$^,./$(target);)

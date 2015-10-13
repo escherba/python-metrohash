@@ -38,6 +38,7 @@ TEST_CASE( "basic test", "[basic]" ) {
     MetroHash64::Hash((uint8_t * const)test_string, STRLEN(test_string), hash, 0);
     REQUIRE(hash[0] != (uint8_t)'\0');
     REQUIRE(hash[HASH64_SZ] == (uint8_t)'\0');
+    free(hash);
 }
 
 TEST_CASE( "test different seeds", "[diff_seeds]" ) {
@@ -47,6 +48,8 @@ TEST_CASE( "test different seeds", "[diff_seeds]" ) {
     MetroHash64::Hash(test_string, STRLEN(test_string), hash1, 0);
     MetroHash64::Hash(test_string, STRLEN(test_string), hash2, 1);
     REQUIRE(memcmp(hash1, hash2, HASH64_SZ) != 0);
+    free(hash1);
+    free(hash2);
 }
 
 TEST_CASE( "test different inputs", "[diff_inputs]" ) {
@@ -57,4 +60,6 @@ TEST_CASE( "test different inputs", "[diff_inputs]" ) {
     MetroHash64::Hash(test_string1, STRLEN(test_string1), hash1, 0);
     MetroHash64::Hash(test_string2, STRLEN(test_string2), hash2, 0);
     REQUIRE(memcmp(hash1, hash2, HASH64_SZ) != 0);
+    free(hash1);
+    free(hash2);
 }
