@@ -32,9 +32,7 @@ clean:
 	rm -rf $(BINDIR)/ $(BUILDDIR)/
 
 $(BUILDDIR) $(BINDIR):
-	mkdir -p $@
-	mkdir -p $@/$(SRCDIR)
-	mkdir -p $@/$(TESTDIR)
+	mkdir -p $@/$(SRCDIR) $@/$(TESTDIR)
 
 $(BUILDDIR)/%.o: ./%.cpp | $(BUILDDIR)
 	$(CC) $(INC) $(CXXFLAGS) -c $< -o $@
