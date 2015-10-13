@@ -27,13 +27,13 @@ inline uint64_t bytes2int64(uint8_t * const array)
     // uint64_t is guaranteed to be 8 bytes long
     return (uint64_t)(
               static_cast<uint64_t>(array[0])
-            | static_cast<uint64_t>(array[1]) << 8
-            | static_cast<uint64_t>(array[2]) << 16
-            | static_cast<uint64_t>(array[3]) << 24
-            | static_cast<uint64_t>(array[4]) << 32
-            | static_cast<uint64_t>(array[5]) << 40
-            | static_cast<uint64_t>(array[6]) << 48
-            | static_cast<uint64_t>(array[7]) << 56);
+            | static_cast<uint64_t>(array[1]) << 8 * 1
+            | static_cast<uint64_t>(array[2]) << 8 * 2
+            | static_cast<uint64_t>(array[3]) << 8 * 3
+            | static_cast<uint64_t>(array[4]) << 8 * 4
+            | static_cast<uint64_t>(array[5]) << 8 * 5
+            | static_cast<uint64_t>(array[6]) << 8 * 6
+            | static_cast<uint64_t>(array[7]) << 8 * 7);
 }
 
 
