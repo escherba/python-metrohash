@@ -21,11 +21,8 @@
 #include <sstream>
 #include "metrohash64.h"
 
-#define STRLEN(s) (sizeof(s)/sizeof(s[0]))
-#define HASH64_SZ 8
 
-
-uint64_t bytes2int64(uint8_t * const array)
+inline uint64_t bytes2int64(uint8_t * const array)
 {
     // uint64_t is guaranteed to be 8 bytes long
     return (uint64_t)(
@@ -42,8 +39,8 @@ uint64_t bytes2int64(uint8_t * const array)
 
 uint64_t metrohash64(const uint8_t * buffer, const uint64_t length, const uint64_t seed)
 {
-    uint8_t * const hash = (uint8_t * const)calloc(HASH64_SZ + 1, sizeof(uint8_t));
-    MetroHash64::Hash((uint8_t * const)buffer, length, hash, seed);
+    uint8_t * const hash = (uint8_t * const)malloc(8);
+    MetroHash64::Hash(buffer, length, hash, seed);
     uint64_t result = bytes2int64(hash);
     free(hash);
     return result;
