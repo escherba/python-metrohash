@@ -6,16 +6,12 @@ A Python wrapper around MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__      = "Eugene Scherba"
 __email__       = "escherba+metrohash@gmail.com"
-__all__         = ["metrohash64",
-                   "metrohash128",
-                   "hash_combine_1",
-                   "hash_combine_2",
-                   "PHashCombiner",
-                   "CMetroHash64",
-                   "CMetroHash128",
-                   #"mh64",
-                   #"mh128",
-                  ]
+__all__         = [
+    "metrohash64", "metrohash128",
+    "CMetroHash64", "CMetroHash128",
+    "hash_combine_1", "hash_combine_2",
+    "PHashCombiner",
+]
 
 
 cdef extern from * nogil:
