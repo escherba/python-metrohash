@@ -104,9 +104,9 @@ inline uint64 hash_combine_1(uint64 x, uint64 y)
     // Murmur-inspired hashing.
     const uint64 kMul = 0x9ddfea08eb382d69ULL;
     uint64 a = (x ^ y) * kMul;
-    a ^= (a >> 47);
+    a ^= (a >> 47ULL);
     uint64 b = (y ^ a) * kMul;
-    b ^= (b >> 47);
+    b ^= (b >> 47ULL);
     b *= kMul;
     return b;
 }
