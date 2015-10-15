@@ -11,6 +11,8 @@ __all__         = ["metrohash64",
                    "hash_combine_1",
                    "hash_combine_2",
                    "PHashCombiner",
+                   "CMetroHash64",
+                   "CMetroHash128"
                    #"mh64",
                    #"mh128",
                   ]
@@ -44,22 +46,34 @@ cdef extern from "metro.h" nogil:
     ctypedef pair uint128
     cdef uint64 c_Uint128Low64 "Uint128Low64" (uint128& x)
     cdef uint64 c_Uint128High64 "Uint128High64" (uint128& x)
-    cdef uint64 c_metrohash64 "metrohash64" (const uint8 *buf, uint64 len, uint64 seed)
+    cdef uint64 c_metrohash64 "metrohash64" (const uint8* buff, uint64 len, uint64 seed)
+    cdef uint64 c_bytes2int64 "bytes2int64" (uint8* const array)
+    cdef uint128[uint64,uint64] c_bytes2int128 "bytes2int128" (uint8* const array)
     cdef uint64 c_hash_combine_1 "hash_combine_1" (uint64 seed, uint64 v)
     cdef uint64 c_hash_combine_2 "hash_combine_2" (uint64 seed, uint64 v)
-    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8 *buf, uint64 len, uint64 seed)
+    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buff, uint64 len, uint64 seed)
+    cdef cppclass MetroHash64:
+        MetroHash64(const uint64 seed)
+        void Initialize(const uint64 seed)
+        void Update(const uint8* buff, const uint64 length)
+        void Finalize(uint8* const result)
+    cdef cppclass MetroHash128:
+        MetroHash128(const uint64 seed)
+        void Initialize(const uint64 seed)
+        void Update(const uint8* buff, const uint64 length)
+        void Finalize(uint8* const result)
 
 
-cpdef metrohash64(bytes buf, uint64 seed=0):
+cpdef metrohash64(bytes buff, uint64 seed=0):
     """Hash function for a byte array
     """
-    return c_metrohash64(buf, len(buf), seed)
+    return c_metrohash64(buff, len(buff), seed)
 
 
-cpdef metrohash128(bytes buf, uint64 seed=0):
+cpdef metrohash128(bytes buff, uint64 seed=0):
     """Hash function for a byte array
     """
-    cdef pair[uint64, uint64] result = c_metrohash128(buf, len(buf), seed)
+    cdef pair[uint64, uint64] result = c_metrohash128(buff, len(buff), seed)
     return (result.first, result.second)
 
 
@@ -101,30 +115,50 @@ cdef class PHashCombiner(object):
         return sum(h * c for h, c in izip(hashes, self._coeffs)) % self._mod
 
 
-#cdef class mh64:
-#    cdef uint64 __value
-#    cdef public bytes name
-#    def __cinit__(self, bytes value=str("")):
-#        self.name = str("CityHash64")
-#        self.update(value)
-#    cpdef update(self, bytes value):
-#        if self.__value:
-#            self.__value = c_CityHash64WithSeed(value, len(value), self.__value)
-#        else:
-#            self.__value = c_CityHash64(value, len(value))
-#    cpdef digest(self):
-#        return self.__value
-#
-#cdef class mh128:
-#    cdef tuple __value
-#    cdef public bytes name
-#    def __cinit__(self, bytes value=str("")):
-#        self.name = str("CityHash128")
-#        self.update(value)
-#    cpdef update(self, bytes value):
-#        if self.__value:
-#            self.__value = CityHash128WithSeed(value, self.__value)
-#        else:
-#            self.__value = CityHash128(value)
-#    cpdef digest(self):
-#        return self.__value
+cdef class CMetroHash64(object):
+
+    cdef MetroHash64* _m
+    cdef public str name
+
+    def __cinit__(self, uint64 seed=0):
+        self._m = new MetroHash64(seed)
+        self.name = "CityHash64"
+
+    def __dealloc__(self):
+        del self._m
+
+    def initialize(self, uint64 seed=0):
+        self._m.Initialize(seed)
+
+    def update(self, bytes buff):
+        self._m.Update(buff, len(buff))
+
+    def finalize(self):
+        cdef uint8 buff[8]
+        self._m.Finalize(buff)
+        return c_bytes2int64(buff)
+
+
+cdef class CMetroHash128(object):
+
+    cdef MetroHash64* _m
+    cdef public str name
+
+    def __cinit__(self, uint64 seed=0):
+        self._m = new MetroHash64(seed)
+        self.name = "CityHash128"
+
+    def __dealloc__(self):
+        del self._m
+
+    def initialize(self, uint64 seed=0):
+        self._m.Initialize(seed)
+
+    def update(self, bytes buff):
+        self._m.Update(buff, len(buff))
+
+    def finalize(self):
+        cdef uint8 buff[16]
+        self._m.Finalize(buff)
+        cdef pair[uint64, uint64] result = c_bytes2int128(buff)
+        return (result.first, result.second)
