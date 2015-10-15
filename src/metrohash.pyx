@@ -95,7 +95,7 @@ cdef class PHashCombiner(object):
         self._coeffs = [prime ** i for i in xrange(size)]
         self._mod = mod
 
-    cpdef uint64 combine(self, list hashes):
+    cpdef uint64 combine(self, hashes):
         """Combine a list of integer hashes
         """
         return sum([h * c for h, c in izip(hashes, self._coeffs)]) % self._mod
