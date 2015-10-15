@@ -9,6 +9,8 @@ bin/
 # Ignore Mac specific files
 .DS_Store
 
+.cache/
+*.egg-info/
 *.py[cod]
 *.swp
 

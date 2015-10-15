@@ -1,4 +1,4 @@
-// metrohash64.cpp
+// metrohash64.cc
 //
 // The MIT License (MIT)
 //
