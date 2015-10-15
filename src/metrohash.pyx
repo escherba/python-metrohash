@@ -91,7 +91,7 @@ cdef class PHashCombiner(object):
     cdef list _coeffs
     cdef uint64 _mod
 
-    def __init__(self, uint64 size, uint64 prime=31ULL, uint64 mod=18446744073709551615ULL):
+    def __init__(self, uint64 size, uint64 prime=31ULL, uint64 mod=0xFFFFFFFFFFFFFFFFULL):
         self._coeffs = [prime ** i for i in xrange(size)]
         self._mod = mod
 
