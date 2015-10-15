@@ -24,7 +24,7 @@ TEST_TARGETS := $(patsubst $(BUILDDIR)/%.o, $(BINDIR)/%, $(TEST_OBJECTS))
 SOURCES := $(filter-out $(RUN_SOURCES) $(TEST_SOURCES), $(ALL_SOURCES))
 OBJECTS := $(patsubst %, $(BUILDDIR)/%, $(SOURCES:.$(SRCEXT)=.o))
 
-.PHONY: clean test run
+.PHONY: clean_cpp test_cpp run_cpp
 
 .SECONDARY: $(RUN_OBJECTS) $(TEST_OBJECTS) $(OBJECTS)
 

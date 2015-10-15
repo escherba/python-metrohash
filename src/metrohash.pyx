@@ -8,7 +8,8 @@ __author__      = "Eugene Scherba"
 __email__       = "escherba+metrohash@gmail.com"
 __all__         = ["metrohash64",
                    "metrohash128",
-                   "hash128to64",
+                   "hash_combine_1",
+                   "hash_combine_2",
                    #"mh64",
                    #"mh128",
                   ]
@@ -40,7 +41,8 @@ cdef extern from "metro.h" nogil:
     cdef uint64 c_Uint128Low64 "Uint128Low64" (uint128& x)
     cdef uint64 c_Uint128High64 "Uint128High64" (uint128& x)
     cdef uint64 c_metrohash64 "metrohash64" (const uint8 *buf, uint64 len, uint64 seed)
-    cdef uint64 c_hash128to64 "hash128to64" (uint128[uint64,uint64]& x)
+    cdef uint64 c_hash_combine_1 "hash_combine_1" (uint64 x, uint64 y)
+    cdef uint64 c_hash_combine_2 "hash_combine_2" (uint64 x, uint64 y)
     cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8 *buf, uint64 len, uint64 seed)
 
 cpdef metrohash64(bytes buf, uint64 seed=0):
@@ -54,14 +56,16 @@ cpdef metrohash128(bytes buf, uint64 seed=0):
     cdef pair[uint64, uint64] result = c_metrohash128(buf, len(buf), seed)
     return (result.first, result.second)
 
-cpdef hash128to64(tuple x):
+cpdef hash_combine_1(uint64 x, uint64 y):
+    """Hash two 64-bit integers together
     """
-        Description: Hash 128 input bits down to 64 bits of output.
-                     This is intended to be a reasonably good hash function.
+    return c_hash_combine_1(x, y)
+
+cpdef hash_combine_2(uint64 x, uint64 y):
+    """Hash two 64-bit integers together
     """
-    cdef pair[uint64,uint64] xx
-    xx.first, xx.second = x[0], x[1]
-    return c_hash128to64(xx)
+    return c_hash_combine_2(x, y)
+
 
 #cdef class mh64:
 #    cdef uint64 __value

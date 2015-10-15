@@ -99,16 +99,20 @@ inline uint128 metrohash128(const uint8_t *buffer, const uint64 length, const ui
 }
 
 
-// Hash 128 input bits down to 64 bits of output.
-// This is intended to be a reasonably good hash function.
-inline uint64 hash128to64(const uint128& x)
+inline uint64 hash_combine_1(uint64 x, uint64 y)
 {
     // Murmur-inspired hashing.
     const uint64 kMul = 0x9ddfea08eb382d69ULL;
-    uint64 a = (Uint128Low64(x) ^ Uint128High64(x)) * kMul;
+    uint64 a = (x ^ y) * kMul;
     a ^= (a >> 47);
-    uint64 b = (Uint128High64(x) ^ a) * kMul;
+    uint64 b = (y ^ a) * kMul;
     b ^= (b >> 47);
     b *= kMul;
     return b;
+}
+
+inline uint64 hash_combine_2(uint64 x, uint64 y)
+{
+    // A simple hash
+    return x ^ (y + 0x9e3779b9 + (x << 6) + (x >> 2));
 }
