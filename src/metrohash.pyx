@@ -6,9 +6,9 @@ A Python wrapper around MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__      = "Eugene Scherba"
 __email__       = "escherba+metrohash@gmail.com"
-__all__         = ["MetroHash64",
-                   "MetroHash128",
-                   "Hash128to64",
+__all__         = ["metrohash64",
+                   "metrohash128",
+                   "hash128to64",
                    #"mh64",
                    #"mh128",
                   ]
@@ -43,18 +43,18 @@ cdef extern from "metro.h" nogil:
     cdef uint64  c_Hash128to64 "Hash128to64" (uint128[uint64,uint64]& x)
     cdef uint128[uint64,uint64] c_metrohash_128_with_seed "metrohash_128_with_seed" (const uint8 *buf, uint64 len, uint64 seed)
 
-cpdef MetroHash64(bytes buf, uint64 seed=0):
+cpdef metrohash64(bytes buf, uint64 seed=0):
     """Hash function for a byte array
     """
     return c_metrohash_64_with_seed(buf, len(buf), seed)
 
-cpdef MetroHash128(bytes buf, uint64 seed=0):
+cpdef metrohash128(bytes buf, uint64 seed=0):
     """Hash function for a byte array
     """
     cdef pair[uint64, uint64] result = c_metrohash_128_with_seed(buf, len(buf), seed)
     return (result.first, result.second)
 
-cpdef Hash128to64(tuple x):
+cpdef hash128to64(tuple x):
     """
         Description: Hash 128 input bits down to 64 bits of output.
                      This is intended to be a reasonably good hash function.
