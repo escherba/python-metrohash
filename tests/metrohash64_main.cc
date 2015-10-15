@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     std::ifstream infile(argv[1]);
     while (std::getline(infile, line))
     {
-        uint64_t result = metrohash_64_with_seed((uint8_t*)line.c_str(), line.length(), 0);
+        uint64_t result = metrohash64((uint8_t*)line.c_str(), line.length(), 0);
         std::cout << result << "\t" << line << std::endl;
     }
     return EXIT_SUCCESS;

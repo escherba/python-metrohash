@@ -83,7 +83,7 @@ inline uint128 bytes2int128(uint8_t * const array)
 }
 
 
-inline uint64 metrohash_64_with_seed(const uint8_t *buffer, const uint64 length, const uint64 seed)
+inline uint64 metrohash64(const uint8_t *buffer, const uint64 length, const uint64 seed)
 {
     uint8_t hash[8];
     MetroHash64::Hash(buffer, length, hash, seed);
@@ -91,7 +91,7 @@ inline uint64 metrohash_64_with_seed(const uint8_t *buffer, const uint64 length,
 }
 
 
-inline uint128 metrohash_128_with_seed(const uint8_t *buffer, const uint64 length, const uint64 seed)
+inline uint128 metrohash128(const uint8_t *buffer, const uint64 length, const uint64 seed)
 {
     uint8_t hash[16];
     MetroHash128::Hash(buffer, length, hash, seed);
@@ -101,7 +101,7 @@ inline uint128 metrohash_128_with_seed(const uint8_t *buffer, const uint64 lengt
 
 // Hash 128 input bits down to 64 bits of output.
 // This is intended to be a reasonably good hash function.
-inline uint64 Hash128to64(const uint128& x)
+inline uint64 hash128to64(const uint128& x)
 {
     // Murmur-inspired hashing.
     const uint64 kMul = 0x9ddfea08eb382d69ULL;
