@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  test_metrohash.cc
+ *       Filename:  test_metro.cc
  *
  *    Description:  Some basic tests for MetroHash
  *
@@ -24,7 +24,7 @@
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-#include "metrohash.h"
+#include "metro.h"
 
 #define STRLEN(s) (sizeof(s)/sizeof(s[0]))
 #define HASH64_SZ 8
