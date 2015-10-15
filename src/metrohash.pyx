@@ -125,15 +125,20 @@ cdef class PHashCombiner(object):
 
 cdef class CMetroHash64(object):
 
+    """Incremental hasher interface for MetroHash64
+    """
+
     cdef MetroHash64* _m
-    cdef public str name
 
     def __cinit__(self, uint64 seed=0):
         self._m = new MetroHash64(seed)
-        self.name = "CityHash64"
+        if self._m is NULL:
+            raise MemoryError()
 
     def __dealloc__(self):
-        del self._m
+        if not self._m is NULL:
+            del self._m
+            self._m = NULL
 
     def initialize(self, uint64 seed=0):
         self._m.Initialize(seed)
@@ -150,15 +155,20 @@ cdef class CMetroHash64(object):
 
 cdef class CMetroHash128(object):
 
+    """Incremental hasher interface for MetroHash128
+    """
+
     cdef MetroHash128* _m
-    cdef public str name
 
     def __cinit__(self, uint64 seed=0):
         self._m = new MetroHash128(seed)
-        self.name = "CityHash128"
+        if self._m is NULL:
+            raise MemoryError()
 
     def __dealloc__(self):
-        del self._m
+        if not self._m is NULL:
+            del self._m
+            self._m = NULL
 
     def initialize(self, uint64 seed=0):
         self._m.Initialize(seed)
