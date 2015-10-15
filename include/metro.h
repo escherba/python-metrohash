@@ -93,7 +93,7 @@ inline uint64 metrohash_64_with_seed(const uint8_t *buffer, const uint64 length,
 
 inline uint128 metrohash_128_with_seed(const uint8_t *buffer, const uint64 length, const uint64 seed)
 {
-    uint8_t hash[8];
+    uint8_t hash[16];
     MetroHash128::Hash(buffer, length, hash, seed);
     return bytes2int128(hash);
 }
