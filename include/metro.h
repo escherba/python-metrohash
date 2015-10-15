@@ -99,20 +99,20 @@ inline uint128 metrohash128(const uint8_t *buffer, const uint64 length, const ui
 }
 
 
-inline uint64 hash_combine_1(uint64 x, uint64 y)
+inline uint64 hash_combine_1(uint64 seed, uint64 v)
 {
     // Murmur-inspired hashing.
     const uint64 kMul = 0x9ddfea08eb382d69ULL;
-    uint64 a = (x ^ y) * kMul;
+    uint64 a = (seed ^ v) * kMul;
     a ^= (a >> 47ULL);
-    uint64 b = (y ^ a) * kMul;
+    uint64 b = (v ^ a) * kMul;
     b ^= (b >> 47ULL);
     b *= kMul;
     return b;
 }
 
-inline uint64 hash_combine_2(uint64 x, uint64 y)
+inline uint64 hash_combine_2(uint64 seed, uint64 v)
 {
-    // A simple hash
-    return x ^ (y + 0x9e3779b9ULL + (x << 6ULL) + (x >> 2ULL));
+    // From boost::hash_combine
+    return seed ^ (v + 0x9e3779b9ULL + (seed << 6ULL) + (seed >> 2ULL));
 }
