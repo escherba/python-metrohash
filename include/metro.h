@@ -114,5 +114,5 @@ inline uint64 hash_combine_1(uint64 x, uint64 y)
 inline uint64 hash_combine_2(uint64 x, uint64 y)
 {
     // A simple hash
-    return x ^ (y + 0x9e3779b9 + (x << 6) + (x >> 2));
+    return x ^ (y + 0x9e3779b9ULL + (x << 6ULL) + (x >> 2ULL));
 }
