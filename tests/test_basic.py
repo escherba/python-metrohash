@@ -4,7 +4,7 @@ from metrohash import metrohash64, PHashCombiner, hash_combine_1, \
     hash_combine_2
 
 
-class TestUtils(unittest.TestCase):
+class TestCombiners(unittest.TestCase):
 
     def test_hash_combiner_0(self):
         """PHashCombiner should work on long inputs"""
