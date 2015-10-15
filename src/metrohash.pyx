@@ -14,6 +14,7 @@ __all__         = ["MetroHash64",
                   ]
 
 cdef extern from * nogil:
+    ctypedef unsigned char uint8_t
     ctypedef unsigned long int uint32_t
     ctypedef unsigned long long int uint64_t
 
@@ -32,14 +33,15 @@ cdef extern from "<utility>" namespace "std":
         bint operator >= (pair&, pair&)
 
 cdef extern from "metro.h" nogil:
+    ctypedef uint8_t uint8
     ctypedef uint32_t uint32
     ctypedef uint64_t uint64
     ctypedef pair uint128
     cdef uint64  c_Uint128Low64 "Uint128Low64" (uint128& x)
     cdef uint64  c_Uint128High64 "Uint128High64" (uint128& x)
-    cdef uint64  c_metrohash_64_with_seed "metrohash_64_with_seed" (const unsigned char *buf, uint64 len, uint64 seed)
+    cdef uint64  c_metrohash_64_with_seed "metrohash_64_with_seed" (const uint8 *buf, uint64 len, uint64 seed)
     cdef uint64  c_Hash128to64 "Hash128to64" (uint128[uint64,uint64]& x)
-    cdef uint128[uint64,uint64] c_metrohash_128_with_seed "metrohash_128_with_seed" (const unsigned char *buf, uint64 len, uint64 seed)
+    cdef uint128[uint64,uint64] c_metrohash_128_with_seed "metrohash_128_with_seed" (const uint8 *buf, uint64 len, uint64 seed)
 
 cpdef MetroHash64(bytes buf, uint64 seed=0):
     """Hash function for a byte array
