@@ -18,9 +18,11 @@ MetroHash64
 
 .. code-block:: python
 
-    >>> from metrohash import MetroHash64, MetroHash128
-    >>> MetroHash64("abc")
+    >>> import metrohash
+    >>> metrohash.MetroHash64("abc")
     17099979927131455419L
-    >>> MetroHash128("abc")
+    >>> metrohash.MetroHash128("abc")
     (9920195071304498087L, 2078520654167540133L)
+    >>> metrohash.Hash128to64(metrohash.MetroHash128("abc"))
+    11756436918765573838L
 
