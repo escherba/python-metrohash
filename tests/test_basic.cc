@@ -63,3 +63,27 @@ TEST_CASE( "test different inputs", "[diff_inputs]" ) {
     free(hash1);
     free(hash2);
 }
+
+TEST_CASE( "implementation verified", "[verified]" ) {
+    REQUIRE(MetroHash64::ImplementationVerified());
+}
+
+TEST_CASE( "test incremental updating", "[incremental]" ) {
+    uint8_t * const hash_incremental = (uint8_t * const)calloc(HASH64_SZ + 1, sizeof(uint8_t));
+    uint8_t * const hash_whole = (uint8_t * const)calloc(HASH64_SZ + 1, sizeof(uint8_t));
+    const uint8_t test_string[] = "abracadabra";
+    const uint8_t test_string1[] = "abra";
+    const uint8_t test_string2[] = "cadabra";
+    REQUIRE(hash_incremental[0] == (uint8_t)'\0');
+    REQUIRE(hash_incremental[HASH64_SZ] == (uint8_t)'\0');
+    MetroHash64 m = MetroHash64(0);
+    m.Update(test_string1, STRLEN(test_string1));
+    m.Update(test_string2, STRLEN(test_string2));
+    m.Finalize(hash_incremental);
+    MetroHash64::Hash(test_string, STRLEN(test_string), hash_whole, 0);
+    REQUIRE(hash_incremental[0] != (uint8_t)'\0');
+    REQUIRE(hash_incremental[HASH64_SZ] == (uint8_t)'\0');
+    REQUIRE(memcmp(hash_incremental, hash_whole, HASH64_SZ) != 0);
+    free(hash_incremental);
+    free(hash_whole);
+}

@@ -11,3 +11,12 @@ bin/
 
 *.py[cod]
 *.swp
+
+tags
+
+env/
+
+# Cython intermediate
+src/metrohash.cpp
+
+*.so
