@@ -64,7 +64,7 @@ cdef extern from "metro.h" nogil:
         void Finalize(uint8* const result)
 
 
-cdef uint8* _chars(s):
+cdef uint8* _chars(basestring s):
     if isinstance(s, unicode):
         s = s.encode('utf8')
     return s
