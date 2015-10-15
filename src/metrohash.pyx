@@ -12,7 +12,7 @@ __all__         = ["metrohash64",
                    "hash_combine_2",
                    "PHashCombiner",
                    "CMetroHash64",
-                   "CMetroHash128"
+                   "CMetroHash128",
                    #"mh64",
                    #"mh128",
                   ]
@@ -64,16 +64,24 @@ cdef extern from "metro.h" nogil:
         void Finalize(uint8* const result)
 
 
-cpdef metrohash64(bytes buff, uint64 seed=0):
-    """Hash function for a byte array
-    """
-    return c_metrohash64(buff, len(buff), seed)
+cdef uint8* _chars(s):
+    if isinstance(s, unicode):
+        s = s.encode('utf8')
+    return s
 
 
-cpdef metrohash128(bytes buff, uint64 seed=0):
+cpdef metrohash64(basestring data, uint64 seed=0):
     """Hash function for a byte array
     """
-    cdef pair[uint64, uint64] result = c_metrohash128(buff, len(buff), seed)
+    array = _chars(data)
+    return c_metrohash64(array, len(array), seed)
+
+
+cpdef metrohash128(basestring data, uint64 seed=0):
+    """Hash function for a byte array
+    """
+    array = _chars(data)
+    cdef pair[uint64, uint64] result = c_metrohash128(data, len(data), seed)
     return (result.first, result.second)
 
 
@@ -130,8 +138,9 @@ cdef class CMetroHash64(object):
     def initialize(self, uint64 seed=0):
         self._m.Initialize(seed)
 
-    def update(self, bytes buff):
-        self._m.Update(buff, len(buff))
+    def update(self, basestring data):
+        array = _chars(data)
+        self._m.Update(array, len(array))
 
     def finalize(self):
         cdef uint8 buff[8]
@@ -141,11 +150,11 @@ cdef class CMetroHash64(object):
 
 cdef class CMetroHash128(object):
 
-    cdef MetroHash64* _m
+    cdef MetroHash128* _m
     cdef public str name
 
     def __cinit__(self, uint64 seed=0):
-        self._m = new MetroHash64(seed)
+        self._m = new MetroHash128(seed)
         self.name = "CityHash128"
 
     def __dealloc__(self):
@@ -154,8 +163,9 @@ cdef class CMetroHash128(object):
     def initialize(self, uint64 seed=0):
         self._m.Initialize(seed)
 
-    def update(self, bytes buff):
-        self._m.Update(buff, len(buff))
+    def update(self, basestring data):
+        array = _chars(data)
+        self._m.Update(array, len(array))
 
     def finalize(self):
         cdef uint8 buff[16]

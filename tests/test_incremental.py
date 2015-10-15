@@ -1,10 +1,10 @@
 import unittest
 import random
 import string
-from metrohash import CMetroHash64, CMetroHash128
+from metrohash import CMetroHash64, CMetroHash128, metrohash64, metrohash128
 
 
-def random_string(n, alphabet=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+def random_string(n, alphabet=string.ascii_lowercase):
     return ''.join(random.choice(alphabet) for _ in range(n))
 
 
@@ -13,6 +13,21 @@ def random_splits(string, n, nsplits=2):
     splits = [0] + splits + [n]
     for a, b in zip(splits, splits[1:]):
         yield string[a:b]
+
+
+class TestStandalone(unittest.TestCase):
+
+    def test_unicode_64(self):
+        """Must accept Unicode input"""
+        test_case = u"abc"
+        self.assertEqual(17099979927131455419L,
+                         metrohash64(test_case))
+
+    def test_unicode_128(self):
+        """Must accept Unicode input"""
+        test_case = u"abc"
+        self.assertEqual((9920195071304498087L, 2078520654167540133L),
+                         metrohash128(test_case))
 
 
 class TestCombiners(unittest.TestCase):
