@@ -26,7 +26,7 @@
 #include "catch.hpp"
 #include "metro.h"
 
-#define STRLEN(s) (sizeof(s)/sizeof(s[0]))
+#define STRLEN(s) (sizeof(s)/sizeof(s[0]) - 1)
 #define HASH64_SZ 8
 #define HASH128_SZ 16
 
@@ -79,14 +79,17 @@ TEST_CASE( "test incremental updating (64-bit)", "[incremental64]" ) {
     const uint8_t test_string2[] = "cadabra";
     REQUIRE(hash_incremental[0] == (uint8_t)'\0');
     REQUIRE(hash_incremental[HASH64_SZ] == (uint8_t)'\0');
-    MetroHash64 m = MetroHash64(0);
-    m.Update(test_string1, STRLEN(test_string1));
-    m.Update(test_string2, STRLEN(test_string2));
-    m.Finalize(hash_incremental);
-    MetroHash64::Hash(test_string, STRLEN(test_string), hash_whole, 0);
+    MetroHash64 m1(0);
+    m1.Update(test_string1, STRLEN(test_string1));
+    m1.Update(test_string2, STRLEN(test_string2));
+    m1.Finalize(hash_incremental);
+    MetroHash64 m2(0);
+    m2.Update(test_string, STRLEN(test_string));
+    m2.Finalize(hash_whole);
     REQUIRE(hash_incremental[0] != (uint8_t)'\0');
     REQUIRE(hash_incremental[HASH64_SZ] == (uint8_t)'\0');
-    REQUIRE(memcmp(hash_incremental, hash_whole, HASH64_SZ) != 0);
+    REQUIRE(memcmp(hash_incremental, hash_whole, HASH64_SZ) == 0);
+    REQUIRE(bytes2int64(hash_incremental) == bytes2int64(hash_whole));
     free(hash_incremental);
     free(hash_whole);
 }
@@ -140,14 +143,17 @@ TEST_CASE( "test incremental updating (128-bit)", "[incremental128]" ) {
     const uint8_t test_string2[] = "cadabra";
     REQUIRE(hash_incremental[0] == (uint8_t)'\0');
     REQUIRE(hash_incremental[HASH128_SZ] == (uint8_t)'\0');
-    MetroHash128 m = MetroHash128(0);
-    m.Update(test_string1, STRLEN(test_string1));
-    m.Update(test_string2, STRLEN(test_string2));
-    m.Finalize(hash_incremental);
-    MetroHash128::Hash(test_string, STRLEN(test_string), hash_whole, 0);
+    MetroHash128 m1(0);
+    m1.Update(test_string1, STRLEN(test_string1));
+    m1.Update(test_string2, STRLEN(test_string2));
+    m1.Finalize(hash_incremental);
+    MetroHash128 m2(0);
+    m2.Update(test_string, STRLEN(test_string));
+    m2.Finalize(hash_whole);
     REQUIRE(hash_incremental[0] != (uint8_t)'\0');
     REQUIRE(hash_incremental[HASH128_SZ] == (uint8_t)'\0');
-    REQUIRE(memcmp(hash_incremental, hash_whole, HASH128_SZ) != 0);
+    REQUIRE(memcmp(hash_incremental, hash_whole, HASH128_SZ) == 0);
+    REQUIRE(bytes2int128(hash_incremental) == bytes2int128(hash_whole));
     free(hash_incremental);
     free(hash_whole);
 }
