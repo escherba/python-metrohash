@@ -4,6 +4,13 @@ MetroHash
 This is a Python wrapper around a C implementation of MetroHash,
 a fast non-cryptographic hashing algorithm.
 
+.. image:: https://travis-ci.org/escherba/python-metrohash.svg
+    :target: https://travis-ci.org/escherba/python-metrohash
+
+
+Installation
+------------
+
 To get started, clone this repo and run `make env` or alternatively
 install it into your environment of choice (below). Note that you
 will need to have Cython installed before you install this package.
