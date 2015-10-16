@@ -17,7 +17,7 @@ will need to have Cython installed before you install this package.
 .. code-block:: bash
 
     pip install -U cython
-    pip install git+https://github.com/escherba/metrohash#egg=metrohash-0.0.1
+    pip install git+https://github.com/escherba/metrohash
 
 
 Example Usage
