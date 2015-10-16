@@ -31,7 +31,7 @@ class build_ext_subclass(build_ext):
 
 
 setup(
-    version="0.0.1",
+    version="0.0.2",
     description="Python bindings for MetroHash",
     author="Eugene Scherba",
     author_email="escherba+metrohash@gmail.com",
