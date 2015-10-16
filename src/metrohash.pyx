@@ -144,7 +144,7 @@ cdef class CMetroHash64(object):
         array = _chars(data)
         self._m.Update(array, len(array))
 
-    def finalize(self):
+    def intdigest(self):
         cdef uint8 buff[8]
         self._m.Finalize(buff)
         return c_bytes2int64(buff)
@@ -174,7 +174,7 @@ cdef class CMetroHash128(object):
         array = _chars(data)
         self._m.Update(array, len(array))
 
-    def finalize(self):
+    def intdigest(self):
         cdef uint8 buff[16]
         self._m.Finalize(buff)
         cdef pair[uint64, uint64] result = c_bytes2int128(buff)

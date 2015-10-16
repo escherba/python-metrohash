@@ -24,8 +24,9 @@ Example Usage
 -------------
 
 This package provides Python interfaces to 64- and 128-bit implementations
-of MetroHash algorithm. For stateless hashing, it exports `metrohash64` and
-``metrohash128`` functions. Each has an optional ``seed`` parameter.
+of MetroHash algorithm. For stateless hashing, it exports ``metrohash64`` and
+``metrohash128`` functions. Both take a value to be hashed (either string or unicode) and
+an optional ``seed`` parameter:
 
 .. code-block:: python
 
@@ -47,7 +48,7 @@ processing large inputs and stream data.
     >>> mh = metrohash.CMetroHash64()
     >>> mh.update("Nobody inspects")
     >>> mh.update(" the spammish repetition")
-    >>> mh.finalize()
+    >>> mh.intdigest()
     7851180100622203313L
 
 Note that the resulting hash value above is the same as:
@@ -56,5 +57,5 @@ Note that the resulting hash value above is the same as:
 
     >>> mh = metrohash.CMetroHash64()
     >>> mh.update("Nobody inspects the spammish repetition")
-    >>> mh.finalize()
+    >>> mh.intdigest()
     7851180100622203313L

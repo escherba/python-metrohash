@@ -59,10 +59,10 @@ class TestCombiners(unittest.TestCase):
             pieces = list(random_splits(data, nchars, random.randint(*split_range)))
             for piece in pieces:
                 m1.update(piece)
-            incremental = m1.finalize()
+            incremental = m1.intdigest()
             m2 = hasher()
             m2.update(data)
-            whole = m2.finalize()
+            whole = m2.intdigest()
             msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (pieces, whole, incremental)
             self.assertEqual(whole, incremental, msg)
 
@@ -81,9 +81,9 @@ class TestCombiners(unittest.TestCase):
             pieces = list(random_splits(data, nchars, random.randint(*split_range)))
             for piece in pieces:
                 m1.update(piece)
-            incremental = m1.finalize()
+            incremental = m1.intdigest()
             m2 = hasher()
             m2.update(data)
-            whole = m2.finalize()
+            whole = m2.intdigest()
             msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (pieces, whole, incremental)
             self.assertEqual(whole, incremental, msg)
