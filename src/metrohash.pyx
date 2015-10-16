@@ -4,9 +4,10 @@
 A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 """
 
-__author__ = "Eugene Scherba"
-__email__  = "escherba+metrohash@gmail.com"
-__all__    = [
+__author__  = "Eugene Scherba"
+__email__   = "escherba+metrohash@gmail.com"
+__version__ = "0.0.1"
+__all__     = [
     "metrohash64", "metrohash128",
     "CMetroHash64", "CMetroHash128",
     "hash_combine_1", "hash_combine_2",
