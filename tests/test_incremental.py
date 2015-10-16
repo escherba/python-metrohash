@@ -32,14 +32,15 @@ class TestStandalone(unittest.TestCase):
     def test_unicode_128_1(self):
         """Must accept Unicode input"""
         test_case = u"abc"
-        self.assertEqual((9920195071304498087L, 2078520654167540133L),
+        self.assertEqual(182995299641628952910564950850867298725L,
                          metrohash128(test_case))
 
     def test_unicode_128_2(self):
         """Must accept Unicode input"""
         test_case = u'\u2661'
-        self.assertEqual((3851320945465930195L, 11486286975777429668L),
+        self.assertEqual(71044331826727115060124269853582874788L,
                          metrohash128(test_case))
+
 
 class TestCombiners(unittest.TestCase):
 

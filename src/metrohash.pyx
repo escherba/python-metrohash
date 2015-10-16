@@ -79,7 +79,7 @@ cpdef metrohash128(basestring data, uint64 seed=0):
     """
     array = _chars(data)
     cdef pair[uint64, uint64] result = c_metrohash128(array, len(array), seed)
-    return (result.first, result.second)
+    return 0x10000000000000000 * int(result.first) + int(result.second)
 
 
 cpdef hash_combine_1(uint64 seed, uint64 v):

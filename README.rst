@@ -33,7 +33,7 @@ of MetroHash algorithm:
     >>> metrohash.metrohash64("abc")
     17099979927131455419L
     >>> metrohash.metrohash128("abc")
-    (9920195071304498087L, 2078520654167540133L)
+    182995299641628952910564950850867298725L
 
 
 For incremental hashing, use CMetroHash classes:
