@@ -10,7 +10,7 @@ A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash>`
 Installation
 ------------
 
-To get started, clone this repo and run ``make env`` or alternatively
+To get started, clone this repo and run ``make env`` or, alternatively,
 install it into your environment of choice (below). Note that you
 will need to have Cython installed before you install this package.
 
@@ -23,7 +23,7 @@ will need to have Cython installed before you install this package.
 Example Usage
 -------------
 
-The module provides Python interfaces to 64- and 128-bit implementations
+This package provides Python interfaces to 64- and 128-bit implementations
 of MetroHash algorithm. For stateless hashing, it exports `metrohash64` and
 ``metrohash128`` functions. Each has an optional ``seed`` parameter.
 
@@ -39,7 +39,8 @@ of MetroHash algorithm. For stateless hashing, it exports `metrohash64` and
 
 For incremental hashing, use ``CMetroHash64`` and ``CMetroHash128`` classes.
 Incremental hashing is associative and guarantees that any combination of
-input slices will result in the same final hash value.
+input slices will result in the same final hash value. This is useful for
+processing large inputs and stream data.
 
 .. code-block:: python
 
