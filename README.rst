@@ -1,7 +1,7 @@
 MetroHash
 =========
 
-A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash`__,
+A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash>`__,
 a fast non-cryptographic hashing algorithm.
 
 .. image:: https://travis-ci.org/escherba/python-metrohash.svg
