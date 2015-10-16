@@ -37,13 +37,16 @@ CXXFLAGS = u"""
 -Wno-unused-function
 """.split()
 
+VERSION = '0.0.3'
+URL = "https://github.com/escherba/python-metrohash"
 
 setup(
-    version="0.0.3",
+    version=VERSION,
     description="Python bindings for MetroHash",
     author="Eugene Scherba",
     author_email="escherba+metrohash@gmail.com",
-    url="https://github.com/escherba/metrohash",
+    url=URL,
+    download_url=URL + "/tarball/master/" + VERSION,
     name='metrohash',
     license='MIT',
     cmdclass={'build_ext': build_ext_subclass},
@@ -53,6 +56,7 @@ setup(
                            language="c++",
                            extra_compile_args=CXXFLAGS,
                            include_dirs=['include'])],
+    keywords=['hashing'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Operating System :: OS Independent',
