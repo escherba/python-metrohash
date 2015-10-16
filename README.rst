@@ -45,16 +45,16 @@ processing large inputs and stream data.
 .. code-block:: python
 
     >>> mh = metrohash.CMetroHash64()
-    >>> mh.update("abc")
-    >>> mh.update("def")
+    >>> mh.update("Nobody inspects")
+    >>> mh.update(" the spammish repetition")
     >>> mh.finalize()
-    3528379674302886064L
+    7851180100622203313L
 
 Note that the resulting hash value above is the same as:
 
 .. code-block:: python
 
     >>> mh = metrohash.CMetroHash64()
-    >>> mh.update("abcdef")
+    >>> mh.update("Nobody inspects the spammish repetition")
     >>> mh.finalize()
-    3528379674302886064L
+    7851180100622203313L
