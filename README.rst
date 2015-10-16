@@ -1,7 +1,7 @@
 MetroHash
 =========
 
-This is a Python wrapper around a C implementation of MetroHash,
+A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash`__,
 a fast non-cryptographic hashing algorithm.
 
 .. image:: https://travis-ci.org/escherba/python-metrohash.svg
@@ -21,8 +21,8 @@ will need to have Cython installed before you install this package.
     pip install git+https://github.com/escherba/metrohash#egg=metrohash-0.0.1
 
 
-Usage
------
+Example Usage
+-------------
 
 The module provides Python interfaces to 64- and 128-bit implementations
 of MetroHash algorithm:
