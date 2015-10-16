@@ -42,7 +42,7 @@ URL = "https://github.com/escherba/python-metrohash"
 
 setup(
     version=VERSION,
-    description="Python bindings for MetroHash",
+    description="Python bindings for MetroHash, a fast non-cryptographic hash algorithm",
     author="Eugene Scherba",
     author_email="escherba+metrohash@gmail.com",
     url=URL,
@@ -68,19 +68,22 @@ setup(
                            language="c++",
                            extra_compile_args=CXXFLAGS,
                            include_dirs=['include'])],
-    keywords=['hashing'],
+    keywords=['hash', 'hashing'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: C++',
         'Programming Language :: Cython',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Internet',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Software Development',
         'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Utilities'
     ],
     long_description=resource_string(__name__, 'README.rst'),
 )
