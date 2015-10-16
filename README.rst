@@ -17,7 +17,7 @@ will need to have Cython installed before you install this package.
 .. code-block:: bash
 
     pip install -U cython
-    pip install git+https://github.com/escherba/metrohash
+    pip install metrohash
 
 
 Example Usage
@@ -41,7 +41,7 @@ an optional ``seed`` parameter:
 For incremental hashing, use ``CMetroHash64`` and ``CMetroHash128`` classes.
 Incremental hashing is associative and guarantees that any combination of
 input slices will result in the same final hash value. This is useful for
-processing large inputs and stream data.
+processing large inputs and stream data. Example with two slices:
 
 .. code-block:: python
 
@@ -51,7 +51,7 @@ processing large inputs and stream data.
     >>> mh.intdigest()
     7851180100622203313L
 
-Note that the resulting hash value above is the same as:
+Note that the resulting hash value above is the same as in:
 
 .. code-block:: python
 
