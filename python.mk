@@ -21,14 +21,14 @@ build_ext: $(EXTENSION).so
 $(EXTENSION).so: ./src/$(PYMODULE).pyx
 	$(PYTHON) setup.py build_ext --inplace
 
-test: extras $(EXTENSION).so
+test: extras $(EXTENSION).so | test_cpp
 	$(PYENV) nosetests $(NOSEARGS)
 	$(PYENV) py.test README.rst
 
 nuke: clean
 	rm -rf *.egg *.egg-info env
 
-clean:
+clean: | clean_cpp
 	python setup.py clean
 	rm -rf dist build *.so
 	find . -path ./env -prune -o -type f -name "*.pyc" -exec rm {} \;

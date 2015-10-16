@@ -1,2 +1,2 @@
-include python.mk
 include cpp.mk
+include python.mk
