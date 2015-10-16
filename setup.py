@@ -39,7 +39,7 @@ CXXFLAGS = u"""
 
 
 setup(
-    version="0.0.2",
+    version="0.0.3",
     description="Python bindings for MetroHash",
     author="Eugene Scherba",
     author_email="escherba+metrohash@gmail.com",
