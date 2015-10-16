@@ -78,7 +78,7 @@ cpdef metrohash128(basestring data, uint64 seed=0):
     """Hash function for a byte array
     """
     array = _chars(data)
-    cdef pair[uint64, uint64] result = c_metrohash128(data, len(data), seed)
+    cdef pair[uint64, uint64] result = c_metrohash128(array, len(array), seed)
     return (result.first, result.second)
 
 
