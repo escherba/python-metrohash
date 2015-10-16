@@ -30,6 +30,14 @@ class build_ext_subclass(build_ext):
         build_ext.build_extensions(self)
 
 
+CXXFLAGS = u"""
+-O3
+-msse4.2
+-Wno-unused-value
+-Wno-unused-function
+""".split()
+
+
 setup(
     version="0.0.2",
     description="Python bindings for MetroHash",
@@ -43,7 +51,7 @@ setup(
                                          "src/metrohash128.cc",
                                          "src/metrohash.pyx"],
                            language="c++",
-                           extra_compile_args=['-O3', '-msse4.2'],
+                           extra_compile_args=CXXFLAGS,
                            include_dirs=['include'])],
     classifiers=[
         'Development Status :: 3 - Alpha',
