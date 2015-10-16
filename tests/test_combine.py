@@ -24,18 +24,22 @@ class TestCombiners(unittest.TestCase):
         comb = PHashCombiner(8)
         self.assertEqual(0L, comb.combine([]))
 
+    def _check_combiner(self, func):
+        VEC_SIZE = 8
+        vec = [metrohash64(str(x)) for x in range(VEC_SIZE)]
+        result1 = reduce(func, vec, 0L)
+        for val in vec:
+            self.assertNotEqual(result1, val)
+        vec[VEC_SIZE // 2] = metrohash64("test")
+        result2 = reduce(func, vec, 0L)
+        for val in vec:
+            self.assertNotEqual(result2, val)
+        self.assertNotEqual(result1, result2)
+
     def test_hash_combine_1(self):
         """hash_combine_1 should work"""
-        vec = [metrohash64(str(x)) for x in range(8)]
-        result = reduce(hash_combine_1, vec, 1337L)
-        for val in vec:
-            self.assertNotEqual(result, val)
-        self.assertEqual(4912212594039284774L, result)
+        self._check_combiner(hash_combine_1)
 
     def test_hash_combine_2(self):
         """hash_combine_2 should work"""
-        vec = [metrohash64(str(x)) for x in range(8)]
-        result = reduce(hash_combine_2, vec, 1337L)
-        for val in vec:
-            self.assertNotEqual(result, val)
-        self.assertEqual(742260322578448263L, result)
+        self._check_combiner(hash_combine_2)
