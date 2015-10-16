@@ -1,9 +1,12 @@
 MetroHash
-========
+=========
 
-This is a Python wrapper around a C implementation of MetroHash, a fast non-cryptographic hashing algorithm.
+This is a Python wrapper around a C implementation of MetroHash,
+a fast non-cryptographic hashing algorithm.
 
-To get started, clone this repo and run the setup.py script, or, alternatively
+To get started, clone this repo and run `make env` or alternatively
+install it into your environment of choice (below). Note that you
+will need to have Cython installed before you install this package.
 
 .. code-block:: bash
 
@@ -11,10 +14,11 @@ To get started, clone this repo and run the setup.py script, or, alternatively
     pip install git+https://github.com/escherba/metrohash#egg=metrohash-0.0.1
 
 
-MetroHash64
-----------
+Usage
+-----
 
-64-bit implementation of MetroHash algorithm
+The module provides Python interfaces to 64- and 128-bit implementations
+of MetroHash algorithm:
 
 .. code-block:: python
 
@@ -30,13 +34,15 @@ For incremental hashing, use CMetroHash classes:
 
 .. code-block:: python
 
-    >>> import metrohash
-    ...
     >>> mh = metrohash.CMetroHash64()
     >>> mh.update("abc")
     >>> mh.update("def")
     >>> mh.finalize()
     3528379674302886064L
+
+Note that the resulting hash value above is the same as:
+
+.. code-block:: python
 
     >>> mh = metrohash.CMetroHash64()
     >>> mh.update("abcdef")
