@@ -102,9 +102,6 @@ from itertools import izip
 
 cdef class PHashCombiner(object):
     """Use polynomial hashing to reduce a vector of hashes
-
-    The result is bounded to uint64 maximum value by default although
-    this can be overriden by changing `mod` initialization parameter
     """
 
     cdef list _coeffs

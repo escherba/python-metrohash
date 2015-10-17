@@ -2,6 +2,7 @@
 
 PYMODULE := metrohash
 EXTENSION := $(PYMODULE).so
+EXTENSION_INTERMEDIATE := ./src/$(PYMODULE).cpp
 EXTENSION_DEPS := ./src/$(PYMODULE).pyx
 PYPI_HOST := pypi
 DISTRIBUTE := sdist bdist_wheel
@@ -33,7 +34,8 @@ nuke: clean
 
 clean: | clean_cpp
 	python setup.py clean
-	rm -rf dist build *.so
+	rm -rf dist build
+	rm -f $(EXTENSION) $(EXTENSION_INTERMEDIATE)
 	find . -path ./env -prune -o -type f -name "*.pyc" -exec rm {} \;
 
 develop:
