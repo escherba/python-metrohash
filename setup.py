@@ -1,6 +1,17 @@
 from setuptools import setup, Extension
+from setuptools.dist import Distribution
 from pkg_resources import resource_string
 from Cython.Distutils import build_ext
+
+
+class BinaryDistribution(Distribution):
+    """
+    Subclass the setuptools Distribution to flip the purity flag to false.
+    See http://lucumr.pocoo.org/2014/1/27/python-on-wheels/
+    """
+    def is_pure(self):
+        # TODO: check if this is still necessary with Python v2.7
+        return False
 
 
 class build_ext_subclass(build_ext):
@@ -87,4 +98,5 @@ setup(
         'Topic :: Utilities'
     ],
     long_description=resource_string(__name__, 'README.rst'),
+    distclass=BinaryDistribution,
 )

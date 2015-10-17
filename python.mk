@@ -19,7 +19,7 @@ release: env build_ext
 	$(PYTHON) setup.py $(DISTRIBUTE) upload -r $(PYPI_HOST)
 
 build_ext: $(EXTENSION)
-	@echo "finished building extension"
+	@echo "done building '$(EXTENSION)' extension"
 
 $(EXTENSION): env $(EXTENSION_DEPS)
 	$(PYTHON) setup.py build_ext --inplace
