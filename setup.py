@@ -1,5 +1,4 @@
-from setuptools import setup
-from distutils.extension import Extension
+from setuptools import setup, Extension
 from pkg_resources import resource_string
 from Cython.Distutils import build_ext
 
