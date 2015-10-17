@@ -108,16 +108,18 @@ cdef class PHashCombiner(object):
     """
 
     cdef list _coeffs
-    cdef uint64 _mod
+    cdef uint64 _mask
 
-    def __init__(self, uint64 size, uint64 prime=31ULL, uint64 mod=0xFFFFFFFFFFFFFFFFULL):
+    def __init__(self, uint64 size, uint64 prime=31ULL, uint64 bits=64):
         self._coeffs = [prime ** i for i in xrange(size)]
-        self._mod = mod
+        self._mask = 2 ** bits - 1
 
     def combine(self, hashes):
         """Combine a list of integer hashes
         """
-        return sum(h * c for h, c in izip(hashes, self._coeffs)) % self._mod
+        ab = sum(h * c for h, c in izip(hashes, self._coeffs))
+        mask = self._mask
+        return (ab % mask + ab & mask) & mask
 
 
 cdef class CMetroHash64(object):

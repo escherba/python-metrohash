@@ -10,7 +10,7 @@ class TestCombiners(unittest.TestCase):
         """PHashCombiner should work on long inputs"""
         vec = [metrohash64(str(x)) for x in range(8)]
         comb = PHashCombiner(8)
-        self.assertEqual(16761784773908155715L, comb.combine(vec))
+        self.assertEqual(15076825468925330791L, comb.combine(vec))
 
     def test_hash_combiner_1(self):
         """PHashCombiner should work on long inputs"""
