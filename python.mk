@@ -1,7 +1,7 @@
 .PHONY: clean develop env extras package release test virtualenv build_ext
 
 PYMODULE := metrohash
-EXTENSION := $(PYMODULE)
+EXTENSION := $(PYMODULE).so
 PYENV := . env/bin/activate;
 PYTHON := $(PYENV) python
 PIP := $(PYENV) pip
@@ -15,13 +15,13 @@ package: env
 release: env
 	$(PYTHON) setup.py $(DISTRIBUTE) upload -r livefyre
 
-build_ext: $(EXTENSION).so
+build_ext: $(EXTENSION)
 	@echo "finished building extension"
 
-$(EXTENSION).so: ./src/$(PYMODULE).pyx
+$(EXTENSION): ./src/$(PYMODULE).pyx
 	$(PYTHON) setup.py build_ext --inplace
 
-test: extras $(EXTENSION).so | test_cpp
+test: extras $(EXTENSION) | test_cpp
 	$(PYENV) nosetests $(NOSEARGS)
 	$(PYENV) py.test README.rst
 

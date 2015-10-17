@@ -50,23 +50,25 @@ setup(
     license='MIT',
     cmdclass={'build_ext': build_ext_subclass},
     zip_safe=False,
-    ext_modules=[Extension("metrohash",
-                           [
-                               "src/metrohash64.cc",
-                               "src/metrohash128.cc",
-                               "src/metrohash.pyx"
-                           ],
-                           depends=[
-                               "include/metro.h",
-                               "include/metrohash.h",
-                               "include/metrohash128.h",
-                               "include/metrohash128crc.h",
-                               "include/metrohash64.h",
-                               "include/platform.h"
-                           ],
-                           language="c++",
-                           extra_compile_args=CXXFLAGS,
-                           include_dirs=['include'])],
+    ext_modules=[Extension(
+        "metrohash",
+        [
+            "src/metrohash64.cc",
+            "src/metrohash128.cc",
+            "src/metrohash.pyx"
+        ],
+        depends=[
+            "include/metro.h",
+            "include/metrohash.h",
+            "include/metrohash128.h",
+            "include/metrohash128crc.h",
+            "include/metrohash64.h",
+            "include/platform.h"
+        ],
+        language="c++",
+        extra_compile_args=CXXFLAGS,
+        include_dirs=['include'])
+    ],
     keywords=['hash', 'hashing'],
     classifiers=[
         'Development Status :: 4 - Beta',
