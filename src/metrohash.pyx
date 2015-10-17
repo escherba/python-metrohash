@@ -118,8 +118,7 @@ cdef class PHashCombiner(object):
         """Combine a list of integer hashes
         """
         ab = sum(h * c for h, c in izip(hashes, self._coeffs))
-        mask = self._mask
-        return (ab % mask + ab & mask) & mask
+        return ab & self._mask
 
 
 cdef class CMetroHash64(object):
