@@ -6,7 +6,7 @@ A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 __all__     = [
     "metrohash64", "metrohash128",
     "CMetroHash64", "CMetroHash128",
@@ -57,7 +57,7 @@ cdef extern from "metro.h" nogil:
         void Finalize(uint8* const result)
 
 
-cdef uint8* _chars(basestring s):
+cdef const uint8* _chars(basestring s):
     if isinstance(s, unicode):
         s = s.encode('utf8')
     return s
@@ -66,16 +66,16 @@ cdef uint8* _chars(basestring s):
 cpdef metrohash64(basestring data, uint64 seed=0):
     """Hash function for a byte array
     """
-    array = _chars(data)
+    cdef const uint8* array = _chars(data)
     return c_metrohash64(array, len(array), seed)
 
 
 cpdef metrohash128(basestring data, uint64 seed=0):
     """Hash function for a byte array
     """
-    array = _chars(data)
+    cdef const uint8* array = _chars(data)
     cdef pair[uint64, uint64] result = c_metrohash128(array, len(array), seed)
-    return 0x10000000000000000 * int(result.first) + int(result.second)
+    return 0x10000000000000000L * long(result.first) + long(result.second)
 
 
 cdef class CMetroHash64(object):
@@ -99,7 +99,7 @@ cdef class CMetroHash64(object):
         self._m.Initialize(seed)
 
     def update(self, basestring data):
-        array = _chars(data)
+        cdef const uint8* array = _chars(data)
         self._m.Update(array, len(array))
 
     def intdigest(self):
@@ -129,11 +129,11 @@ cdef class CMetroHash128(object):
         self._m.Initialize(seed)
 
     def update(self, basestring data):
-        array = _chars(data)
+        cdef const uint8* array = _chars(data)
         self._m.Update(array, len(array))
 
     def intdigest(self):
         cdef uint8 buff[16]
         self._m.Finalize(buff)
         cdef pair[uint64, uint64] result = c_bytes2int128(buff)
-        return (result.first, result.second)
+        return 0x10000000000000000L * long(result.first) + long(result.second)
