@@ -6,12 +6,10 @@ A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __all__     = [
     "metrohash64", "metrohash128",
     "CMetroHash64", "CMetroHash128",
-    "hash_combine_1", "hash_combine_2",
-    "PHashCombiner",
 ]
 
 
@@ -80,42 +78,6 @@ cpdef metrohash128(basestring data, uint64 seed=0):
     array = _chars(data)
     cdef pair[uint64, uint64] result = c_metrohash128(array, len(array), seed)
     return 0x10000000000000000 * int(result.first) + int(result.second)
-
-
-cpdef hash_combine_1(uint64 seed, uint64 v):
-    """Hash two 64-bit integers together
-
-    Uses a Murmur-inspired hash function
-    """
-    return c_hash_combine_1(seed, v)
-
-
-cpdef hash_combine_2(uint64 seed, uint64 v):
-    """Hash two 64-bit integers together
-
-    Uses boost::hash_combine algorithm
-    """
-    return c_hash_combine_2(seed, v)
-
-
-from itertools import izip
-
-cdef class PHashCombiner(object):
-    """Use polynomial hashing to reduce a vector of hashes
-    """
-
-    cdef list _coeffs
-    cdef uint64 _mask
-
-    def __init__(self, uint64 size, uint64 prime=31ULL, uint64 bits=64):
-        self._coeffs = [prime ** i for i in xrange(size)]
-        self._mask = 2 ** bits - 1
-
-    def combine(self, hashes):
-        """Combine a list of integer hashes
-        """
-        ab = sum(h * c for h, c in izip(hashes, self._coeffs))
-        return ab & self._mask
 
 
 cdef class CMetroHash64(object):
