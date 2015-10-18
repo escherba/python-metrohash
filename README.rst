@@ -3,8 +3,17 @@ MetroHash
 
 A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash>`__
 
+.. image:: https://img.shields.io/pypi/v/metrohash.svg
+    :target: https://pypi.python.org/pypi/metrohash
+    :alt: Latest Version
+
+.. image:: https://img.shields.io/pypi/dm/metrohash.svg
+    :target: https://pypi.python.org/pypi/metrohash
+    :alt: Downloads
+
 .. image:: https://travis-ci.org/escherba/python-metrohash.svg
     :target: https://travis-ci.org/escherba/python-metrohash
+    :alt: Travis-CI Test Status
 
 
 Installation
