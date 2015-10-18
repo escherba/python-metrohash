@@ -68,3 +68,9 @@ Note that the resulting hash value above is the same as in:
     >>> mh.update("Nobody inspects the spammish repetition")
     >>> mh.intdigest()
     7851180100622203313L
+
+License
+-------
+This software is licensed under the `MIT License
+<http://www.opensource.org/licenses/mit-license>`_.
+See the included LICENSE file for more information.
