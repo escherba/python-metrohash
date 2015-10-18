@@ -69,6 +69,10 @@ Note that the resulting hash value above is the same as in:
     >>> mh.intdigest()
     7851180100622203313L
 
+Authors
+-------
+The Python bindings in this package were written by Eugene Scherba. The C++ implementation used is by J. Andrew Rogers.
+
 License
 -------
 This software is licensed under the `MIT License
