@@ -80,7 +80,7 @@ setup(
         extra_compile_args=CXXFLAGS,
         include_dirs=['include'])
     ],
-    keywords=['hash', 'hashing'],
+    keywords=['hash', 'hashing', 'metrohash', 'cityhash'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
