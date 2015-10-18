@@ -44,8 +44,6 @@ cdef extern from "metro.h" nogil:
     cdef uint64 c_metrohash64 "metrohash64" (const uint8* buff, uint64 len, uint64 seed)
     cdef uint64 c_bytes2int64 "bytes2int64" (uint8* const array)
     cdef uint128[uint64,uint64] c_bytes2int128 "bytes2int128" (uint8* const array)
-    cdef uint64 c_hash_combine_1 "hash_combine_1" (uint64 seed, uint64 v)
-    cdef uint64 c_hash_combine_2 "hash_combine_2" (uint64 seed, uint64 v)
     cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buff, uint64 len, uint64 seed)
     cdef cppclass MetroHash64:
         MetroHash64(const uint64 seed)
