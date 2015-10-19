@@ -73,7 +73,7 @@ cdef object _type_error(str argname, type expected, value):
     )
 
 
-cpdef metrohash64(data, uint64 seed=0):
+cpdef metrohash64(data, uint64 seed=0ULL):
     """64-bit hash function for a basestring type
     """
     cdef Py_buffer buf
@@ -92,7 +92,7 @@ cpdef metrohash64(data, uint64 seed=0):
     return result
 
 
-cpdef metrohash128(data, uint64 seed=0):
+cpdef metrohash128(data, uint64 seed=0ULL):
     """128-bit hash function for a basestring type
     """
     cdef Py_buffer buf
@@ -120,7 +120,7 @@ cdef class CMetroHash64(object):
 
     cdef MetroHash64* _m
 
-    def __cinit__(self, uint64 seed=0):
+    def __cinit__(self, uint64 seed=0ULL):
         self._m = new MetroHash64(seed)
         if self._m is NULL:
             raise MemoryError()
@@ -130,7 +130,7 @@ cdef class CMetroHash64(object):
             del self._m
             self._m = NULL
 
-    def initialize(self, uint64 seed=0):
+    def initialize(self, uint64 seed=0ULL):
         self._m.Initialize(seed)
 
     def update(self, data):
@@ -159,7 +159,7 @@ cdef class CMetroHash128(object):
 
     cdef MetroHash128* _m
 
-    def __cinit__(self, uint64 seed=0):
+    def __cinit__(self, uint64 seed=0ULL):
         self._m = new MetroHash128(seed)
         if self._m is NULL:
             raise MemoryError()
@@ -169,7 +169,7 @@ cdef class CMetroHash128(object):
             del self._m
             self._m = NULL
 
-    def initialize(self, uint64 seed=0):
+    def initialize(self, uint64 seed=0ULL):
         self._m.Initialize(seed)
 
     def update(self, data):
