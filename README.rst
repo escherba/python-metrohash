@@ -71,7 +71,7 @@ Note that the resulting hash value above is the same as in:
 
 Authors
 -------
-The Python bindings in this package were written by Eugene Scherba. The C++ implementation used is by J. Andrew Rogers.
+The original MetroHash algorithm was designed by J. Andrew Rogers. The Python bindings in this package were written by Eugene Scherba.
 
 License
 -------
