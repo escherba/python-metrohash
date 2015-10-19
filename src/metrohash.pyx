@@ -6,7 +6,7 @@ A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.9"
+__version__ = "0.0.10"
 __all__     = [
     "metrohash64", "metrohash128",
     "CMetroHash64", "CMetroHash128",
@@ -78,7 +78,7 @@ cdef object _type_error(str argname, expected, value):
 
 
 cpdef metrohash64(data, uint64 seed=0ULL):
-    """64-bit hash function for a basestring type
+    """64-bit hash function for a basestring or buffer type
     """
     cdef Py_buffer buf
     cdef object obj
@@ -95,12 +95,12 @@ cpdef metrohash64(data, uint64 seed=0ULL):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
     else:
-        raise _type_error("data", basestring, data)
+        raise _type_error("data", ["basestring", "buffer"], data)
     return result
 
 
 cpdef metrohash128(data, uint64 seed=0ULL):
-    """128-bit hash function for a basestring type
+    """128-bit hash function for a basestring or buffer type
     """
     cdef Py_buffer buf
     cdef object obj
@@ -117,7 +117,7 @@ cpdef metrohash128(data, uint64 seed=0ULL):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
     else:
-        raise _type_error("data", basestring, data)
+        raise _type_error("data", ["basestring", "buffer"], data)
     final = 0x10000000000000000L * long(result.first) + long(result.second)
     return final
 
@@ -157,7 +157,7 @@ cdef class CMetroHash64(object):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
         else:
-            raise _type_error("data", basestring, data)
+            raise _type_error("data", ["basestring", "buffer"], data)
 
     def intdigest(self):
         cdef uint8 buf[8]
@@ -200,7 +200,7 @@ cdef class CMetroHash128(object):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
         else:
-            raise _type_error("data", basestring, data)
+            raise _type_error("data", ["basestring", "buffer"], data)
 
     def intdigest(self):
         cdef uint8 buf[16]

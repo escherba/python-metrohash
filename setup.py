@@ -47,7 +47,7 @@ CXXFLAGS = u"""
 -Wno-unused-function
 """.split()
 
-VERSION = '0.0.9'
+VERSION = '0.0.10'
 URL = "https://github.com/escherba/python-metrohash"
 
 setup(
