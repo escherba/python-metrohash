@@ -8,7 +8,7 @@ __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
 __version__ = "0.0.9"
 __all__     = [
-    "metrohash64", "metrohash64_alt", "metrohash128",
+    "metrohash64", "metrohash128",
     "CMetroHash64", "CMetroHash128",
 ]
 
