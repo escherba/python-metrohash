@@ -6,9 +6,9 @@ A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 __all__     = [
-    "metrohash64", "metrohash128",
+    "metrohash64", "metrohash64_alt", "metrohash128",
     "CMetroHash64", "CMetroHash128",
 ]
 
@@ -41,41 +41,69 @@ cdef extern from "metro.h" nogil:
     ctypedef pair uint128
     cdef uint64 c_Uint128Low64 "Uint128Low64" (uint128& x)
     cdef uint64 c_Uint128High64 "Uint128High64" (uint128& x)
-    cdef uint64 c_metrohash64 "metrohash64" (const uint8* buff, uint64 len, uint64 seed)
+    cdef uint64 c_metrohash64 "metrohash64" (const uint8* buf, uint64 len, uint64 seed)
     cdef uint64 c_bytes2int64 "bytes2int64" (uint8* const array)
     cdef uint128[uint64,uint64] c_bytes2int128 "bytes2int128" (uint8* const array)
-    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buff, uint64 len, uint64 seed)
+    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buf, uint64 len, uint64 seed)
     cdef cppclass MetroHash64:
         MetroHash64(const uint64 seed)
         void Initialize(const uint64 seed)
-        void Update(const uint8* buff, const uint64 length)
+        void Update(const uint8* buf, const uint64 length)
         void Finalize(uint8* const result)
     cdef cppclass MetroHash128:
         MetroHash128(const uint64 seed)
         void Initialize(const uint64 seed)
-        void Update(const uint8* buff, const uint64 length)
+        void Update(const uint8* buf, const uint64 length)
         void Finalize(uint8* const result)
 
+from cpython.buffer cimport PyObject_CheckBuffer
+from cpython.buffer cimport PyBUF_SIMPLE
+from cpython.buffer cimport Py_buffer
+from cpython.buffer cimport PyObject_GetBuffer
 
-cdef const uint8* _chars(basestring s):
-    if isinstance(s, unicode):
-        s = s.encode('utf8')
-    return s
+from cpython.unicode cimport PyUnicode_Check
+
+from cpython cimport PyUnicode_AsUTF8String, Py_DECREF
 
 
-cpdef metrohash64(basestring data, uint64 seed=0):
-    """Hash function for a byte array
+cpdef metrohash64(data, uint64 seed=0):
+    """64-bit hash function for a basestring type
     """
-    cdef const uint8* array = _chars(data)
-    return c_metrohash64(array, len(array), seed)
+    cdef Py_buffer buf
+    cdef object obj
+    cdef uint64 result
+    if PyUnicode_Check(data):
+        obj = PyUnicode_AsUTF8String(data)
+        PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
+        result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
+        Py_DECREF(obj)
+    elif PyObject_CheckBuffer(data):
+        PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
+        result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
+    else:
+        raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+    return result
 
 
-cpdef metrohash128(basestring data, uint64 seed=0):
-    """Hash function for a byte array
+cpdef metrohash128(data, uint64 seed=0):
+    """128-bit hash function for a basestring type
     """
-    cdef const uint8* array = _chars(data)
-    cdef pair[uint64, uint64] result = c_metrohash128(array, len(array), seed)
-    return 0x10000000000000000L * long(result.first) + long(result.second)
+    cdef Py_buffer buf
+    cdef object obj
+    cdef pair[uint64, uint64] result
+    if PyUnicode_Check(data):
+        obj = PyUnicode_AsUTF8String(data)
+        PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
+        result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
+        final = 0x10000000000000000L * long(result.first) + long(result.second)
+        Py_DECREF(obj)
+    elif PyObject_CheckBuffer(data):
+        PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
+        result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
+        final = 0x10000000000000000L * long(result.first) + long(result.second)
+    else:
+        raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+    return final
 
 
 cdef class CMetroHash64(object):
@@ -98,14 +126,23 @@ cdef class CMetroHash64(object):
     def initialize(self, uint64 seed=0):
         self._m.Initialize(seed)
 
-    def update(self, basestring data):
-        cdef const uint8* array = _chars(data)
-        self._m.Update(array, len(array))
+    def update(self, data):
+        cdef Py_buffer buf
+        cdef object obj
+        if PyUnicode_Check(data):
+            obj = PyUnicode_AsUTF8String(data)
+            PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
+            Py_DECREF(obj)
+        elif PyObject_CheckBuffer(data):
+            PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
+        else:
+            raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+        self._m.Update(<const uint8 *>buf.buf, buf.len)
 
     def intdigest(self):
-        cdef uint8 buff[8]
-        self._m.Finalize(buff)
-        return c_bytes2int64(buff)
+        cdef uint8 buf[8]
+        self._m.Finalize(buf)
+        return c_bytes2int64(buf)
 
 
 cdef class CMetroHash128(object):
@@ -128,12 +165,21 @@ cdef class CMetroHash128(object):
     def initialize(self, uint64 seed=0):
         self._m.Initialize(seed)
 
-    def update(self, basestring data):
-        cdef const uint8* array = _chars(data)
-        self._m.Update(array, len(array))
+    def update(self, data):
+        cdef Py_buffer buf
+        cdef object obj
+        if PyUnicode_Check(data):
+            obj = PyUnicode_AsUTF8String(data)
+            PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
+            Py_DECREF(obj)
+        elif PyObject_CheckBuffer(data):
+            PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
+        else:
+            raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+        self._m.Update(<const uint8 *>buf.buf, buf.len)
 
     def intdigest(self):
-        cdef uint8 buff[16]
-        self._m.Finalize(buff)
-        cdef pair[uint64, uint64] result = c_bytes2int128(buff)
+        cdef uint8 buf[16]
+        self._m.Finalize(buf)
+        cdef pair[uint64, uint64] result = c_bytes2int128(buf)
         return 0x10000000000000000L * long(result.first) + long(result.second)

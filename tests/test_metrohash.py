@@ -17,29 +17,47 @@ def random_splits(string, n, nsplits=2):
 
 class TestStandalone(unittest.TestCase):
 
-    def test_unicode_64_1(self):
-        """Must accept Unicode input"""
+    def test_string_unicode_64(self):
+        """Empty Python string has same hash value as empty Unicode string
+        """
+        self.assertEqual(metrohash64(""), metrohash64(u""))
+
+    def test_string_unicode_128(self):
+        """Empty Python string has same hash value as empty Unicode string
+        """
+        self.assertEqual(metrohash128(""), metrohash128(u""))
+
+    def test_consistent_encoding_64(self):
+        """ASCII-range Unicode strings have the same hash values as ASCII strings
+        """
+        text = u"abracadabra"
+        self.assertEqual(metrohash64(text), metrohash64(text.encode("utf-8")))
+
+    def test_consistent_encoding_128(self):
+        """ASCII-range Unicode strings have the same hash values as ASCII strings
+        """
+        text = u"abracadabra"
+        self.assertEqual(metrohash128(text), metrohash128(text.encode("utf-8")))
+
+    def test_unicode_1_64(self):
+        """Accepts Unicode input"""
         test_case = u"abc"
-        self.assertEqual(17099979927131455419L,
-                         metrohash64(test_case))
+        self.assertTrue(isinstance(metrohash64(test_case), long))
 
-    def test_unicode_64_2(self):
-        """Must accept Unicode input"""
-        test_case = u'\u2661'
-        self.assertEqual(89830315997599275L,
-                         metrohash64(test_case))
-
-    def test_unicode_128_1(self):
-        """Must accept Unicode input"""
+    def test_unicode_1_128(self):
+        """Accepts Unicode input"""
         test_case = u"abc"
-        self.assertEqual(182995299641628952910564950850867298725L,
-                         metrohash128(test_case))
+        self.assertTrue(isinstance(metrohash128(test_case), long))
 
-    def test_unicode_128_2(self):
-        """Must accept Unicode input"""
+    def test_unicode_2_64(self):
+        """Accepts Unicode input outside of ASCII range"""
         test_case = u'\u2661'
-        self.assertEqual(71044331826727115060124269853582874788L,
-                         metrohash128(test_case))
+        self.assertTrue(isinstance(metrohash64(test_case), long))
+
+    def test_unicode_2_128(self):
+        """Accepts Unicode input outside of ASCII range"""
+        test_case = u'\u2661'
+        self.assertTrue(isinstance(metrohash128(test_case), long))
 
 
 class TestCombiners(unittest.TestCase):
