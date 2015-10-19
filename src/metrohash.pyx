@@ -66,6 +66,13 @@ from cpython.unicode cimport PyUnicode_Check
 from cpython cimport PyUnicode_AsUTF8String, Py_DECREF
 
 
+cdef object _type_error(str argname, type expected, value):
+    return TypeError(
+        "Argument '%s' has incorrect type (expected %s, got %s)" %
+        (argname, expected, type(value))
+    )
+
+
 cpdef metrohash64(data, uint64 seed=0):
     """64-bit hash function for a basestring type
     """
@@ -81,7 +88,7 @@ cpdef metrohash64(data, uint64 seed=0):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
     else:
-        raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+        raise _type_error("data", basestring, data)
     return result
 
 
@@ -102,7 +109,7 @@ cpdef metrohash128(data, uint64 seed=0):
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
         final = 0x10000000000000000L * long(result.first) + long(result.second)
     else:
-        raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+        raise _type_error("data", basestring, data)
     return final
 
 
@@ -136,7 +143,7 @@ cdef class CMetroHash64(object):
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         else:
-            raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+            raise _type_error("data", basestring, data)
         self._m.Update(<const uint8 *>buf.buf, buf.len)
 
     def intdigest(self):
@@ -175,7 +182,7 @@ cdef class CMetroHash128(object):
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         else:
-            raise TypeError("Argument 'data' has incorrect type (expected basestring, got %s)" % type(data))
+            raise _type_error("data", basestring, data)
         self._m.Update(<const uint8 *>buf.buf, buf.len)
 
     def intdigest(self):
