@@ -62,11 +62,15 @@ from cpython.buffer cimport Py_buffer
 from cpython.buffer cimport PyObject_GetBuffer
 
 from cpython.unicode cimport PyUnicode_Check
+from cpython.unicode cimport PyUnicode_AsUTF8String
 
-from cpython cimport PyUnicode_AsUTF8String, Py_DECREF
+from cpython.string cimport PyString_Check
+from cpython.string cimport PyString_GET_SIZE
+from cpython.string cimport PyString_AS_STRING
+from cpython cimport Py_DECREF
 
 
-cdef object _type_error(str argname, type expected, value):
+cdef object _type_error(str argname, expected, value):
     return TypeError(
         "Argument '%s' has incorrect type (expected %s, got %s)" %
         (argname, expected, type(value))
@@ -84,6 +88,9 @@ cpdef metrohash64(data, uint64 seed=0ULL):
         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
         Py_DECREF(obj)
+    elif PyString_Check(data):
+        result = c_metrohash64(<const uint8 *>PyString_AS_STRING(data),
+                               PyString_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
@@ -102,14 +109,16 @@ cpdef metrohash128(data, uint64 seed=0ULL):
         obj = PyUnicode_AsUTF8String(data)
         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
-        final = 0x10000000000000000L * long(result.first) + long(result.second)
         Py_DECREF(obj)
+    elif PyString_Check(data):
+        result = c_metrohash128(<const uint8 *>PyString_AS_STRING(data),
+                                PyString_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
-        final = 0x10000000000000000L * long(result.first) + long(result.second)
     else:
         raise _type_error("data", basestring, data)
+    final = 0x10000000000000000L * long(result.first) + long(result.second)
     return final
 
 
@@ -140,11 +149,15 @@ cdef class CMetroHash64(object):
             obj = PyUnicode_AsUTF8String(data)
             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
             Py_DECREF(obj)
+            self._m.Update(<const uint8 *>buf.buf, buf.len)
+        elif PyString_Check(data):
+            self._m.Update(<const uint8 *>PyString_AS_STRING(data),
+                           PyString_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
+            self._m.Update(<const uint8 *>buf.buf, buf.len)
         else:
             raise _type_error("data", basestring, data)
-        self._m.Update(<const uint8 *>buf.buf, buf.len)
 
     def intdigest(self):
         cdef uint8 buf[8]
@@ -179,11 +192,15 @@ cdef class CMetroHash128(object):
             obj = PyUnicode_AsUTF8String(data)
             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
             Py_DECREF(obj)
+            self._m.Update(<const uint8 *>buf.buf, buf.len)
+        elif PyString_Check(data):
+            self._m.Update(<const uint8 *>PyString_AS_STRING(data),
+                           PyString_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
+            self._m.Update(<const uint8 *>buf.buf, buf.len)
         else:
             raise _type_error("data", basestring, data)
-        self._m.Update(<const uint8 *>buf.buf, buf.len)
 
     def intdigest(self):
         cdef uint8 buf[16]
