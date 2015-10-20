@@ -47,14 +47,14 @@ an optional ``seed`` parameter:
     182995299641628952910564950850867298725L
 
 
-For incremental hashing, use ``CMetroHash64`` and ``CMetroHash128`` classes.
+For incremental hashing, use ``MetroHash64`` and ``MetroHash128`` classes.
 Incremental hashing is associative and guarantees that any combination of
 input slices will result in the same final hash value. This is useful for
 processing large inputs and stream data. Example with two slices:
 
 .. code-block:: python
 
-    >>> mh = metrohash.CMetroHash64()
+    >>> mh = metrohash.MetroHash64()
     >>> mh.update("Nobody inspects")
     >>> mh.update(" the spammish repetition")
     >>> mh.intdigest()
@@ -64,7 +64,7 @@ Note that the resulting hash value above is the same as in:
 
 .. code-block:: python
 
-    >>> mh = metrohash.CMetroHash64()
+    >>> mh = metrohash.MetroHash64()
     >>> mh.update("Nobody inspects the spammish repetition")
     >>> mh.intdigest()
     7851180100622203313L

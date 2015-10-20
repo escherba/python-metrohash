@@ -1,7 +1,7 @@
 import unittest
 import random
 import string
-from metrohash import CMetroHash64, CMetroHash128, metrohash64, metrohash128
+from metrohash import MetroHash64, MetroHash128, metrohash64, metrohash128
 
 
 def random_string(n, alphabet=string.ascii_lowercase):
@@ -68,7 +68,7 @@ class TestCombiners(unittest.TestCase):
         nchars = 1000
         split_range = (2, 10)
         num_tests = 100
-        hasher = CMetroHash64
+        hasher = MetroHash64
         alphabet = string.ascii_uppercase + string.ascii_lowercase + string.digits
 
         for _ in xrange(num_tests):
@@ -90,7 +90,7 @@ class TestCombiners(unittest.TestCase):
         nchars = 20
         split_range = (2, 4)
         num_tests = 10
-        hasher = CMetroHash128
+        hasher = MetroHash128
         alphabet = string.ascii_lowercase
 
         for _ in xrange(num_tests):

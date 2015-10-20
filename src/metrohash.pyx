@@ -6,10 +6,10 @@ A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.10"
+__version__ = "0.0.11"
 __all__     = [
     "metrohash64", "metrohash128",
-    "CMetroHash64", "CMetroHash128",
+    "MetroHash64", "MetroHash128",
 ]
 
 
@@ -45,13 +45,13 @@ cdef extern from "metro.h" nogil:
     cdef uint64 c_bytes2int64 "bytes2int64" (uint8* const array)
     cdef uint128[uint64,uint64] c_bytes2int128 "bytes2int128" (uint8* const array)
     cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buf, uint64 len, uint64 seed)
-    cdef cppclass MetroHash64:
-        MetroHash64(const uint64 seed)
+    cdef cppclass CCMetroHash64 "MetroHash64":
+        CCMetroHash64(const uint64 seed)
         void Initialize(const uint64 seed)
         void Update(const uint8* buf, const uint64 length)
         void Finalize(uint8* const result)
-    cdef cppclass MetroHash128:
-        MetroHash128(const uint64 seed)
+    cdef cppclass CCMetroHash128 "MetroHash128":
+        CCMetroHash128(const uint64 seed)
         void Initialize(const uint64 seed)
         void Update(const uint8* buf, const uint64 length)
         void Finalize(uint8* const result)
@@ -122,15 +122,15 @@ cpdef metrohash128(data, uint64 seed=0ULL):
     return final
 
 
-cdef class CMetroHash64(object):
+cdef class MetroHash64(object):
 
     """Incremental hasher interface for MetroHash64
     """
 
-    cdef MetroHash64* _m
+    cdef CCMetroHash64* _m
 
     def __cinit__(self, uint64 seed=0ULL):
-        self._m = new MetroHash64(seed)
+        self._m = new CCMetroHash64(seed)
         if self._m is NULL:
             raise MemoryError()
 
@@ -165,15 +165,15 @@ cdef class CMetroHash64(object):
         return c_bytes2int64(buf)
 
 
-cdef class CMetroHash128(object):
+cdef class MetroHash128(object):
 
     """Incremental hasher interface for MetroHash128
     """
 
-    cdef MetroHash128* _m
+    cdef CCMetroHash128* _m
 
     def __cinit__(self, uint64 seed=0ULL):
-        self._m = new MetroHash128(seed)
+        self._m = new CCMetroHash128(seed)
         if self._m is NULL:
             raise MemoryError()
 
