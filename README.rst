@@ -70,7 +70,7 @@ Note that the resulting hash value above is the same as in:
 
 See Also
 --------
-For other fast non-cryptographic hashing implementations available as Python extensions, see `CityHash <https://github.com/escherba/pyhton-cityhash>`__ and `xxh <https://github.com/lebedov/xxh>`__.
+For other fast non-cryptographic hashing implementations available as Python extensions, see `CityHash <https://github.com/escherba/python-cityhash>`__ and `xxh <https://github.com/lebedov/xxh>`__.
 
 Authors
 -------
