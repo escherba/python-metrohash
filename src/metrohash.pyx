@@ -6,7 +6,7 @@ A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.12"
+__version__ = "0.0.13"
 __all__     = [
     "metrohash64", "metrohash128",
     "MetroHash64", "MetroHash128",
