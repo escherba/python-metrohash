@@ -15,17 +15,28 @@ A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash>`
     :target: https://circleci.com/gh/escherba/python-metrohash
     :alt: Tests Status
 
-Installation
-------------
+Getting Started
+---------------
 
-To get started, clone this repo and run ``make env`` or, alternatively,
-install it into your environment of choice (below). Note that you
-will need to have Cython installed before you install this package.
+To use this package in your program, simply enter
 
 .. code-block:: bash
 
-    pip install -U cython
     pip install metrohash
+
+
+After that, you should be able to import the module and do things with it (see
+Example Usage below).
+
+If you want to contribute to this package by developing, the included Makefile
+provides some useful commands to help you with that task:
+
+.. code-block:: bash
+
+    git clone https://github.com/escherba/python-metrohash.git
+    cd python-metrohash
+    make env           # creates a Python virtualenv
+    make test          # builds and runs C++ and Python tests
 
 
 Example Usage
