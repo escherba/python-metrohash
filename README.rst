@@ -13,7 +13,7 @@ A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash>`
 
 .. image:: https://travis-ci.org/escherba/python-metrohash.svg
     :target: https://travis-ci.org/escherba/python-metrohash
-    :alt: Travis-CI Test Status
+    :alt: Tests Status
 
 
 Installation
@@ -68,6 +68,10 @@ Note that the resulting hash value above is the same as in:
     >>> mh.update("Nobody inspects the spammish repetition")
     >>> mh.intdigest()
     7851180100622203313L
+
+See Also
+--------
+For other fast non-cryptographic hashing implementations available as Python extensions, see `CityHash <https://github.com/escherba/pyhton-cityhash>`__ and `xxh <https://github.com/lebedov/xxh>`__.
 
 Authors
 -------
