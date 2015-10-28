@@ -11,10 +11,9 @@ A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash>`
     :target: https://pypi.python.org/pypi/metrohash
     :alt: Downloads
 
-.. image:: https://travis-ci.org/escherba/python-metrohash.svg
-    :target: https://travis-ci.org/escherba/python-metrohash
+.. image:: https://circleci.com/gh/escherba/python-metrohash.png?style=shield
+    :target: https://circleci.com/gh/escherba/python-metrohash
     :alt: Tests Status
-
 
 Installation
 ------------
