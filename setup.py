@@ -69,7 +69,7 @@ else:
             include_dirs=INCLUDE_DIRS)
     )
 
-VERSION = '0.0.12'
+VERSION = '0.0.13'
 URL = "https://github.com/escherba/python-metrohash"
 
 setup(
