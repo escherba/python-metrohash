@@ -28,17 +28,6 @@ To use this package in your program, simply enter
 After that, you should be able to import the module and do things with it (see
 Example Usage below).
 
-If you want to contribute to this package by developing, the included Makefile
-provides some useful commands to help you with that task:
-
-.. code-block:: bash
-
-    git clone https://github.com/escherba/python-metrohash.git
-    cd python-metrohash
-    make env           # creates a Python virtualenv
-    make test          # builds and runs C++ and Python tests
-
-
 Example Usage
 -------------
 
@@ -78,6 +67,21 @@ Note that the resulting hash value above is the same as in:
     >>> mh.update("Nobody inspects the spammish repetition")
     >>> mh.intdigest()
     7851180100622203313L
+
+
+Development
+-----------
+
+If you want to contribute to this package by developing, the included Makefile
+provides some useful commands to help with that task:
+
+.. code-block:: bash
+
+    git clone https://github.com/escherba/python-metrohash.git
+    cd python-metrohash
+    make env           # creates a Python virtualenv
+    make test          # builds and runs C++ and Python tests
+
 
 See Also
 --------
