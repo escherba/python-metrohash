@@ -64,7 +64,7 @@ if USE_CYTHON:
             language="c++",
             extra_compile_args=CXXFLAGS,
             include_dirs=INCLUDE_DIRS)
-    )
+        )
     CMDCLASS['build_ext'] = build_ext
 else:
     EXT_MODULES.append(
@@ -75,7 +75,7 @@ else:
             language="c++",
             extra_compile_args=CXXFLAGS,
             include_dirs=INCLUDE_DIRS)
-    )
+        )
 
 
 VERSION = '0.1.0'
