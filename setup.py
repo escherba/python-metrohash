@@ -132,5 +132,6 @@ setup(
         'Topic :: Utilities'
     ],
     long_description=get_long_description(),
+    tests_require=['pytest'],
     distclass=BinaryDistribution,
 )

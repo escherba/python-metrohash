@@ -1,3 +1,15 @@
+attrs==21.3.0
 Cython==0.29.26
-markerlib==0.6.0
--e git+https://github.com/escherba/python-metrohash@3c66ddae69762d7b7872f67ba9ca11d06371a433#egg=metrohash
+distlib==0.3.4
+filelock==3.4.2
+iniconfig==1.1.1
+-e git+https://github.com/escherba/python-metrohash@dc510c29023965895fa61ec19e3c40c6292fc514#egg=metrohash
+packaging==21.3
+platformdirs==2.4.1
+pluggy==1.0.0
+py==1.11.0
+pyparsing==3.0.6
+pytest==6.2.5
+six==1.16.0
+toml==0.10.2
+virtualenv==20.11.0
