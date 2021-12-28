@@ -1,4 +1,6 @@
 #cython: infer_types=True
+#cython: language_level=3
+#distutils: language=c++
 
 """
 A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
@@ -6,10 +8,12 @@ A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.13"
+__version__ = "0.1.0"
 __all__     = [
-    "metrohash64", "metrohash128",
-    "MetroHash64", "MetroHash128",
+    "metrohash64",
+    "metrohash128",
+    "MetroHash64",
+    "MetroHash128",
 ]
 
 
@@ -56,6 +60,8 @@ cdef extern from "metro.h" nogil:
         void Update(const uint8* buf, const uint64 length)
         void Finalize(uint8* const result)
 
+from cpython.long cimport long
+
 from cpython.buffer cimport PyObject_CheckBuffer
 from cpython.buffer cimport PyBUF_SIMPLE
 from cpython.buffer cimport Py_buffer
@@ -64,9 +70,9 @@ from cpython.buffer cimport PyObject_GetBuffer
 from cpython.unicode cimport PyUnicode_Check
 from cpython.unicode cimport PyUnicode_AsUTF8String
 
-from cpython.string cimport PyString_Check
-from cpython.string cimport PyString_GET_SIZE
-from cpython.string cimport PyString_AS_STRING
+from cpython.bytes cimport PyBytes_Check
+from cpython.bytes cimport PyBytes_GET_SIZE
+from cpython.bytes cimport PyBytes_AS_STRING
 from cpython cimport Py_DECREF
 
 
@@ -88,9 +94,9 @@ cpdef metrohash64(data, uint64 seed=0ULL):
         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
         Py_DECREF(obj)
-    elif PyString_Check(data):
-        result = c_metrohash64(<const uint8 *>PyString_AS_STRING(data),
-                               PyString_GET_SIZE(data), seed)
+    elif PyBytes_Check(data):
+        result = c_metrohash64(<const uint8 *>PyBytes_AS_STRING(data),
+                               PyBytes_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
@@ -110,9 +116,9 @@ cpdef metrohash128(data, uint64 seed=0ULL):
         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
         Py_DECREF(obj)
-    elif PyString_Check(data):
-        result = c_metrohash128(<const uint8 *>PyString_AS_STRING(data),
-                                PyString_GET_SIZE(data), seed)
+    elif PyBytes_Check(data):
+        result = c_metrohash128(<const uint8 *>PyBytes_AS_STRING(data),
+                                PyBytes_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
@@ -150,9 +156,9 @@ cdef class MetroHash64(object):
             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
             Py_DECREF(obj)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
-        elif PyString_Check(data):
-            self._m.Update(<const uint8 *>PyString_AS_STRING(data),
-                           PyString_GET_SIZE(data))
+        elif PyBytes_Check(data):
+            self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
+                           PyBytes_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
@@ -193,9 +199,9 @@ cdef class MetroHash128(object):
             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
             Py_DECREF(obj)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
-        elif PyString_Check(data):
-            self._m.Update(<const uint8 *>PyString_AS_STRING(data),
-                           PyString_GET_SIZE(data))
+        elif PyBytes_Check(data):
+            self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
+                           PyBytes_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)

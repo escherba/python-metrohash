@@ -41,9 +41,9 @@ an optional ``seed`` parameter:
     >>> import metrohash
     ...
     >>> metrohash.metrohash64("abc", seed=0)
-    17099979927131455419L
+    17099979927131455419
     >>> metrohash.metrohash128("abc")
-    182995299641628952910564950850867298725L
+    182995299641628952910564950850867298725
 
 
 For incremental hashing, use ``MetroHash64`` and ``MetroHash128`` classes.
@@ -57,7 +57,7 @@ processing large inputs and stream data. Example with two slices:
     >>> mh.update("Nobody inspects")
     >>> mh.update(" the spammish repetition")
     >>> mh.intdigest()
-    7851180100622203313L
+    7851180100622203313
 
 Note that the resulting hash value above is the same as in:
 
@@ -66,7 +66,7 @@ Note that the resulting hash value above is the same as in:
     >>> mh = metrohash.MetroHash64()
     >>> mh.update("Nobody inspects the spammish repetition")
     >>> mh.intdigest()
-    7851180100622203313L
+    7851180100622203313
 
 
 Development

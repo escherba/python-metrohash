@@ -10,12 +10,10 @@ __pycache__/
 .DS_Store
 tags
 .cache/
-*.egg-info/
-*.swp
+*.sw[op]
 
 # Exclude these directories
 bin/
-lib/
 data/
 
 # Distribution / packaging
@@ -68,3 +66,8 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# IDE and editor stuff
+.idea/
+.vscode/
+.ropeproject/
