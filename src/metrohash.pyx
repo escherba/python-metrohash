@@ -165,8 +165,8 @@ cdef class MetroHash64(object):
             del self._m
             self._m = NULL
 
-    def initialize(self, uint64 seed=0ULL):
-        """Initialize object with a new seed"""
+    def reset(self, uint64 seed=0ULL):
+        """Reset state with a new seed"""
         self._m.Initialize(seed)
 
     def update(self, data):
@@ -222,8 +222,8 @@ cdef class MetroHash128(object):
             del self._m
             self._m = NULL
 
-    def initialize(self, uint64 seed=0ULL):
-        """Initialize object with a new seed"""
+    def reset(self, uint64 seed=0ULL):
+        """Reset state with a new seed"""
         self._m.Initialize(seed)
 
     def update(self, data):

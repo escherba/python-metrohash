@@ -1429,14 +1429,14 @@ static PyObject *__pyx_pf_9metrohash_metrohash64(CYTHON_UNUSED PyObject *__pyx_s
 static PyObject *__pyx_pf_9metrohash_2metrohash128(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, uint64 __pyx_v_seed); /* proto */
 static int __pyx_pf_9metrohash_11MetroHash64___cinit__(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self, uint64 __pyx_v_seed); /* proto */
 static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_9metrohash_11MetroHash64_4initialize(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self, uint64 __pyx_v_seed); /* proto */
+static PyObject *__pyx_pf_9metrohash_11MetroHash64_4reset(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self, uint64 __pyx_v_seed); /* proto */
 static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self, PyObject *__pyx_v_data); /* proto */
 static PyObject *__pyx_pf_9metrohash_11MetroHash64_8intdigest(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_9metrohash_11MetroHash64_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_9metrohash_11MetroHash64_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_9metrohash_12MetroHash128___cinit__(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self, uint64 __pyx_v_seed); /* proto */
 static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_9metrohash_12MetroHash128_4initialize(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self, uint64 __pyx_v_seed); /* proto */
+static PyObject *__pyx_pf_9metrohash_12MetroHash128_4reset(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self, uint64 __pyx_v_seed); /* proto */
 static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self, PyObject *__pyx_v_data); /* proto */
 static PyObject *__pyx_pf_9metrohash_12MetroHash128_8intdigest(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_9metrohash_12MetroHash128_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self); /* proto */
@@ -2395,7 +2395,7 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
  *             del self._m
  *             self._m = NULL             # <<<<<<<<<<<<<<
  * 
- *     def initialize(self, uint64 seed=0ULL):
+ *     def reset(self, uint64 seed=0ULL):
  */
     __pyx_v_self->_m = NULL;
 
@@ -2423,22 +2423,22 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
 /* "metrohash.pyx":168
  *             self._m = NULL
  * 
- *     def initialize(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
- *         """Initialize object with a new seed"""
+ *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
+ *         """Reset state with a new seed"""
  *         self._m.Initialize(seed)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9metrohash_11MetroHash64_5initialize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9metrohash_11MetroHash64_4initialize[] = "MetroHash64.initialize(self, uint64 seed=0)\nInitialize object with a new seed";
-static PyObject *__pyx_pw_9metrohash_11MetroHash64_5initialize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_9metrohash_11MetroHash64_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_9metrohash_11MetroHash64_4reset[] = "MetroHash64.reset(self, uint64 seed=0)\nReset state with a new seed";
+static PyObject *__pyx_pw_9metrohash_11MetroHash64_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   uint64 __pyx_v_seed;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("initialize (wrapper)", 0);
+  __Pyx_RefNannySetupContext("reset (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_seed,0};
     PyObject* values[1] = {0};
@@ -2460,7 +2460,7 @@ static PyObject *__pyx_pw_9metrohash_11MetroHash64_5initialize(PyObject *__pyx_v
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "initialize") < 0)) __PYX_ERR(0, 168, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reset") < 0)) __PYX_ERR(0, 168, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2478,27 +2478,27 @@ static PyObject *__pyx_pw_9metrohash_11MetroHash64_5initialize(PyObject *__pyx_v
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("initialize", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 168, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("reset", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 168, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("metrohash.MetroHash64.initialize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("metrohash.MetroHash64.reset", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9metrohash_11MetroHash64_4initialize(((struct __pyx_obj_9metrohash_MetroHash64 *)__pyx_v_self), __pyx_v_seed);
+  __pyx_r = __pyx_pf_9metrohash_11MetroHash64_4reset(((struct __pyx_obj_9metrohash_MetroHash64 *)__pyx_v_self), __pyx_v_seed);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9metrohash_11MetroHash64_4initialize(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self, uint64 __pyx_v_seed) {
+static PyObject *__pyx_pf_9metrohash_11MetroHash64_4reset(struct __pyx_obj_9metrohash_MetroHash64 *__pyx_v_self, uint64 __pyx_v_seed) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("initialize", 0);
+  __Pyx_RefNannySetupContext("reset", 0);
 
   /* "metrohash.pyx":170
- *     def initialize(self, uint64 seed=0ULL):
- *         """Initialize object with a new seed"""
+ *     def reset(self, uint64 seed=0ULL):
+ *         """Reset state with a new seed"""
  *         self._m.Initialize(seed)             # <<<<<<<<<<<<<<
  * 
  *     def update(self, data):
@@ -2508,8 +2508,8 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_4initialize(struct __pyx_obj_
   /* "metrohash.pyx":168
  *             self._m = NULL
  * 
- *     def initialize(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
- *         """Initialize object with a new seed"""
+ *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
+ *         """Reset state with a new seed"""
  *         self._m.Initialize(seed)
  */
 
@@ -3111,7 +3111,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
  *             del self._m
  *             self._m = NULL             # <<<<<<<<<<<<<<
  * 
- *     def initialize(self, uint64 seed=0ULL):
+ *     def reset(self, uint64 seed=0ULL):
  */
     __pyx_v_self->_m = NULL;
 
@@ -3139,22 +3139,22 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
 /* "metrohash.pyx":225
  *             self._m = NULL
  * 
- *     def initialize(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
- *         """Initialize object with a new seed"""
+ *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
+ *         """Reset state with a new seed"""
  *         self._m.Initialize(seed)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9metrohash_12MetroHash128_5initialize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9metrohash_12MetroHash128_4initialize[] = "MetroHash128.initialize(self, uint64 seed=0)\nInitialize object with a new seed";
-static PyObject *__pyx_pw_9metrohash_12MetroHash128_5initialize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_9metrohash_12MetroHash128_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_9metrohash_12MetroHash128_4reset[] = "MetroHash128.reset(self, uint64 seed=0)\nReset state with a new seed";
+static PyObject *__pyx_pw_9metrohash_12MetroHash128_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   uint64 __pyx_v_seed;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("initialize (wrapper)", 0);
+  __Pyx_RefNannySetupContext("reset (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_seed,0};
     PyObject* values[1] = {0};
@@ -3176,7 +3176,7 @@ static PyObject *__pyx_pw_9metrohash_12MetroHash128_5initialize(PyObject *__pyx_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "initialize") < 0)) __PYX_ERR(0, 225, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reset") < 0)) __PYX_ERR(0, 225, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3194,27 +3194,27 @@ static PyObject *__pyx_pw_9metrohash_12MetroHash128_5initialize(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("initialize", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 225, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("reset", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 225, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("metrohash.MetroHash128.initialize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("metrohash.MetroHash128.reset", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9metrohash_12MetroHash128_4initialize(((struct __pyx_obj_9metrohash_MetroHash128 *)__pyx_v_self), __pyx_v_seed);
+  __pyx_r = __pyx_pf_9metrohash_12MetroHash128_4reset(((struct __pyx_obj_9metrohash_MetroHash128 *)__pyx_v_self), __pyx_v_seed);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9metrohash_12MetroHash128_4initialize(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self, uint64 __pyx_v_seed) {
+static PyObject *__pyx_pf_9metrohash_12MetroHash128_4reset(struct __pyx_obj_9metrohash_MetroHash128 *__pyx_v_self, uint64 __pyx_v_seed) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("initialize", 0);
+  __Pyx_RefNannySetupContext("reset", 0);
 
   /* "metrohash.pyx":227
- *     def initialize(self, uint64 seed=0ULL):
- *         """Initialize object with a new seed"""
+ *     def reset(self, uint64 seed=0ULL):
+ *         """Reset state with a new seed"""
  *         self._m.Initialize(seed)             # <<<<<<<<<<<<<<
  * 
  *     def update(self, data):
@@ -3224,8 +3224,8 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_4initialize(struct __pyx_obj
   /* "metrohash.pyx":225
  *             self._m = NULL
  * 
- *     def initialize(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
- *         """Initialize object with a new seed"""
+ *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
+ *         """Reset state with a new seed"""
  *         self._m.Initialize(seed)
  */
 
@@ -3703,7 +3703,7 @@ static void __pyx_tp_dealloc_9metrohash_MetroHash64(PyObject *o) {
 }
 
 static PyMethodDef __pyx_methods_9metrohash_MetroHash64[] = {
-  {"initialize", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9metrohash_11MetroHash64_5initialize, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9metrohash_11MetroHash64_4initialize},
+  {"reset", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9metrohash_11MetroHash64_5reset, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9metrohash_11MetroHash64_4reset},
   {"update", (PyCFunction)__pyx_pw_9metrohash_11MetroHash64_7update, METH_O, __pyx_doc_9metrohash_11MetroHash64_6update},
   {"intdigest", (PyCFunction)__pyx_pw_9metrohash_11MetroHash64_9intdigest, METH_NOARGS, __pyx_doc_9metrohash_11MetroHash64_8intdigest},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_9metrohash_11MetroHash64_11__reduce_cython__, METH_NOARGS, __pyx_doc_9metrohash_11MetroHash64_10__reduce_cython__},
@@ -3816,7 +3816,7 @@ static void __pyx_tp_dealloc_9metrohash_MetroHash128(PyObject *o) {
 }
 
 static PyMethodDef __pyx_methods_9metrohash_MetroHash128[] = {
-  {"initialize", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9metrohash_12MetroHash128_5initialize, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9metrohash_12MetroHash128_4initialize},
+  {"reset", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9metrohash_12MetroHash128_5reset, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9metrohash_12MetroHash128_4reset},
   {"update", (PyCFunction)__pyx_pw_9metrohash_12MetroHash128_7update, METH_O, __pyx_doc_9metrohash_12MetroHash128_6update},
   {"intdigest", (PyCFunction)__pyx_pw_9metrohash_12MetroHash128_9intdigest, METH_NOARGS, __pyx_doc_9metrohash_12MetroHash128_8intdigest},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_9metrohash_12MetroHash128_11__reduce_cython__, METH_NOARGS, __pyx_doc_9metrohash_12MetroHash128_10__reduce_cython__},

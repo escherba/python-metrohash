@@ -35,9 +35,9 @@ def random_splits(s, n, nsplits=2):
         yield s[begin:end]
 
 
-class TestStandalone(unittest.TestCase):
+class TestAtomic(unittest.TestCase):
 
-    """test single-line methods"""
+    """test atomic (functional) interface"""
 
     def test_string_unicode_64(self):
         """Empty Python string has same hash value as empty Unicode string
@@ -98,18 +98,10 @@ class TestStandalone(unittest.TestCase):
             with self.assertRaises(TypeError):
                 func([])
 
-    def test_obj_raises_type_error(self):
-        """Check that hasher objects raise type error"""
-        hasher_classes = [MetroHash64, MetroHash128]
-        for hasher_class in hasher_classes:
-            hasher = hasher_class()
-            with self.assertRaises(TypeError):
-                hasher.update([])
 
+class TestIncremental(unittest.TestCase):
 
-class TestCombiners(unittest.TestCase):
-
-    """test combiners"""
+    """test incremental hashers"""
 
     def test_compose_64(self):
         """Test various ways to split a string
@@ -154,3 +146,44 @@ class TestCombiners(unittest.TestCase):
             whole = hasher2.intdigest()
             msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (pieces, whole, incremental)
             self.assertEqual(whole, incremental, msg)
+
+    def test_obj_raises_type_error(self):
+        """Check that hasher objects raise type error
+        """
+        hasher_classes = [MetroHash64, MetroHash128]
+        for hasher_class in hasher_classes:
+            hasher = hasher_class()
+            with self.assertRaises(TypeError):
+                hasher.update([])
+
+    def test_reset_64(self):
+        """test that 64-bit hasher can be reset"""
+
+        seed1 = 42
+        expected1 = metrohash64("ab", seed=seed1)
+        hasher = MetroHash64(seed1)
+        hasher.update("a")
+        hasher.update("b")
+        self.assertEqual(hasher.intdigest(), expected1)
+
+        seed2 = 0
+        hasher.reset(seed=seed2)
+        expected2 = metrohash64("c", seed=seed2)
+        hasher.update("c")
+        self.assertEqual(hasher.intdigest(), expected2)
+
+    def test_reset_128(self):
+        """test that 128-bit hasher can be reset"""
+
+        seed1 = 42
+        expected1 = metrohash128("ab", seed=seed1)
+        hasher = MetroHash128(seed1)
+        hasher.update("a")
+        hasher.update("b")
+        self.assertEqual(hasher.intdigest(), expected1)
+
+        seed2 = 0
+        hasher.reset(seed=seed2)
+        expected2 = metrohash128("c", seed=seed2)
+        hasher.update("c")
+        self.assertEqual(hasher.intdigest(), expected2)
