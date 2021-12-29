@@ -28,8 +28,11 @@ To use this package in your program, simply type
 After that, you should be able to import the module and do things with it (see
 Example Usage below).
 
-Example Usage
--------------
+Usage Examples
+--------------
+
+Simple Hashing
+~~~~~~~~~~~~~~
 
 This package provides Python interfaces to 64- and 128-bit implementations of
 MetroHash algorithm. For stateless hashing, it exports ``metrohash64`` and
@@ -45,6 +48,9 @@ unicode) and an optional ``seed`` parameter:
     >>> metrohash.metrohash128("abc")
     182995299641628952910564950850867298725
 
+
+Incremental Hashing
+~~~~~~~~~~~~~~~~~~~
 
 For incremental hashing, use ``MetroHash64`` and ``MetroHash128`` classes.
 Incremental hashing is associative and guarantees that any combination of input
@@ -69,7 +75,7 @@ Note that the resulting hash value above is the same as in:
     7851180100622203313
 
 Buffer Protocol Support
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The methods in this module support Python `Buffer Protocol
 <https://docs.python.org/3/c-api/buffer.html>`__, which allows them to be used
