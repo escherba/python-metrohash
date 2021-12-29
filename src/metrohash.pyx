@@ -1,5 +1,5 @@
 #cython: infer_types=True
-#cython: language_level=3
+#cython: embedsignature=True
 #distutils: language=c++
 
 """
@@ -8,7 +8,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.1.0.post2"
+__version__ = "0.1.0.post3"
 __all__     = [
     "metrohash64",
     "metrohash128",
@@ -77,13 +77,21 @@ from cpython.bytes cimport PyBytes_AS_STRING
 
 cdef object _type_error(argname: str, expected: object, value: object):
     return TypeError(
-        "Argument '%s' has incorrect type (expected %s, got %s)" %
-        (argname, expected, type(value))
+        "Argument '%s' has incorrect type (expected %s, got '%s')" %
+        (argname, expected, type(value).__name__)
     )
 
 
 cpdef metrohash64(data, uint64 seed=0ULL):
     """64-bit hash function for a basestring or buffer type
+
+    Args:
+        data (str or buffer): input data (either string or buffer type)
+        seed (int): seed to random number generator
+    Returns:
+        int: long integer that represents hash value
+    Raises:
+        TypeError
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -107,6 +115,14 @@ cpdef metrohash64(data, uint64 seed=0ULL):
 
 cpdef metrohash128(data, uint64 seed=0ULL):
     """128-bit hash function for a basestring or buffer type
+
+    Args:
+        data (str or buffer): input data (either string or buffer type)
+        seed (int): seed to random number generator
+    Returns:
+        int: long integer that represents hash value
+    Raises:
+        TypeError
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -125,13 +141,16 @@ cpdef metrohash128(data, uint64 seed=0ULL):
         PyBuffer_Release(&buf)
     else:
         raise _type_error("data", ["basestring", "buffer"], data)
-    final = 0x10000000000000000L * long(result.first) + long(result.second)
-    return final
+    return 0x10000000000000000L * long(result.first) + long(result.second)
 
 
 cdef class MetroHash64(object):
-
     """Incremental hasher interface for MetroHash64
+
+    Args:
+        seed (int): seed to random number generator
+    Raises:
+        MemoryError
     """
 
     cdef CCMetroHash64* _m
@@ -146,10 +165,17 @@ cdef class MetroHash64(object):
             del self._m
             self._m = NULL
 
-    def initialize(self, uint64 seed=0ULL):
+    def reset(self, uint64 seed=0ULL):
+        """Reset state with a new seed"""
         self._m.Initialize(seed)
 
     def update(self, data):
+        """Update digest with new data
+        Args:
+            data (str or buffer): input data (either string or buffer type)
+        Raises:
+            TypeError
+        """
         cdef Py_buffer buf
         cdef bytes obj
         if PyUnicode_Check(data):
@@ -168,14 +194,20 @@ cdef class MetroHash64(object):
             raise _type_error("data", ["basestring", "buffer"], data)
 
     def intdigest(self):
+        """Return a long integer representing hash value
+        Returns:
+            int: an integer representing 64-bit hash value
+        """
         cdef uint8 buf[8]
         self._m.Finalize(buf)
         return c_bytes2int64(buf)
 
 
 cdef class MetroHash128(object):
-
     """Incremental hasher interface for MetroHash128
+
+    Args:
+        seed (int): seed to random number generator
     """
 
     cdef CCMetroHash128* _m
@@ -190,10 +222,17 @@ cdef class MetroHash128(object):
             del self._m
             self._m = NULL
 
-    def initialize(self, uint64 seed=0ULL):
+    def reset(self, uint64 seed=0ULL):
+        """Reset state with a new seed"""
         self._m.Initialize(seed)
 
     def update(self, data):
+        """Update digest with new data
+        Args:
+            data (str or buffer): input data (either string or buffer type)
+        Raises:
+            TypeError
+        """
         cdef Py_buffer buf
         cdef bytes obj
         if PyUnicode_Check(data):
@@ -212,6 +251,10 @@ cdef class MetroHash128(object):
             raise _type_error("data", ["basestring", "buffer"], data)
 
     def intdigest(self):
+        """Return integer digest
+        Returns:
+            int: a long integer representing 128-bit hash value
+        """
         cdef uint8 buf[16]
         self._m.Finalize(buf)
         cdef pair[uint64, uint64] result = c_bytes2int128(buf)
