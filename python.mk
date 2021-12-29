@@ -39,7 +39,7 @@ release: env build_ext  ## upload package to PyPI
 .PHONY: shell
 shell: build_ext  ## open Python shell within the virtualenv
 	@echo "Using $(PYVERSION)"
-	$(PYENV) $(ENV_EXTRA) python
+	$(PYENV) python
 
 .PHONY: build_ext
 build_ext: $(EXTENSION)  ## build C extension(s)
@@ -82,7 +82,7 @@ env/bin/activate: setup.py requirements.txt
 	test -f $@ || virtualenv $(VENV_OPTS) env
 	export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PYENV) curl https://bootstrap.pypa.io/ez_setup.py | $(INTERPRETER)
 	$(PIP) install -U pip
-	export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PIP) install -r requirements.txt
+	$(PIP) install -r requirements.txt
 	$(PIP) install -e .
 	$(PIP) freeze > pip-freeze.txt
 	touch $@

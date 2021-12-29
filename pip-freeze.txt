@@ -3,7 +3,7 @@ Cython==0.29.26
 distlib==0.3.4
 filelock==3.4.2
 iniconfig==1.1.1
--e git+https://github.com/escherba/python-metrohash@dc510c29023965895fa61ec19e3c40c6292fc514#egg=metrohash
+-e git+https://github.com/escherba/python-metrohash@f44727818a7218a25bc319215a4ff461f1ca7f4b#egg=metrohash
 packaging==21.3
 platformdirs==2.4.1
 pluggy==1.0.0

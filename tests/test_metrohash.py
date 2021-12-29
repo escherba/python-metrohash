@@ -81,6 +81,17 @@ class TestStandalone(unittest.TestCase):
         test_case = u'\u2661'  # pylint: disable=redundant-u-string-prefix
         self.assertTrue(isinstance(metrohash128(test_case), long))
 
+    def test_refcounts(self):
+        """Doesn't leak references to its argument"""
+        funcs = [metrohash64, metrohash128]
+        args = ['abc', b'abc', bytearray(b'def'), memoryview(b'ghi')]
+        for func in funcs:
+            for arg in args:
+                old_refcount = sys.getrefcount(arg)
+                func(arg)
+                self.assertEqual(sys.getrefcount(arg), old_refcount)
+
+
 
 class TestCombiners(unittest.TestCase):
 
