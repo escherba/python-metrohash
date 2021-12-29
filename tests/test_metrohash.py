@@ -92,7 +92,6 @@ class TestStandalone(unittest.TestCase):
                 self.assertEqual(sys.getrefcount(arg), old_refcount)
 
 
-
 class TestCombiners(unittest.TestCase):
 
     """test combiners"""

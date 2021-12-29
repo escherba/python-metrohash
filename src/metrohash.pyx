@@ -45,10 +45,10 @@ cdef extern from "metro.h" nogil:
     ctypedef pair uint128
     cdef uint64 c_Uint128Low64 "Uint128Low64" (uint128& x)
     cdef uint64 c_Uint128High64 "Uint128High64" (uint128& x)
-    cdef uint64 c_metrohash64 "metrohash64" (const uint8* buf, uint64 len, uint64 seed)
+    cdef uint64 c_metrohash64 "metrohash64" (const uint8* buf, uint64 length, uint64 seed)
     cdef uint64 c_bytes2int64 "bytes2int64" (uint8* const array)
     cdef uint128[uint64,uint64] c_bytes2int128 "bytes2int128" (uint8* const array)
-    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buf, uint64 len, uint64 seed)
+    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buf, uint64 length, uint64 seed)
     cdef cppclass CCMetroHash64 "MetroHash64":
         CCMetroHash64(const uint64 seed)
         void Initialize(const uint64 seed)
