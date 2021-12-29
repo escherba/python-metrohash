@@ -78,7 +78,7 @@ else:
         )
 
 
-VERSION = '0.1.0.post1'
+VERSION = '0.1.0.post2'
 URL = "https://github.com/escherba/python-metrohash"
 
 
@@ -104,7 +104,7 @@ setup(
     url=URL,
     download_url=URL + "/tarball/master/" + VERSION,
     name='metrohash',
-    license='MIT',
+    license='Apache License 2.0',
     zip_safe=False,
     cmdclass=CMDCLASS,
     ext_modules=EXT_MODULES,
@@ -113,7 +113,7 @@ setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: C++',
         'Programming Language :: Cython',

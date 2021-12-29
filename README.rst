@@ -126,6 +126,6 @@ bindings in this package were written by Eugene Scherba.
 
 License
 -------
-This software is licensed under the `MIT License
-<http://www.opensource.org/licenses/mit-license>`_.  See the included LICENSE
+This software is licensed under the `Apache License, Version 2.0
+<https://opensource.org/licenses/Apache-2.0>`_.  See the included LICENSE
 file for more information.
