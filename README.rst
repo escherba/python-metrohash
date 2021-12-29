@@ -68,6 +68,23 @@ Note that the resulting hash value above is the same as in:
     >>> mh.intdigest()
     7851180100622203313
 
+Buffer Protocol Support
+-----------------------
+
+The methods in this module support Python `Buffer Protocol
+<https://docs.python.org/3/c-api/buffer.html>`__, which allows them to be used
+on any object that exports a buffer interface. Here is an example showing
+hashing of a 4D NumPy array:
+
+.. code-block:: python
+
+    >>> import numpy as np
+    >>> arr = np.zeros((256, 256, 4))
+    >>> metrohash.metrohash64(arr)
+    12125832280816116063
+
+Note that arrays need to be contiguous for this to work. To convert a
+non-contiguous array, use ``np.ascontiguousarray()`` method.
 
 Development
 -----------

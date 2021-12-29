@@ -8,7 +8,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.1.0"
+__version__ = "0.1.0.post0"
 __all__     = [
     "metrohash64",
     "metrohash128",
@@ -61,7 +61,6 @@ cdef extern from "metro.h" nogil:
         void Finalize(uint8* const result)
 
 from cpython cimport long
-from cython import basestring
 
 from cpython.buffer cimport PyObject_CheckBuffer
 from cpython.buffer cimport PyBUF_SIMPLE
@@ -76,7 +75,7 @@ from cpython.bytes cimport PyBytes_GET_SIZE
 from cpython.bytes cimport PyBytes_AS_STRING
 
 
-cdef object _type_error(argname: basestring, expected: object, value: object):
+cdef object _type_error(argname: str, expected: object, value: object):
     return TypeError(
         "Argument '%s' has incorrect type (expected %s, got %s)" %
         (argname, expected, type(value))
