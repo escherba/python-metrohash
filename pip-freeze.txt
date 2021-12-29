@@ -4,7 +4,7 @@ distlib==0.3.4
 filelock==3.4.2
 importlib-metadata==4.10.0
 iniconfig==1.1.1
--e git+https://github.com/escherba/python-metrohash@5b2b36b09262853950816ff3852ebda5a8c2779c#egg=metrohash
+-e git+https://github.com/escherba/python-metrohash@b71c0fcb3f309e19a4e06112614d14295446c8c4#egg=metrohash
 numpy==1.21.5
 packaging==21.3
 platformdirs==2.4.1
