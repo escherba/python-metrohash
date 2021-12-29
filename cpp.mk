@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -msse4.2 -O3
+CXXFLAGS := -std=c++11 -O3 -msse4.2
 LDFLAGS :=
 SRCEXT := cc
 INC := -I include
@@ -24,8 +24,6 @@ TEST_TARGETS := $(patsubst $(BUILDDIR)/%.o, $(BINDIR)/%, $(TEST_OBJECTS))
 SOURCES := $(filter-out $(RUN_SOURCES) $(TEST_SOURCES), $(ALL_SOURCES))
 OBJECTS := $(patsubst %, $(BUILDDIR)/%, $(SOURCES:.$(SRCEXT)=.o))
 
-.PHONY: clean_cpp test_cpp run_cpp
-
 .SECONDARY: $(RUN_OBJECTS) $(TEST_OBJECTS) $(OBJECTS)
 
 $(BUILDDIR)/%.o: %.$(SRCEXT)
@@ -36,16 +34,19 @@ $(BINDIR)/%: $(BUILDDIR)/%.o $(OBJECTS)
 	@mkdir -p $(dir $@)
 	$(CXX) $(LIB) $(LDFLAGS) $^ -o $@
 
-clean_cpp:
+.PHONY: cpp-clean
+cpp-clean:  ## clean up C++ project
 	rm -rf ./$(BINDIR)/ ./$(BUILDDIR)/
 
-run_cpp: $(RUN_TARGETS)
+.PHONY: cpp-run
+cpp-run: $(RUN_TARGETS)  ## compile and run C++ program
 	@for target in $(RUN_TARGETS); do \
 		echo $$target >&2; \
 		time ./$$target $(INPUT); \
 		done
 
-test_cpp: $(TEST_TARGETS)
+.PHONY: cpp-test
+cpp-test: $(TEST_TARGETS)  ## run C++ tests
 	@for target in $(TEST_TARGETS); do \
 		echo $$target >&2; \
 		./$$target; \

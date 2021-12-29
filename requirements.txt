@@ -1,5 +1,5 @@
-virtualenv
-setuptools
-distribute
-wheel
 cython
+pytest
+setuptools
+virtualenv
+wheel

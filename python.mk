@@ -1,69 +1,88 @@
-.PHONY: clean develop env extras package release test virtualenv build_ext
-
 PYMODULE := metrohash
 EXTENSION := $(PYMODULE).so
-EXTENSION_INTERMEDIATE := ./src/$(PYMODULE).cpp
-EXTENSION_DEPS := ./src/$(PYMODULE).pyx
-PYPI_HOST := pypi
-DISTRIBUTE := sdist bdist_wheel
-EXTRAS_REQS := dev-requirements.txt $(wildcard extras-*-requirements.txt)
+SRC_DIR := src
+EXTENSION_INTERMEDIATE := ./$(SRC_DIR)/$(PYMODULE).cpp
+EXTENSION_DEPS := ./$(SRC_DIR)/$(PYMODULE).pyx
+PYPI_URL := https://upload.pypi.org/legacy/
 
-PYENV := . env/bin/activate;
-PYTHON := $(PYENV) python
-PIP := $(PYENV) pip
+DISTRIBUTE := sdist
+ifeq ($(shell uname -s),Darwin)
+DISTRIBUTE += bdist_wheel
+endif
 
+PYENV := PYTHONPATH=. . env/bin/activate;
+INTERPRETER := python3
+PACKAGE_MGR := pip3
+PYVERSION := $(shell $(INTERPRETER) --version 2>&1)
+PYTHON := $(PYENV) $(INTERPRETER)
+PIP := $(PYENV) $(PACKAGE_MGR)
 
-package: env build_ext
+VENV_OPTS := --python="$(shell which $(INTERPRETER))"
+ifeq ($(PIP_SYSTEM_SITE_PACKAGES),1)
+VENV_OPTS += --system-site-packages
+endif
+
+BOLD := $(shell tput bold)
+END := $(shell tput sgr0)
+
+.PHONY: package
+package: env build_ext  ## build package
+	@echo "Packaging using $(PYVERSION)"
 	$(PYTHON) setup.py $(DISTRIBUTE)
 
-release: env build_ext
-	$(PYTHON) setup.py $(DISTRIBUTE) upload -r $(PYPI_HOST)
+# See https://packaging.python.org/guides/migrating-to-pypi-org/
+.PHONY: release
+release: env build_ext  ## upload package to PyPI
+	@echo "Releasing using $(PYVERSION)"
+	$(PYTHON) setup.py $(DISTRIBUTE) upload -r $(PYPI_URL)
 
-shell: extras build_ext
-	$(PYENV) $(ENV_EXTRA) ipython
+.PHONY: shell
+shell: build_ext  ## open Python shell within the virtualenv
+	@echo "Using $(PYVERSION)"
+	$(PYENV) python
 
-build_ext: $(EXTENSION)
+.PHONY: build_ext
+build_ext: $(EXTENSION)  ## build C extension(s)
 	@echo "done building '$(EXTENSION)' extension"
 
 $(EXTENSION): env $(EXTENSION_DEPS)
+	@echo "Building using $(PYVERSION)"
 	$(PYTHON) setup.py build_ext --inplace
 
-test: extras build_ext | test_cpp
-	$(PYENV) nosetests $(NOSEARGS)
-	$(PYENV) py.test README.rst
+.PHONY: test
+test: build_ext  ## run Python unit tests
+	$(PYENV) pytest
+	$(PYENV) pytest README.rst
 
-nuke: clean
+.PHONY: nuke
+nuke: clean  ## clean and remove virtual environment
 	rm -f $(EXTENSION_INTERMEDIATE)
 	rm -rf *.egg *.egg-info env
+	find $(SRC_DIR) -depth -type d -name *.egg-info -exec rm -rf {} \;
 
-clean: | clean_cpp
+.PHONY: clean
+clean:  ## remove temporary files
 	python setup.py clean
-	rm -rf dist build
-	rm -f $(EXTENSION)
-	find . -path ./env -prune -o -type f -name "*.pyc" -exec rm {} \;
+	rm -rf dist build __pycache__
+	rm -f *.so
+	find $(SRC_DIR) -type f -name "*.pyc" -exec rm {} \;
+	find $(SRC_DIR) -type f -name "*.cpp" -exec rm {} \;
+	find $(SRC_DIR) -type f -name "*.so" -exec rm {} \;
 
-develop:
+.PHONY: install
+install:  build_ext  ## install package
 	@echo "Installing for " `which pip`
 	-pip uninstall --yes $(PYMODULE)
 	pip install -e .
 
-extras: env/make.extras
-env/make.extras: $(EXTRAS_REQS) | env
-	rm -rf env/build
-	$(PYENV) for req in $?; do pip install -r $$req; done
-	touch $@
-
-ifeq ($(PIP_SYSTEM_SITE_PACKAGES),1)
-VENV_OPTS="--system-site-packages"
-else
-VENV_OPTS="--no-site-packages"
-endif
-
-env virtualenv: env/bin/activate
-env/bin/activate: setup.py
+.PRECIOUS: env/bin/activate
+.PHONY: env
+env: env/bin/activate  ## set up a virtual environment
+env/bin/activate: setup.py requirements.txt
 	test -f $@ || virtualenv $(VENV_OPTS) env
-	$(PYENV) easy_install -U pip
-	$(PYENV) curl https://bootstrap.pypa.io/ez_setup.py | python
-	$(PIP) install -U setuptools distribute wheel cython
+	export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PYENV) curl https://bootstrap.pypa.io/ez_setup.py | $(INTERPRETER)
+	$(PIP) install -U pip
+	$(PIP) install -r requirements.txt
 	$(PIP) install -e .
+	$(PIP) freeze > pip-freeze.txt
 	touch $@

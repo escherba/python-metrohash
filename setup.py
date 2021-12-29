@@ -1,33 +1,41 @@
+from os.path import join, dirname
 from setuptools import setup
 from setuptools.extension import Extension
 from setuptools.dist import Distribution
-from pkg_resources import resource_string
 
+try:
+    from cpuinfo import get_cpu_info
+    cpu_info = get_cpu_info()
+    have_sse42 = 'sse4.2' in cpu_info['flags']
+except Exception:
+    have_sse42 = False
 
 try:
     from Cython.Distutils import build_ext
 except ImportError:
-    USE_CYTHON = False
-else:
-    USE_CYTHON = True
+    build_ext = None
+
+USE_CYTHON = build_ext is not None
 
 
 class BinaryDistribution(Distribution):
     """
     Subclass the setuptools Distribution to flip the purity flag to false.
-    See http://lucumr.pocoo.org/2014/1/27/python-on-wheels/
+    See https://lucumr.pocoo.org/2014/1/27/python-on-wheels/
     """
     def is_pure(self):
-        # TODO: check if this is still necessary with Python v2.7
+        """Returns purity flag"""
         return False
 
 
-CXXFLAGS = u"""
+CXXFLAGS = """
 -O3
--msse4.2
 -Wno-unused-value
 -Wno-unused-function
 """.split()
+
+if have_sse42:
+    CXXFLAGS.append('-msse4.2')
 
 
 INCLUDE_DIRS = ['include']
@@ -56,7 +64,7 @@ if USE_CYTHON:
             language="c++",
             extra_compile_args=CXXFLAGS,
             include_dirs=INCLUDE_DIRS)
-    )
+        )
     CMDCLASS['build_ext'] = build_ext
 else:
     EXT_MODULES.append(
@@ -67,10 +75,26 @@ else:
             language="c++",
             extra_compile_args=CXXFLAGS,
             include_dirs=INCLUDE_DIRS)
-    )
+        )
 
-VERSION = '0.0.13'
+
+VERSION = '0.1.0'
 URL = "https://github.com/escherba/python-metrohash"
+
+
+LONG_DESCRIPTION = """
+
+"""
+
+
+def get_long_description():
+    fname = join(dirname(__file__), 'README.rst')
+    try:
+        with open(fname, 'rb') as fh:
+            return fh.read().decode('utf-8')
+    except Exception:
+        return LONG_DESCRIPTION
+
 
 setup(
     version=VERSION,
@@ -94,6 +118,12 @@ setup(
         'Programming Language :: C++',
         'Programming Language :: Cython',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Internet',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Information Analysis',
@@ -101,6 +131,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities'
     ],
-    long_description=resource_string(__name__, 'README.rst'),
+    long_description=get_long_description(),
+    tests_require=['pytest'],
     distclass=BinaryDistribution,
 )

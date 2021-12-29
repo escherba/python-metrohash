@@ -1,15 +1,19 @@
 #cython: infer_types=True
+#cython: language_level=3
+#distutils: language=c++
 
 """
-A Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
+Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 """
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.0.13"
+__version__ = "0.1.0"
 __all__     = [
-    "metrohash64", "metrohash128",
-    "MetroHash64", "MetroHash128",
+    "metrohash64",
+    "metrohash128",
+    "MetroHash64",
+    "MetroHash128",
 ]
 
 
@@ -41,10 +45,10 @@ cdef extern from "metro.h" nogil:
     ctypedef pair uint128
     cdef uint64 c_Uint128Low64 "Uint128Low64" (uint128& x)
     cdef uint64 c_Uint128High64 "Uint128High64" (uint128& x)
-    cdef uint64 c_metrohash64 "metrohash64" (const uint8* buf, uint64 len, uint64 seed)
+    cdef uint64 c_metrohash64 "metrohash64" (const uint8* buf, uint64 length, uint64 seed)
     cdef uint64 c_bytes2int64 "bytes2int64" (uint8* const array)
     cdef uint128[uint64,uint64] c_bytes2int128 "bytes2int128" (uint8* const array)
-    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buf, uint64 len, uint64 seed)
+    cdef uint128[uint64,uint64] c_metrohash128 "metrohash128" (const uint8* buf, uint64 length, uint64 seed)
     cdef cppclass CCMetroHash64 "MetroHash64":
         CCMetroHash64(const uint64 seed)
         void Initialize(const uint64 seed)
@@ -56,21 +60,23 @@ cdef extern from "metro.h" nogil:
         void Update(const uint8* buf, const uint64 length)
         void Finalize(uint8* const result)
 
+from cpython cimport long
+from cython import basestring
+
 from cpython.buffer cimport PyObject_CheckBuffer
 from cpython.buffer cimport PyBUF_SIMPLE
-from cpython.buffer cimport Py_buffer
 from cpython.buffer cimport PyObject_GetBuffer
+from cpython.buffer cimport PyBuffer_Release
 
 from cpython.unicode cimport PyUnicode_Check
 from cpython.unicode cimport PyUnicode_AsUTF8String
 
-from cpython.string cimport PyString_Check
-from cpython.string cimport PyString_GET_SIZE
-from cpython.string cimport PyString_AS_STRING
-from cpython cimport Py_DECREF
+from cpython.bytes cimport PyBytes_Check
+from cpython.bytes cimport PyBytes_GET_SIZE
+from cpython.bytes cimport PyBytes_AS_STRING
 
 
-cdef object _type_error(str argname, expected, value):
+cdef object _type_error(argname: basestring, expected: object, value: object):
     return TypeError(
         "Argument '%s' has incorrect type (expected %s, got %s)" %
         (argname, expected, type(value))
@@ -81,19 +87,20 @@ cpdef metrohash64(data, uint64 seed=0ULL):
     """64-bit hash function for a basestring or buffer type
     """
     cdef Py_buffer buf
-    cdef object obj
+    cdef bytes obj
     cdef uint64 result
     if PyUnicode_Check(data):
         obj = PyUnicode_AsUTF8String(data)
         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
-        Py_DECREF(obj)
-    elif PyString_Check(data):
-        result = c_metrohash64(<const uint8 *>PyString_AS_STRING(data),
-                               PyString_GET_SIZE(data), seed)
+        PyBuffer_Release(&buf)
+    elif PyBytes_Check(data):
+        result = c_metrohash64(<const uint8 *>PyBytes_AS_STRING(data),
+                               PyBytes_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
+        PyBuffer_Release(&buf)
     else:
         raise _type_error("data", ["basestring", "buffer"], data)
     return result
@@ -103,19 +110,20 @@ cpdef metrohash128(data, uint64 seed=0ULL):
     """128-bit hash function for a basestring or buffer type
     """
     cdef Py_buffer buf
-    cdef object obj
+    cdef bytes obj
     cdef pair[uint64, uint64] result
     if PyUnicode_Check(data):
         obj = PyUnicode_AsUTF8String(data)
         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
-        Py_DECREF(obj)
-    elif PyString_Check(data):
-        result = c_metrohash128(<const uint8 *>PyString_AS_STRING(data),
-                                PyString_GET_SIZE(data), seed)
+        PyBuffer_Release(&buf)
+    elif PyBytes_Check(data):
+        result = c_metrohash128(<const uint8 *>PyBytes_AS_STRING(data),
+                                PyBytes_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
+        PyBuffer_Release(&buf)
     else:
         raise _type_error("data", ["basestring", "buffer"], data)
     final = 0x10000000000000000L * long(result.first) + long(result.second)
@@ -144,18 +152,19 @@ cdef class MetroHash64(object):
 
     def update(self, data):
         cdef Py_buffer buf
-        cdef object obj
+        cdef bytes obj
         if PyUnicode_Check(data):
             obj = PyUnicode_AsUTF8String(data)
             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-            Py_DECREF(obj)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
-        elif PyString_Check(data):
-            self._m.Update(<const uint8 *>PyString_AS_STRING(data),
-                           PyString_GET_SIZE(data))
+            PyBuffer_Release(&buf)
+        elif PyBytes_Check(data):
+            self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
+                           PyBytes_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
+            PyBuffer_Release(&buf)
         else:
             raise _type_error("data", ["basestring", "buffer"], data)
 
@@ -187,18 +196,19 @@ cdef class MetroHash128(object):
 
     def update(self, data):
         cdef Py_buffer buf
-        cdef object obj
+        cdef bytes obj
         if PyUnicode_Check(data):
             obj = PyUnicode_AsUTF8String(data)
             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-            Py_DECREF(obj)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
-        elif PyString_Check(data):
-            self._m.Update(<const uint8 *>PyString_AS_STRING(data),
-                           PyString_GET_SIZE(data))
+            PyBuffer_Release(&buf)
+        elif PyBytes_Check(data):
+            self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
+                           PyBytes_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
+            PyBuffer_Release(&buf)
         else:
             raise _type_error("data", ["basestring", "buffer"], data)
 
