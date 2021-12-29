@@ -91,6 +91,21 @@ class TestStandalone(unittest.TestCase):
                 func(arg)
                 self.assertEqual(sys.getrefcount(arg), old_refcount)
 
+    def test_func_raises_type_error(self):
+        """Check that functions raise type error"""
+        funcs = [metrohash64, metrohash128]
+        for func in funcs:
+            with self.assertRaises(TypeError):
+                func([])
+
+    def test_obj_raises_type_error(self):
+        """Check that hasher objects raise type error"""
+        hasher_classes = [MetroHash64, MetroHash128]
+        for hasher_class in hasher_classes:
+            hasher = hasher_class()
+            with self.assertRaises(TypeError):
+                hasher.update([])
+
 
 class TestCombiners(unittest.TestCase):
 
