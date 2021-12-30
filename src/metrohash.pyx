@@ -10,7 +10,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.1.0.post5"
+__version__ = "0.1.0.post6"
 __all__     = [
     "metrohash64",
     "metrohash128",
@@ -45,8 +45,6 @@ cdef extern from "metro.h" nogil:
     ctypedef uint32_t uint32
     ctypedef uint64_t uint64
     ctypedef pair uint128
-    cdef uint64 c_Uint128Low64 "Uint128Low64" (uint128& x)
-    cdef uint64 c_Uint128High64 "Uint128High64" (uint128& x)
     cdef uint64 c_metrohash64 "metrohash64" (const uint8* buf, uint64 length, uint64 seed)
     cdef uint64 c_bytes2int64 "bytes2int64" (uint8* const array)
     cdef uint128[uint64,uint64] c_bytes2int128 "bytes2int128" (uint8* const array)
@@ -84,7 +82,7 @@ cdef object _type_error(argname: str, expected: object, value: object):
     )
 
 
-cpdef metrohash64(data, uint64 seed=0ULL):
+def metrohash64(data, uint64 seed=0ULL):
     """Obtain a 64-bit hash from input data.
     Args:
         data (str or buffer): input data (either string or buffer type)
@@ -116,7 +114,7 @@ cpdef metrohash64(data, uint64 seed=0ULL):
     return result
 
 
-cpdef metrohash128(data, uint64 seed=0ULL):
+def metrohash128(data, uint64 seed=0ULL):
     """Obtain a 128-bit hash from input data.
     Args:
         data (str or buffer): input data (either string or buffer type)
