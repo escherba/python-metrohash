@@ -82,7 +82,7 @@ else:
         )
 
 
-VERSION = '0.1.0.post5'
+VERSION = '0.1.0.post6'
 URL = "https://github.com/escherba/python-metrohash"
 
 
