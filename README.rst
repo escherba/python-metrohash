@@ -15,6 +15,14 @@ A Python wrapper around `MetroHash <https://github.com/jandrewrogers/MetroHash>`
     :target: https://circleci.com/gh/escherba/python-metrohash
     :alt: Tests Status
 
+.. image:: https://img.shields.io/pypi/pyversions/cityhash.svg
+    :target: https://pypi.python.org/pypi/cityhash
+    :alt: Supported Python versions
+
+.. image:: https://img.shields.io/pypi/l/cityhash.svg
+    :target: https://pypi.python.org/pypi/cityhash
+    :alt: License
+
 Getting Started
 ---------------
 
@@ -31,8 +39,8 @@ Example Usage below).
 Usage Examples
 --------------
 
-Simple Hashing
-~~~~~~~~~~~~~~
+Stateless Hashing
+~~~~~~~~~~~~~~~~~
 
 This package provides Python interfaces to 64- and 128-bit implementations of
 MetroHash algorithm. For stateless hashing, it exports ``metrohash64`` and
@@ -117,7 +125,7 @@ See Also
 --------
 For other fast non-cryptographic hashing implementations available as Python
 extensions, see `CityHash <https://github.com/escherba/python-cityhash>`__ and
-`xxh <https://github.com/lebedov/xxh>`__.
+`MurmurHash <https://github.com/hajimes/mmh3>`__.
 
 Authors
 -------
@@ -128,4 +136,4 @@ License
 -------
 This software is licensed under the `Apache License, Version 2.0
 <https://opensource.org/licenses/Apache-2.0>`_.  See the included LICENSE
-file for more information.
+file for details.
