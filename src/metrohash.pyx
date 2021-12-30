@@ -1,6 +1,7 @@
 #cython: infer_types=True
 #cython: embedsignature=True
 #cython: binding=False
+#cython: language_level=2
 #distutils: language=c++
 
 """
