@@ -35,9 +35,9 @@ def random_splits(s, n, nsplits=2):
         yield s[begin:end]
 
 
-class TestAtomic(unittest.TestCase):
+class TestStateless(unittest.TestCase):
 
-    """test atomic (functional) interface"""
+    """test stateless methods"""
 
     def test_string_unicode_64(self):
         """Empty Python string has same hash value as empty Unicode string

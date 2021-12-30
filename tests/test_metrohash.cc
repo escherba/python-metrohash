@@ -3,7 +3,7 @@
  *
  *       Filename:  test_metro.cc
  *
- *    Description:  Some basic tests for MetroHash
+ *    Description:  C++-based tests for MetroHash
  *
  *        Version:  1.0
  *        Created:  10/12/2015 16:30:58

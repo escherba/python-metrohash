@@ -1,5 +1,6 @@
 #cython: infer_types=True
 #cython: embedsignature=True
+#cython: binding=False
 #distutils: language=c++
 
 """
@@ -8,7 +9,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.1.0.post3"
+__version__ = "0.1.0.post4"
 __all__     = [
     "metrohash64",
     "metrohash128",
@@ -63,9 +64,9 @@ cdef extern from "metro.h" nogil:
 from cpython cimport long
 
 from cpython.buffer cimport PyObject_CheckBuffer
-from cpython.buffer cimport PyBUF_SIMPLE
 from cpython.buffer cimport PyObject_GetBuffer
 from cpython.buffer cimport PyBuffer_Release
+from cpython.buffer cimport PyBUF_SIMPLE
 
 from cpython.unicode cimport PyUnicode_Check
 from cpython.unicode cimport PyUnicode_AsUTF8String
@@ -77,21 +78,20 @@ from cpython.bytes cimport PyBytes_AS_STRING
 
 cdef object _type_error(argname: str, expected: object, value: object):
     return TypeError(
-        "Argument '%s' has incorrect type (expected %s, got '%s')" %
+        "Argument '%s' has incorrect type: expected %s, got '%s' instead" %
         (argname, expected, type(value).__name__)
     )
 
 
 cpdef metrohash64(data, uint64 seed=0ULL):
-    """64-bit hash function for a basestring or buffer type
-
+    """Obtain a 64-bit hash from input data.
     Args:
         data (str or buffer): input data (either string or buffer type)
         seed (int): seed to random number generator
     Returns:
         int: long integer that represents hash value
     Raises:
-        TypeError
+        TypeError, OverflowError
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -114,13 +114,14 @@ cpdef metrohash64(data, uint64 seed=0ULL):
 
 
 cpdef metrohash128(data, uint64 seed=0ULL):
-    """128-bit hash function for a basestring or buffer type
-
+    """Obtain a 128-bit hash from input data.
     Args:
         data (str or buffer): input data (either string or buffer type)
         seed (int): seed to random number generator
     Returns:
         int: long integer that represents hash value
+    Raises:
+        TypeError, OverflowError
     Raises:
         TypeError
     """
@@ -208,6 +209,8 @@ cdef class MetroHash128(object):
 
     Args:
         seed (int): seed to random number generator
+    Raises:
+        TypeError, OverflowError
     """
 
     cdef CCMetroHash128* _m
@@ -223,7 +226,12 @@ cdef class MetroHash128(object):
             self._m = NULL
 
     def reset(self, uint64 seed=0ULL):
-        """Reset state with a new seed"""
+        """Reset state with a new seed
+        Args:
+            seed (int): new seed to reset state to
+        Raises:
+            TypeError, OverflowError
+        """
         self._m.Initialize(seed)
 
     def update(self, data):
