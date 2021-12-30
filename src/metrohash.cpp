@@ -929,7 +929,7 @@ struct __pyx_opt_args_9metrohash_metrohash64 {
   uint64 seed;
 };
 
-/* "metrohash.pyx":116
+/* "metrohash.pyx":118
  * 
  * 
  * cpdef metrohash128(data, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -941,7 +941,7 @@ struct __pyx_opt_args_9metrohash_metrohash128 {
   uint64 seed;
 };
 
-/* "metrohash.pyx":148
+/* "metrohash.pyx":150
  * 
  * 
  * cdef class MetroHash64(object):             # <<<<<<<<<<<<<<
@@ -954,7 +954,7 @@ struct __pyx_obj_9metrohash_MetroHash64 {
 };
 
 
-/* "metrohash.pyx":207
+/* "metrohash.pyx":216
  * 
  * 
  * cdef class MetroHash128(object):             # <<<<<<<<<<<<<<
@@ -1382,7 +1382,7 @@ static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_basestring[] = "basestring";
-static const char __pyx_k_0_1_0_post4[] = "0.1.0.post4";
+static const char __pyx_k_0_1_0_post5[] = "0.1.0.post5";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_MetroHash64[] = "MetroHash64";
 static const char __pyx_k_metrohash64[] = "metrohash64";
@@ -1396,7 +1396,7 @@ static const char __pyx_k_escherba_metrohash_gmail_com[] = "escherba+metrohash@g
 static const char __pyx_k_Python_wrapper_for_MetroHash_a[] = "\nPython wrapper for MetroHash, a fast non-cryptographic hashing algorithm\n";
 static const char __pyx_k_Argument_s_has_incorrect_type_ex[] = "Argument '%s' has incorrect type: expected %s, got '%s' instead";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
-static PyObject *__pyx_kp_s_0_1_0_post4;
+static PyObject *__pyx_kp_s_0_1_0_post5;
 static PyObject *__pyx_kp_s_Argument_s_has_incorrect_type_ex;
 static PyObject *__pyx_kp_s_Eugene_Scherba;
 static PyObject *__pyx_n_s_MemoryError;
@@ -1573,7 +1573,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
     }
   }
 
-  /* "metrohash.pyx":99
+  /* "metrohash.pyx":101
  *     cdef bytes obj
  *     cdef uint64 result
  *     if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -1583,28 +1583,28 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
   __pyx_t_1 = (PyUnicode_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":100
+    /* "metrohash.pyx":102
  *     cdef uint64 result
  *     if PyUnicode_Check(data):
  *         obj = PyUnicode_AsUTF8String(data)             # <<<<<<<<<<<<<<
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
  */
-    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_obj = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "metrohash.pyx":101
+    /* "metrohash.pyx":103
  *     if PyUnicode_Check(data):
  *         obj = PyUnicode_AsUTF8String(data)
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 103, __pyx_L1_error)
 
-    /* "metrohash.pyx":102
+    /* "metrohash.pyx":104
  *         obj = PyUnicode_AsUTF8String(data)
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)             # <<<<<<<<<<<<<<
@@ -1613,7 +1613,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
  */
     __pyx_v_result = metrohash64(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len, __pyx_v_seed);
 
-    /* "metrohash.pyx":103
+    /* "metrohash.pyx":105
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -1622,7 +1622,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":99
+    /* "metrohash.pyx":101
  *     cdef bytes obj
  *     cdef uint64 result
  *     if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -1632,7 +1632,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":104
+  /* "metrohash.pyx":106
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  *     elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -1642,7 +1642,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
   __pyx_t_1 = (PyBytes_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":105
+    /* "metrohash.pyx":107
  *         PyBuffer_Release(&buf)
  *     elif PyBytes_Check(data):
  *         result = c_metrohash64(<const uint8 *>PyBytes_AS_STRING(data),             # <<<<<<<<<<<<<<
@@ -1651,7 +1651,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
  */
     __pyx_v_result = metrohash64(((uint8 const *)PyBytes_AS_STRING(__pyx_v_data)), PyBytes_GET_SIZE(__pyx_v_data), __pyx_v_seed);
 
-    /* "metrohash.pyx":104
+    /* "metrohash.pyx":106
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  *     elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -1661,7 +1661,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":107
+  /* "metrohash.pyx":109
  *         result = c_metrohash64(<const uint8 *>PyBytes_AS_STRING(data),
  *                                PyBytes_GET_SIZE(data), seed)
  *     elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -1671,16 +1671,16 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
   __pyx_t_1 = (PyObject_CheckBuffer(__pyx_v_data) != 0);
   if (likely(__pyx_t_1)) {
 
-    /* "metrohash.pyx":108
+    /* "metrohash.pyx":110
  *                                PyBytes_GET_SIZE(data), seed)
  *     elif PyObject_CheckBuffer(data):
  *         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 108, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 110, __pyx_L1_error)
 
-    /* "metrohash.pyx":109
+    /* "metrohash.pyx":111
  *     elif PyObject_CheckBuffer(data):
  *         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)             # <<<<<<<<<<<<<<
@@ -1689,7 +1689,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
  */
     __pyx_v_result = metrohash64(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len, __pyx_v_seed);
 
-    /* "metrohash.pyx":110
+    /* "metrohash.pyx":112
  *         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -1698,7 +1698,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":107
+    /* "metrohash.pyx":109
  *         result = c_metrohash64(<const uint8 *>PyBytes_AS_STRING(data),
  *                                PyBytes_GET_SIZE(data), seed)
  *     elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -1708,7 +1708,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":112
+  /* "metrohash.pyx":114
  *         PyBuffer_Release(&buf)
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)             # <<<<<<<<<<<<<<
@@ -1716,7 +1716,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
  * 
  */
   /*else*/ {
-    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_n_s_basestring);
     __Pyx_GIVEREF(__pyx_n_s_basestring);
@@ -1724,16 +1724,16 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
     __Pyx_INCREF(__pyx_n_s_buffer);
     __Pyx_GIVEREF(__pyx_n_s_buffer);
     PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_buffer);
-    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 112, __pyx_L1_error)
+    __PYX_ERR(0, 114, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "metrohash.pyx":113
+  /* "metrohash.pyx":115
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)
  *     return result             # <<<<<<<<<<<<<<
@@ -1741,7 +1741,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyInt_From_uint64_t(__pyx_v_result); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_uint64_t(__pyx_v_result); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
@@ -1770,7 +1770,7 @@ static PyObject *__pyx_f_9metrohash_metrohash64(PyObject *__pyx_v_data, CYTHON_U
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_1metrohash64(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9metrohash_metrohash64[] = "metrohash64(data, uint64 seed=0)\nObtain a 64-bit hash from input data.\n    Args:\n        data (str or buffer): input data (either string or buffer type)\n        seed (int): seed to random number generator\n    Returns:\n        int: long integer that represents hash value\n    Raises:\n        TypeError, OverflowError\n    ";
+static char __pyx_doc_9metrohash_metrohash64[] = "metrohash64(data, uint64 seed=0)\nObtain a 64-bit hash from input data.\n    Args:\n        data (str or buffer): input data (either string or buffer type)\n        seed (int): seed to random number generator\n    Returns:\n        int: long integer that represents hash value\n    Raises:\n        TypeError: if input data is not a string or a buffer\n        ValueError: if input buffer is not C-contiguous\n        OverflowError: if seed cannot be converted to unsigned int64\n    ";
 static PyObject *__pyx_pw_9metrohash_1metrohash64(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_data = 0;
   uint64 __pyx_v_seed;
@@ -1869,7 +1869,7 @@ static PyObject *__pyx_pf_9metrohash_metrohash64(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "metrohash.pyx":116
+/* "metrohash.pyx":118
  * 
  * 
  * cpdef metrohash128(data, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -1900,7 +1900,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
     }
   }
 
-  /* "metrohash.pyx":131
+  /* "metrohash.pyx":133
  *     cdef bytes obj
  *     cdef pair[uint64, uint64] result
  *     if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -1910,28 +1910,28 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
   __pyx_t_1 = (PyUnicode_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":132
+    /* "metrohash.pyx":134
  *     cdef pair[uint64, uint64] result
  *     if PyUnicode_Check(data):
  *         obj = PyUnicode_AsUTF8String(data)             # <<<<<<<<<<<<<<
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
  */
-    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_obj = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "metrohash.pyx":133
+    /* "metrohash.pyx":135
  *     if PyUnicode_Check(data):
  *         obj = PyUnicode_AsUTF8String(data)
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 135, __pyx_L1_error)
 
-    /* "metrohash.pyx":134
+    /* "metrohash.pyx":136
  *         obj = PyUnicode_AsUTF8String(data)
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)             # <<<<<<<<<<<<<<
@@ -1940,7 +1940,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
  */
     __pyx_v_result = metrohash128(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len, __pyx_v_seed);
 
-    /* "metrohash.pyx":135
+    /* "metrohash.pyx":137
  *         PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -1949,7 +1949,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":131
+    /* "metrohash.pyx":133
  *     cdef bytes obj
  *     cdef pair[uint64, uint64] result
  *     if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -1959,7 +1959,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":136
+  /* "metrohash.pyx":138
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  *     elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -1969,7 +1969,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
   __pyx_t_1 = (PyBytes_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":137
+    /* "metrohash.pyx":139
  *         PyBuffer_Release(&buf)
  *     elif PyBytes_Check(data):
  *         result = c_metrohash128(<const uint8 *>PyBytes_AS_STRING(data),             # <<<<<<<<<<<<<<
@@ -1978,7 +1978,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
  */
     __pyx_v_result = metrohash128(((uint8 const *)PyBytes_AS_STRING(__pyx_v_data)), PyBytes_GET_SIZE(__pyx_v_data), __pyx_v_seed);
 
-    /* "metrohash.pyx":136
+    /* "metrohash.pyx":138
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  *     elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -1988,7 +1988,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":139
+  /* "metrohash.pyx":141
  *         result = c_metrohash128(<const uint8 *>PyBytes_AS_STRING(data),
  *                                 PyBytes_GET_SIZE(data), seed)
  *     elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -1998,16 +1998,16 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
   __pyx_t_1 = (PyObject_CheckBuffer(__pyx_v_data) != 0);
   if (likely(__pyx_t_1)) {
 
-    /* "metrohash.pyx":140
+    /* "metrohash.pyx":142
  *                                 PyBytes_GET_SIZE(data), seed)
  *     elif PyObject_CheckBuffer(data):
  *         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 140, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 142, __pyx_L1_error)
 
-    /* "metrohash.pyx":141
+    /* "metrohash.pyx":143
  *     elif PyObject_CheckBuffer(data):
  *         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)             # <<<<<<<<<<<<<<
@@ -2016,7 +2016,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
  */
     __pyx_v_result = metrohash128(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len, __pyx_v_seed);
 
-    /* "metrohash.pyx":142
+    /* "metrohash.pyx":144
  *         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
  *         PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -2025,7 +2025,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":139
+    /* "metrohash.pyx":141
  *         result = c_metrohash128(<const uint8 *>PyBytes_AS_STRING(data),
  *                                 PyBytes_GET_SIZE(data), seed)
  *     elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -2035,7 +2035,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":144
+  /* "metrohash.pyx":146
  *         PyBuffer_Release(&buf)
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)             # <<<<<<<<<<<<<<
@@ -2043,7 +2043,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
  * 
  */
   /*else*/ {
-    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_n_s_basestring);
     __Pyx_GIVEREF(__pyx_n_s_basestring);
@@ -2051,16 +2051,16 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
     __Pyx_INCREF(__pyx_n_s_buffer);
     __Pyx_GIVEREF(__pyx_n_s_buffer);
     PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_buffer);
-    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 144, __pyx_L1_error)
+    __PYX_ERR(0, 146, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "metrohash.pyx":145
+  /* "metrohash.pyx":147
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)
  *     return 0x10000000000000000L * long(result.first) + long(result.second)             # <<<<<<<<<<<<<<
@@ -2068,20 +2068,20 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.first); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.first); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Multiply(__pyx_int_18446744073709551616L, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_int_18446744073709551616L, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.second); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.second); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2089,7 +2089,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "metrohash.pyx":116
+  /* "metrohash.pyx":118
  * 
  * 
  * cpdef metrohash128(data, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -2113,7 +2113,7 @@ static PyObject *__pyx_f_9metrohash_metrohash128(PyObject *__pyx_v_data, CYTHON_
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_3metrohash128(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9metrohash_2metrohash128[] = "metrohash128(data, uint64 seed=0)\nObtain a 128-bit hash from input data.\n    Args:\n        data (str or buffer): input data (either string or buffer type)\n        seed (int): seed to random number generator\n    Returns:\n        int: long integer that represents hash value\n    Raises:\n        TypeError, OverflowError\n    Raises:\n        TypeError\n    ";
+static char __pyx_doc_9metrohash_2metrohash128[] = "metrohash128(data, uint64 seed=0)\nObtain a 128-bit hash from input data.\n    Args:\n        data (str or buffer): input data (either string or buffer type)\n        seed (int): seed to random number generator\n    Returns:\n        int: long integer that represents hash value\n    Raises:\n        TypeError: if input data is not a string or a buffer\n        ValueError: if input buffer is not C-contiguous\n        OverflowError: if seed cannot be converted to unsigned int64\n    ";
 static PyObject *__pyx_pw_9metrohash_3metrohash128(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_data = 0;
   uint64 __pyx_v_seed;
@@ -2150,7 +2150,7 @@ static PyObject *__pyx_pw_9metrohash_3metrohash128(PyObject *__pyx_self, PyObjec
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "metrohash128") < 0)) __PYX_ERR(0, 116, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "metrohash128") < 0)) __PYX_ERR(0, 118, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2163,14 +2163,14 @@ static PyObject *__pyx_pw_9metrohash_3metrohash128(PyObject *__pyx_self, PyObjec
     }
     __pyx_v_data = values[0];
     if (values[1]) {
-      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[1]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[1]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 118, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((uint64)0ULL);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("metrohash128", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 116, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("metrohash128", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 118, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("metrohash.metrohash128", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2195,7 +2195,7 @@ static PyObject *__pyx_pf_9metrohash_2metrohash128(CYTHON_UNUSED PyObject *__pyx
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.seed = __pyx_v_seed;
-  __pyx_t_1 = __pyx_f_9metrohash_metrohash128(__pyx_v_data, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9metrohash_metrohash128(__pyx_v_data, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2212,7 +2212,7 @@ static PyObject *__pyx_pf_9metrohash_2metrohash128(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "metrohash.pyx":159
+/* "metrohash.pyx":162
  *     cdef CCMetroHash64* _m
  * 
  *     def __cinit__(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -2251,7 +2251,7 @@ static int __pyx_pw_9metrohash_11MetroHash64_1__cinit__(PyObject *__pyx_v_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 159, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 162, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2262,14 +2262,14 @@ static int __pyx_pw_9metrohash_11MetroHash64_1__cinit__(PyObject *__pyx_v_self, 
       }
     }
     if (values[0]) {
-      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((uint64)0ULL);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 159, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 162, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("metrohash.MetroHash64.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2291,7 +2291,7 @@ static int __pyx_pf_9metrohash_11MetroHash64___cinit__(struct __pyx_obj_9metroha
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "metrohash.pyx":160
+  /* "metrohash.pyx":163
  * 
  *     def __cinit__(self, uint64 seed=0ULL):
  *         self._m = new CCMetroHash64(seed)             # <<<<<<<<<<<<<<
@@ -2300,7 +2300,7 @@ static int __pyx_pf_9metrohash_11MetroHash64___cinit__(struct __pyx_obj_9metroha
  */
   __pyx_v_self->_m = new MetroHash64(__pyx_v_seed);
 
-  /* "metrohash.pyx":161
+  /* "metrohash.pyx":164
  *     def __cinit__(self, uint64 seed=0ULL):
  *         self._m = new CCMetroHash64(seed)
  *         if self._m is NULL:             # <<<<<<<<<<<<<<
@@ -2310,16 +2310,16 @@ static int __pyx_pf_9metrohash_11MetroHash64___cinit__(struct __pyx_obj_9metroha
   __pyx_t_1 = ((__pyx_v_self->_m == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "metrohash.pyx":162
+    /* "metrohash.pyx":165
  *         self._m = new CCMetroHash64(seed)
  *         if self._m is NULL:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 162, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 165, __pyx_L1_error)
 
-    /* "metrohash.pyx":161
+    /* "metrohash.pyx":164
  *     def __cinit__(self, uint64 seed=0ULL):
  *         self._m = new CCMetroHash64(seed)
  *         if self._m is NULL:             # <<<<<<<<<<<<<<
@@ -2328,7 +2328,7 @@ static int __pyx_pf_9metrohash_11MetroHash64___cinit__(struct __pyx_obj_9metroha
  */
   }
 
-  /* "metrohash.pyx":159
+  /* "metrohash.pyx":162
  *     cdef CCMetroHash64* _m
  * 
  *     def __cinit__(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -2347,7 +2347,7 @@ static int __pyx_pf_9metrohash_11MetroHash64___cinit__(struct __pyx_obj_9metroha
   return __pyx_r;
 }
 
-/* "metrohash.pyx":164
+/* "metrohash.pyx":167
  *             raise MemoryError()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2371,7 +2371,7 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "metrohash.pyx":165
+  /* "metrohash.pyx":168
  * 
  *     def __dealloc__(self):
  *         if not self._m is NULL:             # <<<<<<<<<<<<<<
@@ -2381,7 +2381,7 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
   __pyx_t_1 = ((__pyx_v_self->_m != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":166
+    /* "metrohash.pyx":169
  *     def __dealloc__(self):
  *         if not self._m is NULL:
  *             del self._m             # <<<<<<<<<<<<<<
@@ -2390,7 +2390,7 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
  */
     delete __pyx_v_self->_m;
 
-    /* "metrohash.pyx":167
+    /* "metrohash.pyx":170
  *         if not self._m is NULL:
  *             del self._m
  *             self._m = NULL             # <<<<<<<<<<<<<<
@@ -2399,7 +2399,7 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
  */
     __pyx_v_self->_m = NULL;
 
-    /* "metrohash.pyx":165
+    /* "metrohash.pyx":168
  * 
  *     def __dealloc__(self):
  *         if not self._m is NULL:             # <<<<<<<<<<<<<<
@@ -2408,7 +2408,7 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
  */
   }
 
-  /* "metrohash.pyx":164
+  /* "metrohash.pyx":167
  *             raise MemoryError()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2420,17 +2420,17 @@ static void __pyx_pf_9metrohash_11MetroHash64_2__dealloc__(struct __pyx_obj_9met
   __Pyx_RefNannyFinishContext();
 }
 
-/* "metrohash.pyx":169
+/* "metrohash.pyx":172
  *             self._m = NULL
  * 
  *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
- *         """Reset state with a new seed"""
- *         self._m.Initialize(seed)
+ *         """Reset state with a new seed
+ *         Args:
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9metrohash_11MetroHash64_4reset[] = "MetroHash64.reset(self, uint64 seed=0)\nReset state with a new seed";
+static char __pyx_doc_9metrohash_11MetroHash64_4reset[] = "MetroHash64.reset(self, uint64 seed=0)\nReset state with a new seed\n        Args:\n            seed (int): new seed to reset state to\n        Raises:\n            OverflowError: if seed is out of bounds\n        ";
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   uint64 __pyx_v_seed;
   int __pyx_lineno = 0;
@@ -2460,7 +2460,7 @@ static PyObject *__pyx_pw_9metrohash_11MetroHash64_5reset(PyObject *__pyx_v_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reset") < 0)) __PYX_ERR(0, 169, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reset") < 0)) __PYX_ERR(0, 172, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2471,14 +2471,14 @@ static PyObject *__pyx_pw_9metrohash_11MetroHash64_5reset(PyObject *__pyx_v_self
       }
     }
     if (values[0]) {
-      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 169, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((uint64)0ULL);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("reset", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 169, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("reset", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 172, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("metrohash.MetroHash64.reset", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2496,21 +2496,21 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_4reset(struct __pyx_obj_9metr
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("reset", 0);
 
-  /* "metrohash.pyx":171
- *     def reset(self, uint64 seed=0ULL):
- *         """Reset state with a new seed"""
+  /* "metrohash.pyx":179
+ *             OverflowError: if seed is out of bounds
+ *         """
  *         self._m.Initialize(seed)             # <<<<<<<<<<<<<<
  * 
  *     def update(self, data):
  */
   __pyx_v_self->_m->Initialize(__pyx_v_seed);
 
-  /* "metrohash.pyx":169
+  /* "metrohash.pyx":172
  *             self._m = NULL
  * 
  *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
- *         """Reset state with a new seed"""
- *         self._m.Initialize(seed)
+ *         """Reset state with a new seed
+ *         Args:
  */
 
   /* function exit code */
@@ -2520,7 +2520,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_4reset(struct __pyx_obj_9metr
   return __pyx_r;
 }
 
-/* "metrohash.pyx":173
+/* "metrohash.pyx":181
  *         self._m.Initialize(seed)
  * 
  *     def update(self, data):             # <<<<<<<<<<<<<<
@@ -2530,7 +2530,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_4reset(struct __pyx_obj_9metr
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_7update(PyObject *__pyx_v_self, PyObject *__pyx_v_data); /*proto*/
-static char __pyx_doc_9metrohash_11MetroHash64_6update[] = "MetroHash64.update(self, data)\nUpdate digest with new data\n        Args:\n            data (str or buffer): input data (either string or buffer type)\n        Raises:\n            TypeError\n        ";
+static char __pyx_doc_9metrohash_11MetroHash64_6update[] = "MetroHash64.update(self, data)\nUpdate digest with new data\n        Args:\n            data (str or buffer): input data (either string or buffer type)\n        Raises:\n            TypeError: if input data is not a string or a buffer\n            ValueError: if input buffer is not C-contiguous\n        ";
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_7update(PyObject *__pyx_v_self, PyObject *__pyx_v_data) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2556,7 +2556,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update", 0);
 
-  /* "metrohash.pyx":182
+  /* "metrohash.pyx":191
  *         cdef Py_buffer buf
  *         cdef bytes obj
  *         if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -2566,28 +2566,28 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
   __pyx_t_1 = (PyUnicode_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":183
+    /* "metrohash.pyx":192
  *         cdef bytes obj
  *         if PyUnicode_Check(data):
  *             obj = PyUnicode_AsUTF8String(data)             # <<<<<<<<<<<<<<
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  */
-    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 192, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_obj = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "metrohash.pyx":184
+    /* "metrohash.pyx":193
  *         if PyUnicode_Check(data):
  *             obj = PyUnicode_AsUTF8String(data)
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 193, __pyx_L1_error)
 
-    /* "metrohash.pyx":185
+    /* "metrohash.pyx":194
  *             obj = PyUnicode_AsUTF8String(data)
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)             # <<<<<<<<<<<<<<
@@ -2596,7 +2596,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
  */
     __pyx_v_self->_m->Update(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len);
 
-    /* "metrohash.pyx":186
+    /* "metrohash.pyx":195
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -2605,7 +2605,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":182
+    /* "metrohash.pyx":191
  *         cdef Py_buffer buf
  *         cdef bytes obj
  *         if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -2615,7 +2615,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":187
+  /* "metrohash.pyx":196
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  *         elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -2625,7 +2625,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
   __pyx_t_1 = (PyBytes_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":188
+    /* "metrohash.pyx":197
  *             PyBuffer_Release(&buf)
  *         elif PyBytes_Check(data):
  *             self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),             # <<<<<<<<<<<<<<
@@ -2634,7 +2634,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
  */
     __pyx_v_self->_m->Update(((uint8 const *)PyBytes_AS_STRING(__pyx_v_data)), PyBytes_GET_SIZE(__pyx_v_data));
 
-    /* "metrohash.pyx":187
+    /* "metrohash.pyx":196
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  *         elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -2644,7 +2644,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":190
+  /* "metrohash.pyx":199
  *             self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
  *                            PyBytes_GET_SIZE(data))
  *         elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -2654,16 +2654,16 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
   __pyx_t_1 = (PyObject_CheckBuffer(__pyx_v_data) != 0);
   if (likely(__pyx_t_1)) {
 
-    /* "metrohash.pyx":191
+    /* "metrohash.pyx":200
  *                            PyBytes_GET_SIZE(data))
  *         elif PyObject_CheckBuffer(data):
  *             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 200, __pyx_L1_error)
 
-    /* "metrohash.pyx":192
+    /* "metrohash.pyx":201
  *         elif PyObject_CheckBuffer(data):
  *             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)             # <<<<<<<<<<<<<<
@@ -2672,7 +2672,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
  */
     __pyx_v_self->_m->Update(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len);
 
-    /* "metrohash.pyx":193
+    /* "metrohash.pyx":202
  *             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -2681,7 +2681,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":190
+    /* "metrohash.pyx":199
  *             self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
  *                            PyBytes_GET_SIZE(data))
  *         elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -2691,7 +2691,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":195
+  /* "metrohash.pyx":204
  *             PyBuffer_Release(&buf)
  *         else:
  *             raise _type_error("data", ["basestring", "buffer"], data)             # <<<<<<<<<<<<<<
@@ -2699,7 +2699,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
  *     def intdigest(self):
  */
   /*else*/ {
-    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 204, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_n_s_basestring);
     __Pyx_GIVEREF(__pyx_n_s_basestring);
@@ -2707,16 +2707,16 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
     __Pyx_INCREF(__pyx_n_s_buffer);
     __Pyx_GIVEREF(__pyx_n_s_buffer);
     PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_buffer);
-    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 195, __pyx_L1_error)
+    __PYX_ERR(0, 204, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "metrohash.pyx":173
+  /* "metrohash.pyx":181
  *         self._m.Initialize(seed)
  * 
  *     def update(self, data):             # <<<<<<<<<<<<<<
@@ -2739,7 +2739,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_6update(struct __pyx_obj_9met
   return __pyx_r;
 }
 
-/* "metrohash.pyx":197
+/* "metrohash.pyx":206
  *             raise _type_error("data", ["basestring", "buffer"], data)
  * 
  *     def intdigest(self):             # <<<<<<<<<<<<<<
@@ -2771,7 +2771,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_8intdigest(struct __pyx_obj_9
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intdigest", 0);
 
-  /* "metrohash.pyx":203
+  /* "metrohash.pyx":212
  *         """
  *         cdef uint8 buf[8]
  *         self._m.Finalize(buf)             # <<<<<<<<<<<<<<
@@ -2780,7 +2780,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_8intdigest(struct __pyx_obj_9
  */
   __pyx_v_self->_m->Finalize(__pyx_v_buf);
 
-  /* "metrohash.pyx":204
+  /* "metrohash.pyx":213
  *         cdef uint8 buf[8]
  *         self._m.Finalize(buf)
  *         return c_bytes2int64(buf)             # <<<<<<<<<<<<<<
@@ -2788,13 +2788,13 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_8intdigest(struct __pyx_obj_9
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uint64_t(bytes2int64(__pyx_v_buf)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uint64_t(bytes2int64(__pyx_v_buf)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "metrohash.pyx":197
+  /* "metrohash.pyx":206
  *             raise _type_error("data", ["basestring", "buffer"], data)
  * 
  *     def intdigest(self):             # <<<<<<<<<<<<<<
@@ -2928,7 +2928,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_12__setstate_cython__(CYTHON_
   return __pyx_r;
 }
 
-/* "metrohash.pyx":218
+/* "metrohash.pyx":228
  *     cdef CCMetroHash128* _m
  * 
  *     def __cinit__(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -2967,7 +2967,7 @@ static int __pyx_pw_9metrohash_12MetroHash128_1__cinit__(PyObject *__pyx_v_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 218, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 228, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2978,14 +2978,14 @@ static int __pyx_pw_9metrohash_12MetroHash128_1__cinit__(PyObject *__pyx_v_self,
       }
     }
     if (values[0]) {
-      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 218, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 228, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((uint64)0ULL);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 218, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 228, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("metrohash.MetroHash128.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3007,7 +3007,7 @@ static int __pyx_pf_9metrohash_12MetroHash128___cinit__(struct __pyx_obj_9metroh
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "metrohash.pyx":219
+  /* "metrohash.pyx":229
  * 
  *     def __cinit__(self, uint64 seed=0ULL):
  *         self._m = new CCMetroHash128(seed)             # <<<<<<<<<<<<<<
@@ -3016,7 +3016,7 @@ static int __pyx_pf_9metrohash_12MetroHash128___cinit__(struct __pyx_obj_9metroh
  */
   __pyx_v_self->_m = new MetroHash128(__pyx_v_seed);
 
-  /* "metrohash.pyx":220
+  /* "metrohash.pyx":230
  *     def __cinit__(self, uint64 seed=0ULL):
  *         self._m = new CCMetroHash128(seed)
  *         if self._m is NULL:             # <<<<<<<<<<<<<<
@@ -3026,16 +3026,16 @@ static int __pyx_pf_9metrohash_12MetroHash128___cinit__(struct __pyx_obj_9metroh
   __pyx_t_1 = ((__pyx_v_self->_m == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "metrohash.pyx":221
+    /* "metrohash.pyx":231
  *         self._m = new CCMetroHash128(seed)
  *         if self._m is NULL:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 221, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 231, __pyx_L1_error)
 
-    /* "metrohash.pyx":220
+    /* "metrohash.pyx":230
  *     def __cinit__(self, uint64 seed=0ULL):
  *         self._m = new CCMetroHash128(seed)
  *         if self._m is NULL:             # <<<<<<<<<<<<<<
@@ -3044,7 +3044,7 @@ static int __pyx_pf_9metrohash_12MetroHash128___cinit__(struct __pyx_obj_9metroh
  */
   }
 
-  /* "metrohash.pyx":218
+  /* "metrohash.pyx":228
  *     cdef CCMetroHash128* _m
  * 
  *     def __cinit__(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -3063,7 +3063,7 @@ static int __pyx_pf_9metrohash_12MetroHash128___cinit__(struct __pyx_obj_9metroh
   return __pyx_r;
 }
 
-/* "metrohash.pyx":223
+/* "metrohash.pyx":233
  *             raise MemoryError()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3087,7 +3087,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "metrohash.pyx":224
+  /* "metrohash.pyx":234
  * 
  *     def __dealloc__(self):
  *         if not self._m is NULL:             # <<<<<<<<<<<<<<
@@ -3097,7 +3097,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
   __pyx_t_1 = ((__pyx_v_self->_m != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":225
+    /* "metrohash.pyx":235
  *     def __dealloc__(self):
  *         if not self._m is NULL:
  *             del self._m             # <<<<<<<<<<<<<<
@@ -3106,7 +3106,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
  */
     delete __pyx_v_self->_m;
 
-    /* "metrohash.pyx":226
+    /* "metrohash.pyx":236
  *         if not self._m is NULL:
  *             del self._m
  *             self._m = NULL             # <<<<<<<<<<<<<<
@@ -3115,7 +3115,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
  */
     __pyx_v_self->_m = NULL;
 
-    /* "metrohash.pyx":224
+    /* "metrohash.pyx":234
  * 
  *     def __dealloc__(self):
  *         if not self._m is NULL:             # <<<<<<<<<<<<<<
@@ -3124,7 +3124,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
  */
   }
 
-  /* "metrohash.pyx":223
+  /* "metrohash.pyx":233
  *             raise MemoryError()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3136,7 +3136,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
   __Pyx_RefNannyFinishContext();
 }
 
-/* "metrohash.pyx":228
+/* "metrohash.pyx":238
  *             self._m = NULL
  * 
  *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -3146,7 +3146,7 @@ static void __pyx_pf_9metrohash_12MetroHash128_2__dealloc__(struct __pyx_obj_9me
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9metrohash_12MetroHash128_4reset[] = "MetroHash128.reset(self, uint64 seed=0)\nReset state with a new seed\n        Args:\n            seed (int): new seed to reset state to\n        Raises:\n            TypeError, OverflowError\n        ";
+static char __pyx_doc_9metrohash_12MetroHash128_4reset[] = "MetroHash128.reset(self, uint64 seed=0)\nReset state with a new seed\n        Args:\n            seed (int): new seed to reset state to\n        Raises:\n            OverflowError: if seed is out of bounds\n        ";
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   uint64 __pyx_v_seed;
   int __pyx_lineno = 0;
@@ -3176,7 +3176,7 @@ static PyObject *__pyx_pw_9metrohash_12MetroHash128_5reset(PyObject *__pyx_v_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reset") < 0)) __PYX_ERR(0, 228, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reset") < 0)) __PYX_ERR(0, 238, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3187,14 +3187,14 @@ static PyObject *__pyx_pw_9metrohash_12MetroHash128_5reset(PyObject *__pyx_v_sel
       }
     }
     if (values[0]) {
-      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 228, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyInt_As_uint64_t(values[0]); if (unlikely((__pyx_v_seed == ((uint64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((uint64)0ULL);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("reset", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 228, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("reset", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 238, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("metrohash.MetroHash128.reset", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3212,8 +3212,8 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_4reset(struct __pyx_obj_9met
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("reset", 0);
 
-  /* "metrohash.pyx":235
- *             TypeError, OverflowError
+  /* "metrohash.pyx":245
+ *             OverflowError: if seed is out of bounds
  *         """
  *         self._m.Initialize(seed)             # <<<<<<<<<<<<<<
  * 
@@ -3221,7 +3221,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_4reset(struct __pyx_obj_9met
  */
   __pyx_v_self->_m->Initialize(__pyx_v_seed);
 
-  /* "metrohash.pyx":228
+  /* "metrohash.pyx":238
  *             self._m = NULL
  * 
  *     def reset(self, uint64 seed=0ULL):             # <<<<<<<<<<<<<<
@@ -3236,7 +3236,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_4reset(struct __pyx_obj_9met
   return __pyx_r;
 }
 
-/* "metrohash.pyx":237
+/* "metrohash.pyx":247
  *         self._m.Initialize(seed)
  * 
  *     def update(self, data):             # <<<<<<<<<<<<<<
@@ -3246,7 +3246,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_4reset(struct __pyx_obj_9met
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_7update(PyObject *__pyx_v_self, PyObject *__pyx_v_data); /*proto*/
-static char __pyx_doc_9metrohash_12MetroHash128_6update[] = "MetroHash128.update(self, data)\nUpdate digest with new data\n        Args:\n            data (str or buffer): input data (either string or buffer type)\n        Raises:\n            TypeError\n        ";
+static char __pyx_doc_9metrohash_12MetroHash128_6update[] = "MetroHash128.update(self, data)\nUpdate digest with new data\n        Args:\n            data (str or buffer): input data (either string or buffer type)\n        Raises:\n            TypeError: if input data is not a string or a buffer\n            ValueError: if input buffer is not C-contiguous\n        ";
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_7update(PyObject *__pyx_v_self, PyObject *__pyx_v_data) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -3272,7 +3272,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update", 0);
 
-  /* "metrohash.pyx":246
+  /* "metrohash.pyx":257
  *         cdef Py_buffer buf
  *         cdef bytes obj
  *         if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -3282,28 +3282,28 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
   __pyx_t_1 = (PyUnicode_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":247
+    /* "metrohash.pyx":258
  *         cdef bytes obj
  *         if PyUnicode_Check(data):
  *             obj = PyUnicode_AsUTF8String(data)             # <<<<<<<<<<<<<<
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  */
-    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 247, __pyx_L1_error)
+    __pyx_t_2 = PyUnicode_AsUTF8String(__pyx_v_data); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 258, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_obj = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "metrohash.pyx":248
+    /* "metrohash.pyx":259
  *         if PyUnicode_Check(data):
  *             obj = PyUnicode_AsUTF8String(data)
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 248, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_obj, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 259, __pyx_L1_error)
 
-    /* "metrohash.pyx":249
+    /* "metrohash.pyx":260
  *             obj = PyUnicode_AsUTF8String(data)
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)             # <<<<<<<<<<<<<<
@@ -3312,7 +3312,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
  */
     __pyx_v_self->_m->Update(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len);
 
-    /* "metrohash.pyx":250
+    /* "metrohash.pyx":261
  *             PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -3321,7 +3321,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":246
+    /* "metrohash.pyx":257
  *         cdef Py_buffer buf
  *         cdef bytes obj
  *         if PyUnicode_Check(data):             # <<<<<<<<<<<<<<
@@ -3331,7 +3331,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":251
+  /* "metrohash.pyx":262
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  *         elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -3341,7 +3341,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
   __pyx_t_1 = (PyBytes_Check(__pyx_v_data) != 0);
   if (__pyx_t_1) {
 
-    /* "metrohash.pyx":252
+    /* "metrohash.pyx":263
  *             PyBuffer_Release(&buf)
  *         elif PyBytes_Check(data):
  *             self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),             # <<<<<<<<<<<<<<
@@ -3350,7 +3350,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
  */
     __pyx_v_self->_m->Update(((uint8 const *)PyBytes_AS_STRING(__pyx_v_data)), PyBytes_GET_SIZE(__pyx_v_data));
 
-    /* "metrohash.pyx":251
+    /* "metrohash.pyx":262
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  *         elif PyBytes_Check(data):             # <<<<<<<<<<<<<<
@@ -3360,7 +3360,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":254
+  /* "metrohash.pyx":265
  *             self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
  *                            PyBytes_GET_SIZE(data))
  *         elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -3370,16 +3370,16 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
   __pyx_t_1 = (PyObject_CheckBuffer(__pyx_v_data) != 0);
   if (likely(__pyx_t_1)) {
 
-    /* "metrohash.pyx":255
+    /* "metrohash.pyx":266
  *                            PyBytes_GET_SIZE(data))
  *         elif PyObject_CheckBuffer(data):
  *             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)             # <<<<<<<<<<<<<<
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)
  */
-    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 255, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetBuffer(__pyx_v_data, (&__pyx_v_buf), PyBUF_SIMPLE); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 266, __pyx_L1_error)
 
-    /* "metrohash.pyx":256
+    /* "metrohash.pyx":267
  *         elif PyObject_CheckBuffer(data):
  *             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)             # <<<<<<<<<<<<<<
@@ -3388,7 +3388,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
  */
     __pyx_v_self->_m->Update(((uint8 const *)__pyx_v_buf.buf), __pyx_v_buf.len);
 
-    /* "metrohash.pyx":257
+    /* "metrohash.pyx":268
  *             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
  *             self._m.Update(<const uint8 *>buf.buf, buf.len)
  *             PyBuffer_Release(&buf)             # <<<<<<<<<<<<<<
@@ -3397,7 +3397,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
  */
     PyBuffer_Release((&__pyx_v_buf));
 
-    /* "metrohash.pyx":254
+    /* "metrohash.pyx":265
  *             self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
  *                            PyBytes_GET_SIZE(data))
  *         elif PyObject_CheckBuffer(data):             # <<<<<<<<<<<<<<
@@ -3407,7 +3407,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
     goto __pyx_L3;
   }
 
-  /* "metrohash.pyx":259
+  /* "metrohash.pyx":270
  *             PyBuffer_Release(&buf)
  *         else:
  *             raise _type_error("data", ["basestring", "buffer"], data)             # <<<<<<<<<<<<<<
@@ -3415,7 +3415,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
  *     def intdigest(self):
  */
   /*else*/ {
-    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 259, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 270, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_n_s_basestring);
     __Pyx_GIVEREF(__pyx_n_s_basestring);
@@ -3423,16 +3423,16 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
     __Pyx_INCREF(__pyx_n_s_buffer);
     __Pyx_GIVEREF(__pyx_n_s_buffer);
     PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_buffer);
-    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 259, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_9metrohash__type_error(__pyx_n_s_data, __pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 270, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 259, __pyx_L1_error)
+    __PYX_ERR(0, 270, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "metrohash.pyx":237
+  /* "metrohash.pyx":247
  *         self._m.Initialize(seed)
  * 
  *     def update(self, data):             # <<<<<<<<<<<<<<
@@ -3455,7 +3455,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_6update(struct __pyx_obj_9me
   return __pyx_r;
 }
 
-/* "metrohash.pyx":261
+/* "metrohash.pyx":272
  *             raise _type_error("data", ["basestring", "buffer"], data)
  * 
  *     def intdigest(self):             # <<<<<<<<<<<<<<
@@ -3490,7 +3490,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_8intdigest(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intdigest", 0);
 
-  /* "metrohash.pyx":267
+  /* "metrohash.pyx":278
  *         """
  *         cdef uint8 buf[16]
  *         self._m.Finalize(buf)             # <<<<<<<<<<<<<<
@@ -3499,7 +3499,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_8intdigest(struct __pyx_obj_
  */
   __pyx_v_self->_m->Finalize(__pyx_v_buf);
 
-  /* "metrohash.pyx":268
+  /* "metrohash.pyx":279
  *         cdef uint8 buf[16]
  *         self._m.Finalize(buf)
  *         cdef pair[uint64, uint64] result = c_bytes2int128(buf)             # <<<<<<<<<<<<<<
@@ -3507,26 +3507,26 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_8intdigest(struct __pyx_obj_
  */
   __pyx_v_result = bytes2int128(__pyx_v_buf);
 
-  /* "metrohash.pyx":269
+  /* "metrohash.pyx":280
  *         self._m.Finalize(buf)
  *         cdef pair[uint64, uint64] result = c_bytes2int128(buf)
  *         return 0x10000000000000000L * long(result.first) + long(result.second)             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.first); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.first); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_int_18446744073709551616L, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Multiply(__pyx_int_18446744073709551616L, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.second); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.second); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3534,7 +3534,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_8intdigest(struct __pyx_obj_
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "metrohash.pyx":261
+  /* "metrohash.pyx":272
  *             raise _type_error("data", ["basestring", "buffer"], data)
  * 
  *     def intdigest(self):             # <<<<<<<<<<<<<<
@@ -3742,7 +3742,7 @@ static PyTypeObject __pyx_type_9metrohash_MetroHash64 = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  "Incremental hasher interface for MetroHash64\n\n    Args:\n        seed (int): seed to random number generator\n    Raises:\n        MemoryError\n    ", /*tp_doc*/
+  "Incremental hasher interface for MetroHash64\n\n    Args:\n        seed (int): seed to random number generator\n    Raises:\n        MemoryError: if a new method fails\n        OverflowError: if seed is out of bounds\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -3855,7 +3855,7 @@ static PyTypeObject __pyx_type_9metrohash_MetroHash128 = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  "Incremental hasher interface for MetroHash128\n\n    Args:\n        seed (int): seed to random number generator\n    Raises:\n        TypeError, OverflowError\n    ", /*tp_doc*/
+  "Incremental hasher interface for MetroHash128\n\n    Args:\n        seed (int): seed to random number generator\n    Raises:\n        MemoryError: if a new method fails\n        OverflowError: if seed is out of bounds\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -3944,7 +3944,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_0_1_0_post4, __pyx_k_0_1_0_post4, sizeof(__pyx_k_0_1_0_post4), 0, 0, 1, 0},
+  {&__pyx_kp_s_0_1_0_post5, __pyx_k_0_1_0_post5, sizeof(__pyx_k_0_1_0_post5), 0, 0, 1, 0},
   {&__pyx_kp_s_Argument_s_has_incorrect_type_ex, __pyx_k_Argument_s_has_incorrect_type_ex, sizeof(__pyx_k_Argument_s_has_incorrect_type_ex), 0, 0, 1, 0},
   {&__pyx_kp_s_Eugene_Scherba, __pyx_k_Eugene_Scherba, sizeof(__pyx_k_Eugene_Scherba), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
@@ -3977,7 +3977,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 80, __pyx_L1_error)
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 165, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4078,25 +4078,25 @@ static int __Pyx_modinit_type_init_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_9metrohash_MetroHash64) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_9metrohash_MetroHash64) < 0) __PYX_ERR(0, 150, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_9metrohash_MetroHash64.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_9metrohash_MetroHash64.tp_dictoffset && __pyx_type_9metrohash_MetroHash64.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_9metrohash_MetroHash64.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MetroHash64, (PyObject *)&__pyx_type_9metrohash_MetroHash64) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_9metrohash_MetroHash64) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MetroHash64, (PyObject *)&__pyx_type_9metrohash_MetroHash64) < 0) __PYX_ERR(0, 150, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_9metrohash_MetroHash64) < 0) __PYX_ERR(0, 150, __pyx_L1_error)
   __pyx_ptype_9metrohash_MetroHash64 = &__pyx_type_9metrohash_MetroHash64;
-  if (PyType_Ready(&__pyx_type_9metrohash_MetroHash128) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_9metrohash_MetroHash128) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_9metrohash_MetroHash128.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_9metrohash_MetroHash128.tp_dictoffset && __pyx_type_9metrohash_MetroHash128.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_9metrohash_MetroHash128.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MetroHash128, (PyObject *)&__pyx_type_9metrohash_MetroHash128) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_9metrohash_MetroHash128) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MetroHash128, (PyObject *)&__pyx_type_9metrohash_MetroHash128) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_9metrohash_MetroHash128) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
   __pyx_ptype_9metrohash_MetroHash128 = &__pyx_type_9metrohash_MetroHash128;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4363,7 +4363,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"             # <<<<<<<<<<<<<<
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.0.post4"
+ * __version__ = "0.1.0.post5"
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_author, __pyx_kp_s_Eugene_Scherba) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
 
@@ -4371,7 +4371,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"             # <<<<<<<<<<<<<<
- * __version__ = "0.1.0.post4"
+ * __version__ = "0.1.0.post5"
  * __all__     = [
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_email, __pyx_kp_s_escherba_metrohash_gmail_com) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
@@ -4379,15 +4379,15 @@ if (!__Pyx_RefNanny) {
   /* "metrohash.pyx":12
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.0.post4"             # <<<<<<<<<<<<<<
+ * __version__ = "0.1.0.post5"             # <<<<<<<<<<<<<<
  * __all__     = [
  *     "metrohash64",
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_1_0_post4) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_1_0_post5) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
 
   /* "metrohash.pyx":13
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.0.post4"
+ * __version__ = "0.1.0.post5"
  * __all__     = [             # <<<<<<<<<<<<<<
  *     "metrohash64",
  *     "metrohash128",
