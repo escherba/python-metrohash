@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import warnings
 from os.path import join, dirname
 from setuptools import setup
 from setuptools.extension import Extension
@@ -7,9 +8,10 @@ from setuptools.dist import Distribution
 
 try:
     from cpuinfo import get_cpu_info
-    have_sse42 = 'sse4.2' in get_cpu_info()['flags']
-except Exception:
-    have_sse42 = False
+    cpu_info = get_cpu_info()
+    HAVE_SSE42 = 'sse4_2' in cpu_info['flags']
+except Exception as exc:
+    HAVE_SSE42 = False
 
 try:
     from Cython.Distutils import build_ext
@@ -33,8 +35,11 @@ CXXFLAGS = """
 -Wno-unused-function
 """.split()
 
-if have_sse42:
+if HAVE_SSE42:
+    warnings.warn("Compiling with SSE4.2 enabled")
     CXXFLAGS.append('-msse4.2')
+else:
+    warnings.warn("compiling without SSE4.2 support")
 
 
 INCLUDE_DIRS = ['include']
@@ -77,7 +82,7 @@ else:
         )
 
 
-VERSION = '0.1.0.post4'
+VERSION = '0.1.0.post5'
 URL = "https://github.com/escherba/python-metrohash"
 
 

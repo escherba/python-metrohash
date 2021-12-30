@@ -9,7 +9,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.1.0.post4"
+__version__ = "0.1.0.post5"
 __all__     = [
     "metrohash64",
     "metrohash128",
@@ -91,7 +91,9 @@ cpdef metrohash64(data, uint64 seed=0ULL):
     Returns:
         int: long integer that represents hash value
     Raises:
-        TypeError, OverflowError
+        TypeError: if input data is not a string or a buffer
+        ValueError: if input buffer is not C-contiguous
+        OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -121,9 +123,9 @@ cpdef metrohash128(data, uint64 seed=0ULL):
     Returns:
         int: long integer that represents hash value
     Raises:
-        TypeError, OverflowError
-    Raises:
-        TypeError
+        TypeError: if input data is not a string or a buffer
+        ValueError: if input buffer is not C-contiguous
+        OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -151,7 +153,8 @@ cdef class MetroHash64(object):
     Args:
         seed (int): seed to random number generator
     Raises:
-        MemoryError
+        MemoryError: if a new method fails
+        OverflowError: if seed is out of bounds
     """
 
     cdef CCMetroHash64* _m
@@ -167,7 +170,12 @@ cdef class MetroHash64(object):
             self._m = NULL
 
     def reset(self, uint64 seed=0ULL):
-        """Reset state with a new seed"""
+        """Reset state with a new seed
+        Args:
+            seed (int): new seed to reset state to
+        Raises:
+            OverflowError: if seed is out of bounds
+        """
         self._m.Initialize(seed)
 
     def update(self, data):
@@ -175,7 +183,8 @@ cdef class MetroHash64(object):
         Args:
             data (str or buffer): input data (either string or buffer type)
         Raises:
-            TypeError
+            TypeError: if input data is not a string or a buffer
+            ValueError: if input buffer is not C-contiguous
         """
         cdef Py_buffer buf
         cdef bytes obj
@@ -210,7 +219,8 @@ cdef class MetroHash128(object):
     Args:
         seed (int): seed to random number generator
     Raises:
-        TypeError, OverflowError
+        MemoryError: if a new method fails
+        OverflowError: if seed is out of bounds
     """
 
     cdef CCMetroHash128* _m
@@ -230,7 +240,7 @@ cdef class MetroHash128(object):
         Args:
             seed (int): new seed to reset state to
         Raises:
-            TypeError, OverflowError
+            OverflowError: if seed is out of bounds
         """
         self._m.Initialize(seed)
 
@@ -239,7 +249,8 @@ cdef class MetroHash128(object):
         Args:
             data (str or buffer): input data (either string or buffer type)
         Raises:
-            TypeError
+            TypeError: if input data is not a string or a buffer
+            ValueError: if input buffer is not C-contiguous
         """
         cdef Py_buffer buf
         cdef bytes obj
