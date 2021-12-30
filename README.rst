@@ -124,8 +124,9 @@ are available, type:
 See Also
 --------
 For other fast non-cryptographic hashing implementations available as Python
-extensions, see `CityHash <https://github.com/escherba/python-cityhash>`__ and
-`MurmurHash <https://github.com/hajimes/mmh3>`__.
+extensions, see `FarmHash <https://github.com/escherba/python-farmhash>>`__,
+`CityHash <https://github.com/escherba/python-cityhash>`__, and `MurmurHash
+<https://github.com/hajimes/mmh3>`__.
 
 Authors
 -------
