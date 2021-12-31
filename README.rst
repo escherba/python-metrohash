@@ -34,18 +34,18 @@ To use this package in your program, simply type
 
 
 After that, you should be able to import the module and do things with it (see
-Example Usage below).
+usage example below).
 
 Usage Examples
 --------------
 
-Stateless Hashing
+Stateless hashing
 ~~~~~~~~~~~~~~~~~
 
 This package provides Python interfaces to 64- and 128-bit implementations of
 MetroHash algorithm. For stateless hashing, it exports ``metrohash64`` and
-``metrohash128`` functions. Both take a value to be hashed (either string or
-unicode) and an optional ``seed`` parameter:
+``metrohash128`` functions. Both take a value to be hashed and an optional
+``seed`` parameter:
 
 .. code-block:: python
 
@@ -57,7 +57,7 @@ unicode) and an optional ``seed`` parameter:
     182995299641628952910564950850867298725
 
 
-Incremental Hashing
+Incremental hashing
 ~~~~~~~~~~~~~~~~~~~
 
 For incremental hashing, use ``MetroHash64`` and ``MetroHash128`` classes.
@@ -82,7 +82,7 @@ Note that the resulting hash value above is the same as in:
     >>> mh.intdigest()
     7851180100622203313
 
-Buffer Protocol Support
+Buffer protocol support
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 The methods in this module support Python `Buffer Protocol
@@ -129,8 +129,8 @@ extensions, see `CityHash <https://github.com/escherba/python-cityhash>`__ and
 
 Authors
 -------
-The original MetroHash algorithm was designed by J. Andrew Rogers. The Python
-bindings in this package were written by Eugene Scherba.
+The MetroHash algorithm and C++ implementation is due to J. Andrew Rogers. The
+Python bindings for it were written by Eugene Scherba.
 
 License
 -------
