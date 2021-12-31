@@ -3108,7 +3108,7 @@ static PyObject *__pyx_pf_9metrohash_12hash64_int(CYTHON_UNUSED PyObject *__pyx_
  *         PyBuffer_Release(&buf)
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)             # <<<<<<<<<<<<<<
- *     return result + 1
+ *     return result
  * 
  */
   /*else*/ {
@@ -3132,12 +3132,12 @@ static PyObject *__pyx_pf_9metrohash_12hash64_int(CYTHON_UNUSED PyObject *__pyx_
   /* "metrohash.pyx":223
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)
- *     return result + 1             # <<<<<<<<<<<<<<
+ *     return result             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyInt_From_uint64_t((__pyx_v_result + 1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_uint64_t(__pyx_v_result); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
