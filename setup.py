@@ -67,6 +67,7 @@ CMDCLASS = {}
 EXT_MODULES = []
 
 if USE_CYTHON:
+    warnings.warn("building extension using Cython")
     CMDCLASS['build_ext'] = build_ext
     EXT_MODULES.append(
         Extension(
@@ -79,6 +80,7 @@ if USE_CYTHON:
         )
     )
 else:
+    warnings.warn("building extension w/o Cython")
     EXT_MODULES.append(
         Extension(
             "metrohash",
