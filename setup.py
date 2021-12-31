@@ -9,15 +9,15 @@ from setuptools.dist import Distribution
 
 try:
     from cpuinfo import get_cpu_info
-    cpu_info = get_cpu_info()
-    HAVE_SSE42 = 'sse4_2' in cpu_info['flags']
+    CPU_FLAGS = get_cpu_info()['flags']
 except Exception as exc:
-    HAVE_SSE42 = False
+    CPU_FLAGS = {}
 
 try:
     from Cython.Distutils import build_ext
+    USE_CYTHON = True
 except ImportError:
-    build_ext = None
+    USE_CYTHON = False
 
 
 class BinaryDistribution(Distribution):
@@ -30,16 +30,19 @@ class BinaryDistribution(Distribution):
         return False
 
 
-CXXFLAGS = ["-O3"]
+CXXFLAGS = []
 
-if os.name != "nt":
+if os.name == "nt":
+    CXXFLAGS.extend(["/O3"])
+else:
     CXXFLAGS.extend([
+        "-O3",
         "-Wno-unused-value",
         "-Wno-unused-function",
     ])
 
 
-if HAVE_SSE42:
+if 'sse4_2' in CPU_FLAGS:
     warnings.warn("Compiling with SSE4.2 enabled")
     CXXFLAGS.append('-msse4.2')
 else:
@@ -63,7 +66,7 @@ CXXSOURCES = [
 CMDCLASS = {}
 EXT_MODULES = []
 
-if build_ext is not None:
+if USE_CYTHON:
     CMDCLASS['build_ext'] = build_ext
     EXT_MODULES.append(
         Extension(
@@ -72,8 +75,9 @@ if build_ext is not None:
             depends=CXXHEADERS,
             language="c++",
             extra_compile_args=CXXFLAGS,
-            include_dirs=INCLUDE_DIRS)
+            include_dirs=INCLUDE_DIRS,
         )
+    )
 else:
     EXT_MODULES.append(
         Extension(
@@ -82,8 +86,9 @@ else:
             depends=CXXHEADERS,
             language="c++",
             extra_compile_args=CXXFLAGS,
-            include_dirs=INCLUDE_DIRS)
+            include_dirs=INCLUDE_DIRS,
         )
+    )
 
 
 VERSION = '0.1.1.post0'
@@ -116,7 +121,7 @@ setup(
     zip_safe=False,
     cmdclass=CMDCLASS,
     ext_modules=EXT_MODULES,
-    keywords=['hash', 'hashing', 'metrohash', 'cityhash'],
+    keywords=['hash', 'hashing', 'metrohash'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
