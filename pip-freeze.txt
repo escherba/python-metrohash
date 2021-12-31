@@ -10,7 +10,7 @@ ipdb==0.13.9
 ipython==7.30.1
 jedi==0.18.1
 matplotlib-inline==0.1.3
--e git+https://github.com/escherba/python-metrohash@35159617ba4106c99b82701267441c73aca4b951#egg=metrohash
+-e git+https://github.com/escherba/python-metrohash@c0d6ef1dac61d9cfb3cba5bb8533f69df3c445e6#egg=metrohash
 numpy==1.21.5
 packaging==21.3
 parso==0.8.3
