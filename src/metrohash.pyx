@@ -39,7 +39,6 @@ cdef extern from "<utility>" namespace "std":
         bint operator <= (pair&, pair&)
         bint operator >= (pair&, pair&)
 
-xxx
 
 cdef extern from "metro.h" nogil:
     ctypedef uint8_t uint8
@@ -221,7 +220,7 @@ def hash64_int(data, uint64 seed=0ULL) -> int:
         PyBuffer_Release(&buf)
     else:
         raise _type_error("data", ["basestring", "buffer"], data)
-    return result
+    return result + 1
 
 
 def hash128_int(data, uint64 seed=0ULL) -> int:
