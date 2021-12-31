@@ -110,7 +110,7 @@ commands:
 
     git clone https://github.com/escherba/python-metrohash.git
     cd python-metrohash
-    make env           # creates a Python virtualenv
+    make env           # create a Python virtualenv
     make test          # run Python tests
     make cpp-test      # run C++ tests
 

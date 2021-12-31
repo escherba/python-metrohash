@@ -325,7 +325,7 @@ cdef class MetroHash64(object):
     def hexdigest(self) -> str:
         """Obtain a string digest in hexadecimal form
         Returns:
-            bytes: hash string
+            str: hash string
         """
         return bytes2hex(self.digest())
 
@@ -409,7 +409,7 @@ cdef class MetroHash128(object):
     def hexdigest(self) -> str:
         """Obtain a string digest in hexadecimal form
         Returns:
-            bytes: hash string
+            str: hash string
         """
         return bytes2hex(self.digest())
 

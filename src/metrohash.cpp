@@ -4178,7 +4178,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_8digest(struct __pyx_obj_9met
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_9metrohash_11MetroHash64_10hexdigest[] = "MetroHash64.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            bytes: hash string\n        ";
+static char __pyx_doc_9metrohash_11MetroHash64_10hexdigest[] = "MetroHash64.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            str: hash string\n        ";
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4203,7 +4203,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_10hexdigest(struct __pyx_obj_
   __Pyx_RefNannySetupContext("hexdigest", 0);
 
   /* "metrohash.pyx":330
- *             bytes: hash string
+ *             str: hash string
  *         """
  *         return bytes2hex(self.digest())             # <<<<<<<<<<<<<<
  * 
@@ -5152,7 +5152,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_8digest(struct __pyx_obj_9me
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_9metrohash_12MetroHash128_10hexdigest[] = "MetroHash128.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            bytes: hash string\n        ";
+static char __pyx_doc_9metrohash_12MetroHash128_10hexdigest[] = "MetroHash128.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            str: hash string\n        ";
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5177,7 +5177,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_10hexdigest(struct __pyx_obj
   __Pyx_RefNannySetupContext("hexdigest", 0);
 
   /* "metrohash.pyx":414
- *             bytes: hash string
+ *             str: hash string
  *         """
  *         return bytes2hex(self.digest())             # <<<<<<<<<<<<<<
  * 
