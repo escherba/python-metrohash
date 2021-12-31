@@ -38,6 +38,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        pip install virtualenv
         make env
 
     - name: Test with pytest
