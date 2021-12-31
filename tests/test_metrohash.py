@@ -9,8 +9,8 @@ import sys
 from metrohash import (
     MetroHash64,
     MetroHash128,
-    metrohash64,
-    metrohash128
+    hash64_int as metrohash64,
+    hash128_int as metrohash128
 )
 
 
