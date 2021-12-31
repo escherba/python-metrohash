@@ -51,9 +51,9 @@ MetroHash algorithm. For stateless hashing, it exports ``metrohash64`` and
 
     >>> import metrohash
     ...
-    >>> metrohash.metrohash64("abc", seed=0)
+    >>> metrohash.hash64_int("abc", seed=0)
     17099979927131455419
-    >>> metrohash.metrohash128("abc")
+    >>> metrohash.hash128_int("abc")
     182995299641628952910564950850867298725
 
 
@@ -94,7 +94,7 @@ hashing of a 4D NumPy array:
 
     >>> import numpy as np
     >>> arr = np.zeros((256, 256, 4))
-    >>> metrohash.metrohash64(arr)
+    >>> metrohash.hash64_int(arr)
     12125832280816116063
 
 Note that arrays need to be contiguous for this to work. To convert a
