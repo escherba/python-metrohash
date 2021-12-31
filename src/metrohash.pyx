@@ -220,7 +220,7 @@ def hash64_int(data, uint64 seed=0ULL) -> int:
         PyBuffer_Release(&buf)
     else:
         raise _type_error("data", ["basestring", "buffer"], data)
-    return result + 1
+    return result
 
 
 def hash128_int(data, uint64 seed=0ULL) -> int:
