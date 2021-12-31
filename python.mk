@@ -11,8 +11,8 @@ DISTRIBUTE += bdist_wheel
 endif
 
 PYENV := PYTHONPATH=. . env/bin/activate;
-INTERPRETER := python
-PACKAGE_MGR := pip
+INTERPRETER := python3
+PACKAGE_MGR := pip3
 PYVERSION := $(shell $(INTERPRETER) --version 2>&1)
 PYTHON := $(PYENV) $(INTERPRETER)
 PIP := $(PYENV) $(PACKAGE_MGR)
@@ -80,9 +80,9 @@ install:  build_ext  ## install package
 env: env/bin/activate  ## set up a virtual environment
 env/bin/activate: setup.py requirements.txt
 	test -f $@ || virtualenv $(VENV_OPTS) env
-	# export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PYENV) curl https://bootstrap.pypa.io/ez_setup.py | $(INTERPRETER)
+	export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PYENV) curl https://bootstrap.pypa.io/ez_setup.py | $(INTERPRETER)
 	$(PIP) install -U pip wheel
-	$(PIP) install -r requirements.txt
+	export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PIP) install -r requirements.txt
 	$(PIP) install -e .
 	$(PIP) freeze > pip-freeze.txt
 	touch $@

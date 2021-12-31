@@ -33,14 +33,17 @@ jobs:
     # https://medium.com/ai2-blog/python-caching-in-github-actions-e9452698e98d
     - uses: actions/cache@v2
       with:
-        path: env
-        key: env-${{ hashFiles('requirements.txt') }}
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
 
     - name: Install dependencies
       run: |
-        pip install virtualenv
-        make env
+        pip install --upgrade --upgrade-strategy eager setuptools wheel
+        pip install --upgrade --upgrade-strategy eager -r requirements.txt
+        pip install --upgrade --upgrade-strategy eager -e .
 
     - name: Test with pytest
       run: |
-        make test
+        python setup.py build_ext --inplace
+        pip install --upgrade --upgrade-strategy eager -e .
+        python -m pytest
