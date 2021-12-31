@@ -10,7 +10,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.1.1.post1"
+__version__ = "0.1.1.post2"
 __all__     = [
     "metrohash64",
     "metrohash128",
@@ -325,7 +325,7 @@ cdef class MetroHash64(object):
     def hexdigest(self) -> str:
         """Obtain a string digest in hexadecimal form
         Returns:
-            bytes: hash string
+            str: hash string
         """
         return bytes2hex(self.digest())
 
@@ -409,7 +409,7 @@ cdef class MetroHash128(object):
     def hexdigest(self) -> str:
         """Obtain a string digest in hexadecimal form
         Returns:
-            bytes: hash string
+            str: hash string
         """
         return bytes2hex(self.digest())
 

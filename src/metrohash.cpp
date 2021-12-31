@@ -1508,7 +1508,7 @@ static const char __pyx_k_basestring[] = "basestring";
 static const char __pyx_k_hash64_hex[] = "hash64_hex";
 static const char __pyx_k_hash64_int[] = "hash64_int";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_0_1_1_post1[] = "0.1.1.post1";
+static const char __pyx_k_0_1_1_post2[] = "0.1.1.post2";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_MetroHash64[] = "MetroHash64";
 static const char __pyx_k_hash128_hex[] = "hash128_hex";
@@ -1526,7 +1526,7 @@ static const char __pyx_k_escherba_metrohash_gmail_com[] = "escherba+metrohash@g
 static const char __pyx_k_Python_wrapper_for_MetroHash_a[] = "\nPython wrapper for MetroHash, a fast non-cryptographic hashing algorithm\n";
 static const char __pyx_k_Argument_s_has_incorrect_type_ex[] = "Argument '%s' has incorrect type: expected %s, got '%s' instead";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
-static PyObject *__pyx_kp_s_0_1_1_post1;
+static PyObject *__pyx_kp_s_0_1_1_post2;
 static PyObject *__pyx_kp_s_Argument_s_has_incorrect_type_ex;
 static PyObject *__pyx_kp_s_Eugene_Scherba;
 static PyObject *__pyx_n_s_MemoryError;
@@ -4178,7 +4178,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_8digest(struct __pyx_obj_9met
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_9metrohash_11MetroHash64_10hexdigest[] = "MetroHash64.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            bytes: hash string\n        ";
+static char __pyx_doc_9metrohash_11MetroHash64_10hexdigest[] = "MetroHash64.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            str: hash string\n        ";
 static PyObject *__pyx_pw_9metrohash_11MetroHash64_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4203,7 +4203,7 @@ static PyObject *__pyx_pf_9metrohash_11MetroHash64_10hexdigest(struct __pyx_obj_
   __Pyx_RefNannySetupContext("hexdigest", 0);
 
   /* "metrohash.pyx":330
- *             bytes: hash string
+ *             str: hash string
  *         """
  *         return bytes2hex(self.digest())             # <<<<<<<<<<<<<<
  * 
@@ -5152,7 +5152,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_8digest(struct __pyx_obj_9me
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_9metrohash_12MetroHash128_10hexdigest[] = "MetroHash128.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            bytes: hash string\n        ";
+static char __pyx_doc_9metrohash_12MetroHash128_10hexdigest[] = "MetroHash128.hexdigest(self) -> str\nObtain a string digest in hexadecimal form\n        Returns:\n            str: hash string\n        ";
 static PyObject *__pyx_pw_9metrohash_12MetroHash128_11hexdigest(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5177,7 +5177,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_10hexdigest(struct __pyx_obj
   __Pyx_RefNannySetupContext("hexdigest", 0);
 
   /* "metrohash.pyx":414
- *             bytes: hash string
+ *             str: hash string
  *         """
  *         return bytes2hex(self.digest())             # <<<<<<<<<<<<<<
  * 
@@ -5732,7 +5732,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_0_1_1_post1, __pyx_k_0_1_1_post1, sizeof(__pyx_k_0_1_1_post1), 0, 0, 1, 0},
+  {&__pyx_kp_s_0_1_1_post2, __pyx_k_0_1_1_post2, sizeof(__pyx_k_0_1_1_post2), 0, 0, 1, 0},
   {&__pyx_kp_s_Argument_s_has_incorrect_type_ex, __pyx_k_Argument_s_has_incorrect_type_ex, sizeof(__pyx_k_Argument_s_has_incorrect_type_ex), 0, 0, 1, 0},
   {&__pyx_kp_s_Eugene_Scherba, __pyx_k_Eugene_Scherba, sizeof(__pyx_k_Eugene_Scherba), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
@@ -6287,7 +6287,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"             # <<<<<<<<<<<<<<
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.1.post1"
+ * __version__ = "0.1.1.post2"
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_author, __pyx_kp_s_Eugene_Scherba) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
 
@@ -6295,7 +6295,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"             # <<<<<<<<<<<<<<
- * __version__ = "0.1.1.post1"
+ * __version__ = "0.1.1.post2"
  * __all__     = [
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_email, __pyx_kp_s_escherba_metrohash_gmail_com) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
@@ -6303,15 +6303,15 @@ if (!__Pyx_RefNanny) {
   /* "metrohash.pyx":13
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.1.post1"             # <<<<<<<<<<<<<<
+ * __version__ = "0.1.1.post2"             # <<<<<<<<<<<<<<
  * __all__     = [
  *     "metrohash64",
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_1_1_post1) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_1_1_post2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
 
   /* "metrohash.pyx":14
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.1.post1"
+ * __version__ = "0.1.1.post2"
  * __all__     = [             # <<<<<<<<<<<<<<
  *     "metrohash64",
  *     "metrohash128",
