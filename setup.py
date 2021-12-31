@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 import warnings
 from os.path import join, dirname
 from setuptools import setup
@@ -29,11 +30,14 @@ class BinaryDistribution(Distribution):
         return False
 
 
-CXXFLAGS = """
--O3
--Wno-unused-value
--Wno-unused-function
-""".split()
+CXXFLAGS = ["-O3"]
+
+if os.name != "nt":
+    CXXFLAGS.extend([
+        "-Wno-unused-value",
+        "-Wno-unused-function",
+    ])
+
 
 if HAVE_SSE42:
     warnings.warn("Compiling with SSE4.2 enabled")
