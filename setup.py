@@ -33,7 +33,7 @@ class BinaryDistribution(Distribution):
 CXXFLAGS = []
 
 if os.name == "nt":
-    CXXFLAGS.extend(["/O3"])
+    CXXFLAGS.extend(["/O2"])
 else:
     CXXFLAGS.extend([
         "-O3",
@@ -91,7 +91,7 @@ else:
     )
 
 
-VERSION = '0.1.1.post1'
+VERSION = '0.1.1.post2'
 URL = "https://github.com/escherba/python-metrohash"
 
 
