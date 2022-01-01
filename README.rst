@@ -60,10 +60,12 @@ MetroHash algorithm. For stateless hashing, it exports ``metrohash64`` and
 Incremental hashing
 ~~~~~~~~~~~~~~~~~~~
 
-For incremental hashing, use ``MetroHash64`` and ``MetroHash128`` classes.
-Incremental hashing is associative and guarantees that any combination of input
-slices will result in the same final hash value. This is useful for processing
-large inputs and stream data. Example with two slices:
+Unlike its cousins CityHash and FarmHash, MetroHash allows incremental
+(stateful) hashing.  For incremental hashing, use ``MetroHash64`` and
+``MetroHash128`` classes.  Incremental hashing is associative and guarantees
+that any combination of input slices will result in the same final hash value.
+This is useful for processing large inputs and stream data. Example with two
+slices:
 
 .. code-block:: python
 
@@ -85,10 +87,14 @@ Note that the resulting hash value above is the same as in:
 Buffer protocol support
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The methods in this module support Python `Buffer Protocol
-<https://docs.python.org/3/c-api/buffer.html>`__, which allows them to be used
-on any object that exports a buffer interface. Here is an example showing
-hashing of a 4D NumPy array:
+The Python `Buffer Protocol <https://docs.python.org/3/c-api/buffer.html>`__
+allows Python objects to expose their data as raw byte arrays to other objects,
+for fast access without copying to a separate location in memory.  Among
+others, NumPy is a major framework that supports this protocol.
+
+All hashing functions in this packege will read byte arrays from objects that
+expose them via the buffer protocol. Here is an example showing hashing of a 4D
+NumPy array:
 
 .. code-block:: python
 
@@ -97,8 +103,8 @@ hashing of a 4D NumPy array:
     >>> metrohash.hash64_int(arr)
     12125832280816116063
 
-Note that arrays need to be contiguous for this to work. To convert a
-non-contiguous array, use ``np.ascontiguousarray()`` method.
+The arrays need to be contiguous for this to work. To convert a non-contiguous
+array, use NumPy's ``ascontiguousarray()`` function.
 
 Development
 -----------

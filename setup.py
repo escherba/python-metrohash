@@ -31,7 +31,9 @@ class BinaryDistribution(Distribution):
 
 CXXFLAGS = []
 
-print(f"building for platform: {os.name}")
+print("building for platform: %s" % os.name)
+print("available CPU flags: %s" % CPU_FLAGS)
+
 if os.name == "nt":
     CXXFLAGS.extend(["/O2"])
 else:
@@ -42,6 +44,13 @@ else:
     ])
 
 
+if 'ssse3' in CPU_FLAGS:
+    print("Compiling with SSSE3 enabled")
+    CXXFLAGS.append('-mssse3')
+else:
+    print("compiling without SSE3 support")
+
+
 if 'sse4_2' in CPU_FLAGS:
     print("Compiling with SSE4.2 enabled")
     CXXFLAGS.append('-msse4.2')
@@ -49,51 +58,44 @@ else:
     print("compiling without SSE4.2 support")
 
 
-INCLUDE_DIRS = ['include']
+INCLUDE_DIRS = ['src']
 CXXHEADERS = [
-    "include/metro.h",
-    "include/metrohash.h",
-    "include/metrohash128.h",
-    "include/metrohash128crc.h",
-    "include/metrohash64.h",
-    "include/platform.h",
+    "src/metro.h",
+    "src/metrohash.h",
+    "src/metrohash128.h",
+    "src/metrohash128crc.h",
+    "src/metrohash64.h",
+    "src/platform.h",
 ]
 CXXSOURCES = [
     "src/metrohash64.cc",
     "src/metrohash128.cc",
 ]
 
-CMDCLASS = {}
 EXT_MODULES = []
 
 if USE_CYTHON:
     print("building extension using Cython")
-    CMDCLASS['build_ext'] = build_ext
-    EXT_MODULES.append(
-        Extension(
-            "metrohash",
-            CXXSOURCES + ["src/metrohash.pyx"],
-            depends=CXXHEADERS,
-            language="c++",
-            extra_compile_args=CXXFLAGS,
-            include_dirs=INCLUDE_DIRS,
-        )
-    )
+    CMDCLASS = {'build_ext': build_ext}
+    SRC_EXT = ".pyx"
 else:
     print("building extension w/o Cython")
-    EXT_MODULES.append(
-        Extension(
-            "metrohash",
-            CXXSOURCES + ["src/metrohash.cpp"],
-            depends=CXXHEADERS,
-            language="c++",
-            extra_compile_args=CXXFLAGS,
-            include_dirs=INCLUDE_DIRS,
-        )
-    )
+    CMDCLASS = {}
+    SRC_EXT = ".cpp"
 
 
-VERSION = '0.1.1.post2'
+EXT_MODULES = [
+    Extension(
+        "metrohash",
+        CXXSOURCES + ["src/metrohash" + SRC_EXT],
+        depends=CXXHEADERS,
+        language="c++",
+        extra_compile_args=CXXFLAGS,
+        include_dirs=INCLUDE_DIRS,
+    ),
+]
+
+VERSION = '0.1.1.post3'
 URL = "https://github.com/escherba/python-metrohash"
 
 
