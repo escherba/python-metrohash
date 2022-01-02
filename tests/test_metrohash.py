@@ -10,7 +10,7 @@ from metrohash import (
     MetroHash64,
     MetroHash128,
     hash64_int as metrohash64,
-    hash128_int as metrohash128
+    hash128_int as metrohash128,
 )
 
 
@@ -24,7 +24,7 @@ if sys.version_info[0] >= 3:
 
 def random_string(n, alphabet=string.ascii_lowercase):
     """generate a random string"""
-    return ''.join(random.choice(alphabet) for _ in range(n))
+    return "".join(random.choice(alphabet) for _ in range(n))
 
 
 def random_splits(s, n, nsplits=2):
@@ -40,24 +40,20 @@ class TestStateless(unittest.TestCase):
     """test stateless methods"""
 
     def test_string_unicode_64(self):
-        """Empty Python string has same hash value as empty Unicode string
-        """
+        """Empty Python string has same hash value as empty Unicode string"""
         self.assertEqual(metrohash64(EMPTY_STRING), metrohash64(EMPTY_UNICODE))
 
     def test_string_unicode_128(self):
-        """Empty Python string has same hash value as empty Unicode string
-        """
+        """Empty Python string has same hash value as empty Unicode string"""
         self.assertEqual(metrohash128(EMPTY_STRING), metrohash128(EMPTY_UNICODE))
 
     def test_consistent_encoding_64(self):
-        """ASCII-range Unicode strings have the same hash values as ASCII strings
-        """
+        """ASCII-range Unicode strings have the same hash values as ASCII strings"""
         text = u"abracadabra"  # pylint: disable=redundant-u-string-prefix
         self.assertEqual(metrohash64(text), metrohash64(text.encode("utf-8")))
 
     def test_consistent_encoding_128(self):
-        """ASCII-range Unicode strings have the same hash values as ASCII strings
-        """
+        """ASCII-range Unicode strings have the same hash values as ASCII strings"""
         text = u"abracadabra"  # pylint: disable=redundant-u-string-prefix
         self.assertEqual(metrohash128(text), metrohash128(text.encode("utf-8")))
 
@@ -73,18 +69,18 @@ class TestStateless(unittest.TestCase):
 
     def test_unicode_2_64(self):
         """Accepts Unicode input outside of ASCII range"""
-        test_case = u'\u2661'  # pylint: disable=redundant-u-string-prefix
+        test_case = u"\u2661"  # pylint: disable=redundant-u-string-prefix
         self.assertTrue(isinstance(metrohash64(test_case), long))
 
     def test_unicode_2_128(self):
         """Accepts Unicode input outside of ASCII range"""
-        test_case = u'\u2661'  # pylint: disable=redundant-u-string-prefix
+        test_case = u"\u2661"  # pylint: disable=redundant-u-string-prefix
         self.assertTrue(isinstance(metrohash128(test_case), long))
 
     def test_refcounts(self):
         """Doesn't leak references to its argument"""
         funcs = [metrohash64, metrohash128]
-        args = ['abc', b'abc', bytearray(b'def'), memoryview(b'ghi')]
+        args = ["abc", b"abc", bytearray(b"def"), memoryview(b"ghi")]
         for func in funcs:
             for arg in args:
                 old_refcount = sys.getrefcount(arg)
@@ -104,8 +100,7 @@ class TestIncremental(unittest.TestCase):
     """test incremental hashers"""
 
     def test_compose_64(self):
-        """Test various ways to split a string
-        """
+        """Test various ways to split a string"""
         nchars = 1000
         split_range = (2, 10)
         num_tests = 100
@@ -122,12 +117,15 @@ class TestIncremental(unittest.TestCase):
             hasher2 = hasher()
             hasher2.update(data)
             whole = hasher2.intdigest()
-            msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (pieces, whole, incremental)
+            msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (
+                pieces,
+                whole,
+                incremental,
+            )
             self.assertEqual(whole, incremental, msg)
 
     def test_compose_128(self):
-        """Test various ways to split a string
-        """
+        """Test various ways to split a string"""
         nchars = 20
         split_range = (2, 4)
         num_tests = 10
@@ -144,12 +142,15 @@ class TestIncremental(unittest.TestCase):
             hasher2 = hasher()
             hasher2.update(data)
             whole = hasher2.intdigest()
-            msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (pieces, whole, incremental)
+            msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (
+                pieces,
+                whole,
+                incremental,
+            )
             self.assertEqual(whole, incremental, msg)
 
     def test_obj_raises_type_error(self):
-        """Check that hasher objects raise type error
-        """
+        """Check that hasher objects raise type error"""
         hasher_classes = [MetroHash64, MetroHash128]
         for hasher_class in hasher_classes:
             hasher = hasher_class()

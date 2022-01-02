@@ -906,9 +906,9 @@ static const char *__pyx_filename;
 static const char *__pyx_f[] = {
   "src/metrohash.pyx",
   "stringsource",
-  "env/lib/python3.7/site-packages/Cython/Includes/cpython/type.pxd",
-  "env/lib/python3.7/site-packages/Cython/Includes/cpython/bool.pxd",
-  "env/lib/python3.7/site-packages/Cython/Includes/cpython/complex.pxd",
+  "type.pxd",
+  "bool.pxd",
+  "complex.pxd",
 };
 
 /*--- Type declarations ---*/
@@ -1489,7 +1489,9 @@ static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_seed[] = "seed";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_0_1_2[] = "0.1.2";
 static const char __pyx_k_email[] = "__email__";
+static const char __pyx_k_sys_2[] = "_sys";
 static const char __pyx_k_author[] = "__author__";
 static const char __pyx_k_buffer[] = "buffer";
 static const char __pyx_k_digest[] = "digest";
@@ -1508,7 +1510,6 @@ static const char __pyx_k_basestring[] = "basestring";
 static const char __pyx_k_hash64_hex[] = "hash64_hex";
 static const char __pyx_k_hash64_int[] = "hash64_int";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_0_1_1_post3[] = "0.1.1.post3";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_MetroHash64[] = "MetroHash64";
 static const char __pyx_k_hash128_hex[] = "hash128_hex";
@@ -1526,7 +1527,7 @@ static const char __pyx_k_escherba_metrohash_gmail_com[] = "escherba+metrohash@g
 static const char __pyx_k_Python_wrapper_for_MetroHash_a[] = "\nPython wrapper for MetroHash, a fast non-cryptographic hashing algorithm\n";
 static const char __pyx_k_Argument_s_has_incorrect_type_ex[] = "Argument '%s' has incorrect type: expected %s, got '%s' instead";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
-static PyObject *__pyx_kp_s_0_1_1_post3;
+static PyObject *__pyx_kp_s_0_1_2;
 static PyObject *__pyx_kp_s_Argument_s_has_incorrect_type_ex;
 static PyObject *__pyx_kp_s_Eugene_Scherba;
 static PyObject *__pyx_n_s_MemoryError;
@@ -1570,6 +1571,7 @@ static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_kp_s_src_metrohash_pyx;
 static PyObject *__pyx_n_s_sys;
+static PyObject *__pyx_n_s_sys_2;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_version;
 static PyObject *__pyx_n_s_version_info;
@@ -1630,7 +1632,7 @@ static PyObject *__pyx_codeobj__19;
 
 /* "metrohash.pyx":86
  * 
- * if sys.version_info < (3, ):
+ * if _sys.version_info < (3, ):
  *     def bytes2hex(bs: bytes) -> str:             # <<<<<<<<<<<<<<
  *         return bs.encode("hex")
  * else:
@@ -1669,7 +1671,7 @@ static PyObject *__pyx_pf_9metrohash_bytes2hex(CYTHON_UNUSED PyObject *__pyx_sel
   __Pyx_RefNannySetupContext("bytes2hex", 0);
 
   /* "metrohash.pyx":87
- * if sys.version_info < (3, ):
+ * if _sys.version_info < (3, ):
  *     def bytes2hex(bs: bytes) -> str:
  *         return bs.encode("hex")             # <<<<<<<<<<<<<<
  * else:
@@ -1685,7 +1687,7 @@ static PyObject *__pyx_pf_9metrohash_bytes2hex(CYTHON_UNUSED PyObject *__pyx_sel
 
   /* "metrohash.pyx":86
  * 
- * if sys.version_info < (3, ):
+ * if _sys.version_info < (3, ):
  *     def bytes2hex(bs: bytes) -> str:             # <<<<<<<<<<<<<<
  *         return bs.encode("hex")
  * else:
@@ -5732,7 +5734,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_0_1_1_post3, __pyx_k_0_1_1_post3, sizeof(__pyx_k_0_1_1_post3), 0, 0, 1, 0},
+  {&__pyx_kp_s_0_1_2, __pyx_k_0_1_2, sizeof(__pyx_k_0_1_2), 0, 0, 1, 0},
   {&__pyx_kp_s_Argument_s_has_incorrect_type_ex, __pyx_k_Argument_s_has_incorrect_type_ex, sizeof(__pyx_k_Argument_s_has_incorrect_type_ex), 0, 0, 1, 0},
   {&__pyx_kp_s_Eugene_Scherba, __pyx_k_Eugene_Scherba, sizeof(__pyx_k_Eugene_Scherba), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
@@ -5776,6 +5778,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_kp_s_src_metrohash_pyx, __pyx_k_src_metrohash_pyx, sizeof(__pyx_k_src_metrohash_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
+  {&__pyx_n_s_sys_2, __pyx_k_sys_2, sizeof(__pyx_k_sys_2), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_version, __pyx_k_version, sizeof(__pyx_k_version), 0, 0, 1, 1},
   {&__pyx_n_s_version_info, __pyx_k_version_info, sizeof(__pyx_k_version_info), 0, 0, 1, 1},
@@ -5856,7 +5859,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "metrohash.pyx":85
  * 
  * 
- * if sys.version_info < (3, ):             # <<<<<<<<<<<<<<
+ * if _sys.version_info < (3, ):             # <<<<<<<<<<<<<<
  *     def bytes2hex(bs: bytes) -> str:
  *         return bs.encode("hex")
  */
@@ -5866,7 +5869,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "metrohash.pyx":86
  * 
- * if sys.version_info < (3, ):
+ * if _sys.version_info < (3, ):
  *     def bytes2hex(bs: bytes) -> str:             # <<<<<<<<<<<<<<
  *         return bs.encode("hex")
  * else:
@@ -6287,7 +6290,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"             # <<<<<<<<<<<<<<
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.1.post3"
+ * __version__ = "0.1.2"
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_author, __pyx_kp_s_Eugene_Scherba) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
 
@@ -6295,7 +6298,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"             # <<<<<<<<<<<<<<
- * __version__ = "0.1.1.post3"
+ * __version__ = "0.1.2"
  * __all__     = [
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_email, __pyx_kp_s_escherba_metrohash_gmail_com) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
@@ -6303,15 +6306,15 @@ if (!__Pyx_RefNanny) {
   /* "metrohash.pyx":13
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.1.post3"             # <<<<<<<<<<<<<<
+ * __version__ = "0.1.2"             # <<<<<<<<<<<<<<
  * __all__     = [
  *     "metrohash64",
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_1_1_post3) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_1_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
 
   /* "metrohash.pyx":14
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.1.1.post3"
+ * __version__ = "0.1.2"
  * __all__     = [             # <<<<<<<<<<<<<<
  *     "metrohash64",
  *     "metrohash128",
@@ -6336,23 +6339,23 @@ if (!__Pyx_RefNanny) {
   /* "metrohash.pyx":68
  * 
  * 
- * import sys             # <<<<<<<<<<<<<<
+ * import sys as _sys             # <<<<<<<<<<<<<<
  * from cpython cimport long
  * 
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_1) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys_2, __pyx_t_1) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "metrohash.pyx":85
  * 
  * 
- * if sys.version_info < (3, ):             # <<<<<<<<<<<<<<
+ * if _sys.version_info < (3, ):             # <<<<<<<<<<<<<<
  *     def bytes2hex(bs: bytes) -> str:
  *         return bs.encode("hex")
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_sys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_sys_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_version_info); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -6365,7 +6368,7 @@ if (!__Pyx_RefNanny) {
 
     /* "metrohash.pyx":86
  * 
- * if sys.version_info < (3, ):
+ * if _sys.version_info < (3, ):
  *     def bytes2hex(bs: bytes) -> str:             # <<<<<<<<<<<<<<
  *         return bs.encode("hex")
  * else:
@@ -6378,7 +6381,7 @@ if (!__Pyx_RefNanny) {
     /* "metrohash.pyx":85
  * 
  * 
- * if sys.version_info < (3, ):             # <<<<<<<<<<<<<<
+ * if _sys.version_info < (3, ):             # <<<<<<<<<<<<<<
  *     def bytes2hex(bs: bytes) -> str:
  *         return bs.encode("hex")
  */
