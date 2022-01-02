@@ -99,7 +99,7 @@ EXT_MODULES = [
     ),
 ]
 
-VERSION = "0.2.0"
+VERSION = "0.2.0.post0"
 URL = "https://github.com/escherba/python-metrohash"
 
 
@@ -128,7 +128,7 @@ setup(
     cmdclass=CMDCLASS,
     ext_modules=EXT_MODULES,
     package_dir={"": "src"},
-    keywords=["hash", "hashing", "metrohash"],
+    keywords=["hash", "hashing", "metrohash", "cython"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
