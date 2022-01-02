@@ -52,7 +52,7 @@ $(EXTENSION): env $(EXTENSION_DEPS)
 .PHONY: test
 test: build_ext  ## run Python unit tests
 	$(PYENV) pytest
-	$(PYENV) pytest README.rst
+	$(PYTHON) -m doctest README.md && echo "$(BOLD)doctests passed$(END)"
 
 .PHONY: nuke
 nuke: clean  ## clean and remove virtual environment
@@ -82,6 +82,7 @@ env/bin/activate: setup.py requirements.txt
 	test -f $@ || virtualenv $(VENV_OPTS) env
 	export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PYENV) curl https://bootstrap.pypa.io/ez_setup.py | $(INTERPRETER)
 	$(PIP) install -U pip wheel
+	$(PIP) install -U py-cpuinfo
 	export SETUPTOOLS_USE_DISTUTILS=stdlib; $(PIP) install -r requirements.txt
 	$(PIP) install -e .
 	$(PIP) freeze > pip-freeze.txt

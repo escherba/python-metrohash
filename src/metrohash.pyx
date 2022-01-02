@@ -65,7 +65,7 @@ cdef extern from "metro.h" nogil:
         void Hash(const uint8_t* key, const uint64_t length, uint8_t* const out, const uint64_t seed)
 
 
-import sys
+import sys as _sys
 from cpython cimport long
 
 from cpython.buffer cimport PyObject_CheckBuffer
@@ -82,7 +82,7 @@ from cpython.bytes cimport PyBytes_AS_STRING
 from cpython.bytes cimport PyBytes_FromStringAndSize
 
 
-if sys.version_info < (3, ):
+if _sys.version_info < (3, ):
     def bytes2hex(bs: bytes) -> str:
         return bs.encode("hex")
 else:
