@@ -8,9 +8,9 @@ Version](https://img.shields.io/pypi/v/metrohash.svg)](https://pypi.python.org/p
 [![Downloads](https://img.shields.io/pypi/dm/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
 [![Tests
 Status](https://circleci.com/gh/escherba/python-metrohash.png?style=shield)](https://circleci.com/gh/escherba/python-metrohash)
+[![License](https://img.shields.io/pypi/l/cityhash.svg)](https://pypi.python.org/pypi/cityhash)
 [![Supported Python
 versions](https://img.shields.io/pypi/pyversions/cityhash.svg)](https://pypi.python.org/pypi/cityhash)
-[![License](https://img.shields.io/pypi/l/cityhash.svg)](https://pypi.python.org/pypi/cityhash)
 
 ## Getting Started
 
