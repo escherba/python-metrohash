@@ -101,16 +101,18 @@ cdef object _type_error(argname: str, expected: object, value: object):
 
 
 cpdef bytes hash64(data, uint64_t seed=0ULL):
-    """Obtain a 64-bit hash from data using MetroHash-64.
-    Args:
-        data (str or buffer): input data (either string or buffer type)
-        seed (int): seed to random number generator
-    Returns:
-        bytes: hash value
-    Raises:
-        TypeError: if input data is not a string or a buffer
-        ValueError: if input buffer is not C-contiguous
-        OverflowError: if seed cannot be converted to unsigned int64
+    """
+Obtain a 64-bit hash from data using MetroHash-64.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+    seed (int): seed to random number generator
+Returns:
+    bytes: hash value
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
+    OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -134,16 +136,18 @@ cpdef bytes hash64(data, uint64_t seed=0ULL):
 
 
 cpdef bytes hash128(data, uint64_t seed=0ULL):
-    """Obtain a 128-bit hash from data using MetroHash-128.
-    Args:
-        data (str or buffer): input data (either string or buffer type)
-        seed (int): seed to random number generator
-    Returns:
-        bytes: hash value
-    Raises:
-        TypeError: if input data is not a string or a buffer
-        ValueError: if input buffer is not C-contiguous
-        OverflowError: if seed cannot be converted to unsigned int64
+    """
+Obtain a 128-bit hash from data using MetroHash-128.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+    seed (int): seed to random number generator
+Returns:
+    bytes: hash value
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
+    OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -168,46 +172,52 @@ cpdef bytes hash128(data, uint64_t seed=0ULL):
 
 
 def hash64_hex(data, uint64_t seed=0ULL) -> str:
-    """Obtain a 64-bit hash from data using MetroHash-64.
-    Args:
-        data (str or buffer): input data (either string or buffer type)
-        seed (int): seed to random number generator
-    Returns:
-        str: hash value
-    Raises:
-        TypeError: if input data is not a string or a buffer
-        ValueError: if input buffer is not C-contiguous
-        OverflowError: if seed cannot be converted to unsigned int64
+    """
+Obtain a 64-bit hash from data using MetroHash-64.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+    seed (int): seed to random number generator
+Returns:
+    str: hash value
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
+    OverflowError: if seed cannot be converted to unsigned int64
     """
     return bytes2hex(hash64(data, seed=seed))
 
 
 def hash128_hex(data, uint64_t seed=0ULL) -> str:
-    """Obtain a 128-bit hash from data using MetroHash-128.
-    Args:
-        data (str or buffer): input data (either string or buffer type)
-        seed (int): seed to random number generator
-    Returns:
-        str: hash value
-    Raises:
-        TypeError: if input data is not a string or a buffer
-        ValueError: if input buffer is not C-contiguous
-        OverflowError: if seed cannot be converted to unsigned int64
+    """
+Obtain a 128-bit hash from data using MetroHash-128.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+    seed (int): seed to random number generator
+Returns:
+    str: hash value
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
+    OverflowError: if seed cannot be converted to unsigned int64
     """
     return bytes2hex(hash128(data, seed=seed))
 
 
 def hash64_int(data, uint64 seed=0ULL) -> int:
-    """Obtain a 64-bit hash from data using MetroHash-64.
-    Args:
-        data (str or buffer): input data (either string or buffer type)
-        seed (int): seed to random number generator
-    Returns:
-        int: hash value
-    Raises:
-        TypeError: if input data is not a string or a buffer
-        ValueError: if input buffer is not C-contiguous
-        OverflowError: if seed cannot be converted to unsigned int64
+    """
+Obtain a 64-bit hash from data using MetroHash-64.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+    seed (int): seed to random number generator
+Returns:
+    int: hash value
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
+    OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -230,16 +240,18 @@ def hash64_int(data, uint64 seed=0ULL) -> int:
 
 
 def hash128_int(data, uint64 seed=0ULL) -> int:
-    """Obtain a 128-bit hash from data using MetroHash-128.
-    Args:
-        data (str or buffer): input data (either string or buffer type)
-        seed (int): seed to random number generator
-    Returns:
-        int: hash value
-    Raises:
-        TypeError: if input data is not a string or a buffer
-        ValueError: if input buffer is not C-contiguous
-        OverflowError: if seed cannot be converted to unsigned int64
+    """
+Obtain a 128-bit hash from data using MetroHash-128.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+    seed (int): seed to random number generator
+Returns:
+    int: hash value
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
+    OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
     cdef bytes obj
@@ -262,20 +274,20 @@ def hash128_int(data, uint64 seed=0ULL) -> int:
 
 
 cdef class MetroHash64(object):
-    """Incremental hasher interface for MetroHash-64.
+    """
+Incremental hasher interface for MetroHash-64.
+
+Args:
+    seed (int): seed to random number generator
+Raises:
+    TypeError: if seed is not an integer type
+    MemoryError: if a new method fails
+    OverflowError: if seed is out of bounds
     """
 
     cdef CCMetroHash64* _m
 
     def __cinit__(self, uint64 seed=0ULL) -> None:
-        """
-        Args:
-            seed (int): seed to random number generator
-        Raises:
-            TypeError: if seed is not an integer type
-            MemoryError: if a new method fails
-            OverflowError: if seed is out of bounds
-        """
         self._m = new CCMetroHash64(seed)
         if self._m is NULL:
             raise MemoryError()
@@ -286,22 +298,26 @@ cdef class MetroHash64(object):
             self._m = NULL
 
     def reset(self, uint64 seed=0ULL) -> None:
-        """Reset state with a new seed
-        Args:
-            seed (int): new seed to reset state to
-        Raises:
-            TypeError: if seed is not an integer type
-            OverflowError: if seed is out of bounds
+        """
+Reset state with a new seed.
+
+Args:
+    seed (int): new seed to reset state to
+Raises:
+    TypeError: if seed is not an integer type
+    OverflowError: if seed is out of bounds
         """
         self._m.Initialize(seed)
 
     def update(self, data) -> None:
-        """Update digest with new data
-        Args:
-            data (str or buffer): input data (either string or buffer type)
-        Raises:
-            TypeError: if input data is not a string or a buffer
-            ValueError: if input buffer is not C-contiguous
+        """
+Update digest with new data.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
         """
         cdef Py_buffer buf
         cdef bytes obj
@@ -321,25 +337,31 @@ cdef class MetroHash64(object):
             raise _type_error("data", ["basestring", "buffer"], data)
 
     cpdef bytes digest(self):
-        """Obtain bytes digest
-        Returns:
-            bytes: eight bytes representing the 64-bit hash
+        """
+Obtain bytes digest.
+
+Returns:
+    bytes: eight bytes representing the 64-bit hash
         """
         cdef bytearray out = bytearray(8)
         self._m.Finalize(out)
         return bytes(out)
 
     def hexdigest(self) -> str:
-        """Obtain a string digest in hexadecimal form
-        Returns:
-            str: hash string
+        """
+Obtain a string digest in hexadecimal form.
+
+Returns:
+    str: hash string
         """
         return bytes2hex(self.digest())
 
     def intdigest(self) -> int:
-        """Obtain a long integer representing hash value
-        Returns:
-            int: an integer representing 64-bit hash value
+        """
+Obtain a long integer representing hash value.
+
+Returns:
+    int: an integer representing 64-bit hash value
         """
         cdef uint8 buf[8]
         self._m.Finalize(buf)
@@ -347,20 +369,20 @@ cdef class MetroHash64(object):
 
 
 cdef class MetroHash128(object):
-    """Incremental hasher interface for MetroHash-128.
+    """
+Incremental hasher interface for MetroHash-128.
+
+Args:
+    seed (int): seed to random number generator
+Raises:
+    TypeError: if seed is not an integer type
+    MemoryError: if a new method fails
+    OverflowError: if seed is out of bounds
     """
 
     cdef CCMetroHash128* _m
 
     def __cinit__(self, uint64 seed=0ULL) -> None:
-        """
-        Args:
-            seed (int): seed to random number generator
-        Raises:
-            TypeError: if seed is not an integer type
-            MemoryError: if a new method fails
-            OverflowError: if seed is out of bounds
-        """
         self._m = new CCMetroHash128(seed)
         if self._m is NULL:
             raise MemoryError()
@@ -371,22 +393,26 @@ cdef class MetroHash128(object):
             self._m = NULL
 
     def reset(self, uint64 seed=0ULL) -> None:
-        """Reset state with a new seed
-        Args:
-            seed (int): new seed to reset state to
-        Raises:
-            TypeError: if seed is not an integer type
-            OverflowError: if seed is out of bounds
+        """
+Reset state with a new seed.
+
+Args:
+    seed (int): new seed to reset state to
+Raises:
+    TypeError: if seed is not an integer type
+    OverflowError: if seed is out of bounds
         """
         self._m.Initialize(seed)
 
     def update(self, data) -> None:
-        """Update digest with new data
-        Args:
-            data (str or buffer): input data (either string or buffer type)
-        Raises:
-            TypeError: if input data is not a string or a buffer
-            ValueError: if input buffer is not C-contiguous
+        """
+Update digest with new data.
+
+Args:
+    data (str or buffer): input data (either string or buffer type)
+Raises:
+    TypeError: if input data is not a string or a buffer
+    ValueError: if input buffer is not C-contiguous
         """
         cdef Py_buffer buf
         cdef bytes obj
@@ -406,25 +432,31 @@ cdef class MetroHash128(object):
             raise _type_error("data", ["basestring", "buffer"], data)
 
     cpdef bytes digest(self):
-        """Obtain bytes digest
-        Returns:
-            bytes: sixteen bytes representing the 128-bit hash
+        """
+Obtain bytes digest.
+
+Returns:
+    bytes: sixteen bytes representing the 128-bit hash
         """
         cdef bytearray out = bytearray(16)
         self._m.Finalize(out)
         return bytes(out)
 
     def hexdigest(self) -> str:
-        """Obtain a string digest in hexadecimal form
-        Returns:
-            str: hash string
+        """
+Obtain a string digest in hexadecimal form.
+
+Returns:
+    str: hash string
         """
         return bytes2hex(self.digest())
 
     def intdigest(self) -> int:
-        """Obtain integer digest
-        Returns:
-            int: a long integer representing 128-bit hash value
+        """
+Obtain integer digest.
+
+Returns:
+    int: a long integer representing 128-bit hash value
         """
         cdef uint8 buf[16]
         self._m.Finalize(buf)
