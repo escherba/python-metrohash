@@ -99,55 +99,31 @@ class TestIncremental(unittest.TestCase):
 
     """test incremental hashers"""
 
-    def test_compose_64(self):
+    def test_compose(self):
         """Test various ways to split a string"""
         nchars = 1000
         split_range = (2, 10)
         num_tests = 100
-        hasher = MetroHash64
+        hashers = [MetroHash64, MetroHash128]
         alphabet = string.ascii_uppercase + string.ascii_lowercase + string.digits
 
-        for _ in range(num_tests):
-            data = random_string(nchars, alphabet=alphabet)
-            hasher1 = hasher()
-            pieces = list(random_splits(data, nchars, random.randint(*split_range)))
-            for piece in pieces:
-                hasher1.update(piece)
-            incremental = hasher1.intdigest()
-            hasher2 = hasher()
-            hasher2.update(data)
-            whole = hasher2.intdigest()
-            msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (
-                pieces,
-                whole,
-                incremental,
-            )
-            self.assertEqual(whole, incremental, msg)
-
-    def test_compose_128(self):
-        """Test various ways to split a string"""
-        nchars = 20
-        split_range = (2, 4)
-        num_tests = 10
-        hasher = MetroHash128
-        alphabet = string.ascii_lowercase
-
-        for _ in range(num_tests):
-            data = random_string(nchars, alphabet=alphabet)
-            hasher1 = hasher()
-            pieces = list(random_splits(data, nchars, random.randint(*split_range)))
-            for piece in pieces:
-                hasher1.update(piece)
-            incremental = hasher1.intdigest()
-            hasher2 = hasher()
-            hasher2.update(data)
-            whole = hasher2.intdigest()
-            msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (
-                pieces,
-                whole,
-                incremental,
-            )
-            self.assertEqual(whole, incremental, msg)
+        for hasher in hashers:
+            for _ in range(num_tests):
+                data = random_string(nchars, alphabet=alphabet)
+                hasher1 = hasher()
+                pieces = list(random_splits(data, nchars, random.randint(*split_range)))
+                for piece in pieces:
+                    hasher1.update(piece)
+                incremental = hasher1.intdigest()
+                hasher2 = hasher()
+                hasher2.update(data)
+                whole = hasher2.intdigest()
+                msg = "\ndata: %s\nwhole: %s\nincremental: %s\n" % (
+                    pieces,
+                    whole,
+                    incremental,
+                )
+                self.assertEqual(whole, incremental, msg)
 
     def test_obj_raises_type_error(self):
         """Check that hasher objects raise type error"""
@@ -161,15 +137,15 @@ class TestIncremental(unittest.TestCase):
         """test that 64-bit hasher can be reset"""
 
         seed1 = 42
-        expected1 = metrohash64("ab", seed=seed1)
+        expected1 = metrohash64("ab", seed1)
         hasher = MetroHash64(seed1)
         hasher.update("a")
         hasher.update("b")
         self.assertEqual(hasher.intdigest(), expected1)
 
         seed2 = 0
-        hasher.reset(seed=seed2)
-        expected2 = metrohash64("c", seed=seed2)
+        hasher.reset(seed2)
+        expected2 = metrohash64("c", seed2)
         hasher.update("c")
         self.assertEqual(hasher.intdigest(), expected2)
 
@@ -177,14 +153,14 @@ class TestIncremental(unittest.TestCase):
         """test that 128-bit hasher can be reset"""
 
         seed1 = 42
-        expected1 = metrohash128("ab", seed=seed1)
+        expected1 = metrohash128("ab", seed1)
         hasher = MetroHash128(seed1)
         hasher.update("a")
         hasher.update("b")
         self.assertEqual(hasher.intdigest(), expected1)
 
         seed2 = 0
-        hasher.reset(seed=seed2)
-        expected2 = metrohash128("c", seed=seed2)
+        hasher.reset(seed2)
+        expected2 = metrohash128("c", seed2)
         hasher.update("c")
         self.assertEqual(hasher.intdigest(), expected2)
