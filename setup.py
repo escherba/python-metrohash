@@ -128,7 +128,7 @@ setup(
     cmdclass=CMDCLASS,
     ext_modules=EXT_MODULES,
     package_dir={"": "src"},
-    keywords=["hash", "hashing", "metrohash"],
+    keywords=["hash", "hashing", "metrohash", "cython"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
