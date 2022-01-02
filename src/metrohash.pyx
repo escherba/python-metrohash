@@ -10,12 +10,16 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 __all__     = [
-    "metrohash64",
-    "metrohash128",
     "MetroHash64",
     "MetroHash128",
+    "hash64",
+    "hash128",
+    "hash64_int",
+    "hash128_int",
+    "hash64_hex",
+    "hash128_hex",
 ]
 
 
@@ -79,7 +83,6 @@ from cpython.unicode cimport PyUnicode_AsUTF8String
 from cpython.bytes cimport PyBytes_Check
 from cpython.bytes cimport PyBytes_GET_SIZE
 from cpython.bytes cimport PyBytes_AS_STRING
-from cpython.bytes cimport PyBytes_FromStringAndSize
 
 
 if _sys.version_info < (3, ):
@@ -260,23 +263,24 @@ def hash128_int(data, uint64 seed=0ULL) -> int:
 
 cdef class MetroHash64(object):
     """Incremental hasher interface for MetroHash-64.
-
-    Args:
-        seed (int): seed to random number generator
-    Raises:
-        TypeError: if seed is not an integer type
-        MemoryError: if a new method fails
-        OverflowError: if seed is out of bounds
     """
 
     cdef CCMetroHash64* _m
 
-    def __cinit__(self, uint64 seed=0ULL):
+    def __cinit__(self, uint64 seed=0ULL) -> None:
+        """
+        Args:
+            seed (int): seed to random number generator
+        Raises:
+            TypeError: if seed is not an integer type
+            MemoryError: if a new method fails
+            OverflowError: if seed is out of bounds
+        """
         self._m = new CCMetroHash64(seed)
         if self._m is NULL:
             raise MemoryError()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         if not self._m is NULL:
             del self._m
             self._m = NULL
@@ -344,23 +348,24 @@ cdef class MetroHash64(object):
 
 cdef class MetroHash128(object):
     """Incremental hasher interface for MetroHash-128.
-
-    Args:
-        seed (int): seed to random number generator
-    Raises:
-        TypeError: if seed is not an integer type
-        MemoryError: if a new method fails
-        OverflowError: if seed is out of bounds
     """
 
     cdef CCMetroHash128* _m
 
-    def __cinit__(self, uint64 seed=0ULL):
+    def __cinit__(self, uint64 seed=0ULL) -> None:
+        """
+        Args:
+            seed (int): seed to random number generator
+        Raises:
+            TypeError: if seed is not an integer type
+            MemoryError: if a new method fails
+            OverflowError: if seed is out of bounds
+        """
         self._m = new CCMetroHash128(seed)
         if self._m is NULL:
             raise MemoryError()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         if not self._m is NULL:
             del self._m
             self._m = NULL
