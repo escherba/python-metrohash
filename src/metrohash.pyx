@@ -270,7 +270,7 @@ Raises:
         PyBuffer_Release(&buf)
     else:
         raise _type_error("data", ["basestring", "buffer"], data)
-    return 0x10000000000000000L * long(result.first) + long(result.second)
+    return (long(result.first) << 64) + long(result.second)
 
 
 cdef class MetroHash64(object):
@@ -461,4 +461,4 @@ Returns:
         cdef uint8 buf[16]
         self._m.Finalize(buf)
         cdef uint128 result = c_bytes2int128(buf)
-        return 0x10000000000000000L * long(result.first) + long(result.second)
+        return (long(result.first) << 64) + long(result.second)

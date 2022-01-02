@@ -1608,7 +1608,7 @@ static __Pyx_CachedCFunction __pyx_umethod_PyBytes_Type_hex = {0, &__pyx_n_s_hex
 static PyObject *__pyx_int_3;
 static PyObject *__pyx_int_8;
 static PyObject *__pyx_int_16;
-static PyObject *__pyx_int_18446744073709551616L;
+static PyObject *__pyx_int_64;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
@@ -3402,7 +3402,7 @@ static PyObject *__pyx_pf_9metrohash_14hash128_int(CYTHON_UNUSED PyObject *__pyx
  *         PyBuffer_Release(&buf)
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)             # <<<<<<<<<<<<<<
- *     return 0x10000000000000000L * long(result.first) + long(result.second)
+ *     return (long(result.first) << 64) + long(result.second)
  * 
  */
   /*else*/ {
@@ -3426,7 +3426,7 @@ static PyObject *__pyx_pf_9metrohash_14hash128_int(CYTHON_UNUSED PyObject *__pyx
   /* "metrohash.pyx":273
  *     else:
  *         raise _type_error("data", ["basestring", "buffer"], data)
- *     return 0x10000000000000000L * long(result.first) + long(result.second)             # <<<<<<<<<<<<<<
+ *     return (long(result.first) << 64) + long(result.second)             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -3436,7 +3436,7 @@ static PyObject *__pyx_pf_9metrohash_14hash128_int(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Multiply(__pyx_int_18446744073709551616L, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Lshift(__pyx_t_2, __pyx_int_64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.second); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 273, __pyx_L1_error)
@@ -5273,7 +5273,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_12intdigest(struct __pyx_obj
  *         cdef uint8 buf[16]
  *         self._m.Finalize(buf)             # <<<<<<<<<<<<<<
  *         cdef uint128 result = c_bytes2int128(buf)
- *         return 0x10000000000000000L * long(result.first) + long(result.second)
+ *         return (long(result.first) << 64) + long(result.second)
  */
   __pyx_v_self->_m->Finalize(__pyx_v_buf);
 
@@ -5281,14 +5281,14 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_12intdigest(struct __pyx_obj
  *         cdef uint8 buf[16]
  *         self._m.Finalize(buf)
  *         cdef uint128 result = c_bytes2int128(buf)             # <<<<<<<<<<<<<<
- *         return 0x10000000000000000L * long(result.first) + long(result.second)
+ *         return (long(result.first) << 64) + long(result.second)
  */
   __pyx_v_result = bytes2int128(__pyx_v_buf);
 
   /* "metrohash.pyx":464
  *         self._m.Finalize(buf)
  *         cdef uint128 result = c_bytes2int128(buf)
- *         return 0x10000000000000000L * long(result.first) + long(result.second)             # <<<<<<<<<<<<<<
+ *         return (long(result.first) << 64) + long(result.second)             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.first); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 464, __pyx_L1_error)
@@ -5296,7 +5296,7 @@ static PyObject *__pyx_pf_9metrohash_12MetroHash128_12intdigest(struct __pyx_obj
   __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_int_18446744073709551616L, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 464, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Lshift(__pyx_t_2, __pyx_int_64); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_PyInt_From_uint64_t(__pyx_v_result.second); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 464, __pyx_L1_error)
@@ -5952,7 +5952,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   __pyx_int_3 = PyInt_FromLong(3); if (unlikely(!__pyx_int_3)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_8 = PyInt_FromLong(8); if (unlikely(!__pyx_int_8)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_16 = PyInt_FromLong(16); if (unlikely(!__pyx_int_16)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_18446744073709551616L = PyLong_FromString((char *)"18446744073709551616", 0, 0); if (unlikely(!__pyx_int_18446744073709551616L)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_64 = PyInt_FromLong(64); if (unlikely(!__pyx_int_64)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
