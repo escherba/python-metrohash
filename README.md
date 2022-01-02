@@ -128,7 +128,7 @@ ubuntu-x86, linux-x86\_64, linux-aarch64, and macosx-x86\_64.
 ## See Also
 
 For other fast non-cryptographic hash functions available as Python
-extensions, see [CityHash](https://github.com/escherba/python-cityhash)
+extensions, see [FarmHash](https://github.com/escherba/python-cityhash)
 and [MurmurHash](https://github.com/hajimes/mmh3).
 
 ## Authors
