@@ -109,8 +109,7 @@ make cpp-test      # run C++ tests
 make shell         # enter IPython shell
 ```
 
-The Makefiles provided have self-documenting targets. To find out which
-targets are available, type:
+To find out which Make targets are available, type:
 
 ``` bash
 make help
@@ -118,10 +117,8 @@ make help
 
 ### Distribution
 
-The wheels are built using
-[cibuildwheel](https://cibuildwheel.readthedocs.io/) and are distributed
-to PyPI using GitHub actions using [this
-workflow](.github/workflows/publish.yml). The wheels contain compiled
+The wheels are built using [cibuildwheel](https://cibuildwheel.readthedocs.io/)
+and are distributed to PyPI using GitHub actions. The wheels contain compiled
 binaries and are available for the following platforms: windows-amd64,
 ubuntu-x86, linux-x86\_64, linux-aarch64, and macosx-x86\_64.
 
