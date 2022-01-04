@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import struct
 from os.path import join, dirname
 
 from setuptools import setup
@@ -34,13 +35,23 @@ class BinaryDistribution(Distribution):
         return False
 
 
+def get_system_bits():
+    """Return 32 for 32-bit systems and 64 for 64-bit"""
+    return struct.calcsize("P") * 8
+
+
+SYSTEM = os.name
+BITS = get_system_bits()
+HAVE_SSE42 = "sse4_2" in CPU_FLAGS
+HAVE_AES = "aes" in CPU_FLAGS
+
 CXXFLAGS = []
 
-print("building on platform:", os.name)
+print("system: %s-%d" % (SYSTEM, BITS))
 print("available CPU flags:", CPU_FLAGS)
 print("environment:", ", ".join(["%s=%s" % (k, v) for k, v in os.environ.items()]))
 
-if os.name == "nt":
+if SYSTEM == "nt":
     CXXFLAGS.extend(["/O2"])
 else:
     CXXFLAGS.extend(
@@ -53,17 +64,22 @@ else:
 
 # The "cibuildwheel" tool sets the variable below to
 # something like x86_64, aarch64, i686, and so on.
-ARCH = os.environ.get("AUDITWHEEL_ARCH")
+TARGET_ARCH = os.environ.get("AUDITWHEEL_ARCH")
 
-# Note: Only -msse4.2 has significant effect on performance;
-# so not using other flags such as -maes and -mavx
-if "sse4_2" in CPU_FLAGS:
-    if (ARCH in [None, "x86_64"]) and (os.name != "nt"):
-        print("enabling SSE4.2 on compile")
+if HAVE_SSE42 and (TARGET_ARCH in [None, "x86_64"]) and (BITS == 64):
+    print("enabling SSE4.2 on compile")
+    if SYSTEM == "nt":
+        CXXFLAGS.append("/D__SSE4_2__")
+    else:
         CXXFLAGS.append("-msse4.2")
-else:
-    print("the CPU does not appear to support SSE4.2")
 
+
+if HAVE_AES and (TARGET_ARCH in [None, "x86_64"]) and (BITS == 64):
+    print("enabling AES on compile")
+    if SYSTEM == "nt":
+        CXXFLAGS.append("/D__AES__")
+    else:
+        CXXFLAGS.append("-maes")
 
 CXXHEADERS = [
     "src/metro.h",
@@ -77,6 +93,7 @@ CXXSOURCES = [
     "src/metrohash64.cc",
     "src/metrohash128.cc",
 ]
+
 
 if USE_CYTHON:
     print("building extension using Cython")
@@ -99,7 +116,7 @@ EXT_MODULES = [
     ),
 ]
 
-VERSION = "0.2.0.post1"
+VERSION = "0.2.1"
 URL = "https://github.com/escherba/python-metrohash"
 
 
