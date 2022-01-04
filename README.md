@@ -7,9 +7,9 @@ fast non-cryptographic hash function.
 [![Latest
 Version](https://img.shields.io/pypi/v/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
 [![Downloads](https://img.shields.io/pypi/dm/metrohash.svg)](https://pypistats.org/packages/metrohash)
-[![License](https://img.shields.io/pypi/l/cityhash.svg)](https://pypi.python.org/pypi/cityhash)
+[![License](https://img.shields.io/pypi/l/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
 [![Supported Python
-versions](https://img.shields.io/pypi/pyversions/cityhash.svg)](https://pypi.python.org/pypi/cityhash)
+versions](https://img.shields.io/pypi/pyversions/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
 
 ## Getting Started
 
