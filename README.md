@@ -3,7 +3,7 @@
 Python wrapper for [MetroHash](https://github.com/jandrewrogers/MetroHash), a
 fast non-cryptographic hash function.
 
-[![Build Status](https://github.com/escherba/python-metrohash/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/escherba/python-metrohash/actions/workflows/build.yml)
+[![Build Status](https://img.shields.io/github/workflow/status/escherba/python-metrohash/build/master)](https://github.com/escherba/python-metrohash/actions/workflows/build.yml)
 [![Latest
 Version](https://img.shields.io/pypi/v/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
 [![Downloads](https://img.shields.io/pypi/dm/metrohash.svg)](https://pypistats.org/packages/metrohash)
