@@ -116,7 +116,7 @@ EXT_MODULES = [
     ),
 ]
 
-VERSION = "0.2.1"
+VERSION = "0.3.0"
 URL = "https://github.com/escherba/python-metrohash"
 
 
