@@ -1,7 +1,7 @@
 #cython: infer_types=True
 #cython: embedsignature=True
 #cython: binding=False
-#cython: language_level=2
+#cython: language_level=3
 #distutils: language=c++
 
 """
@@ -44,6 +44,14 @@ cdef extern from "<utility>" namespace "std" nogil:
         bint operator >= (pair&, pair&)
 
 
+cdef extern from "Python.h":
+    # Note that following functions can potentially raise an exception,
+    # thus they cannot be declared 'nogil'. Also PyUnicode_AsUTF8AndSize() can
+    # potentially allocate memory inside in unlikely case of when underlying
+    # unicode object was stored as non-utf8 and utf8 wasn't requested before.
+    const char* PyUnicode_AsUTF8AndSize(object obj, Py_ssize_t* length) except NULL
+
+
 cdef extern from "metro.h" nogil:
     ctypedef uint8_t uint8
     ctypedef uint32_t uint32
@@ -59,17 +67,16 @@ cdef extern from "metro.h" nogil:
         void Update(const uint8* key, const uint64 length)
         void Finalize(uint8* const result)
         @staticmethod
-        void Hash(const uint8_t* key, const uint64_t length, uint8_t* const out, const uint64_t seed)
+        void Hash(const uint8* key, const uint64 length, uint8* const out, const uint64 seed)
     cdef cppclass CCMetroHash128 "MetroHash128":
         CCMetroHash128(const uint64 seed)
         void Initialize(const uint64 seed)
         void Update(const uint8* key, const uint64 length)
         void Finalize(uint8* const result)
         @staticmethod
-        void Hash(const uint8_t* key, const uint64_t length, uint8_t* const out, const uint64_t seed)
+        void Hash(const uint8* key, const uint64 length, uint8* const out, const uint64 seed)
 
 
-import sys as _sys
 from cpython cimport long
 
 from cpython.buffer cimport PyObject_CheckBuffer
@@ -78,19 +85,14 @@ from cpython.buffer cimport PyBuffer_Release
 from cpython.buffer cimport PyBUF_SIMPLE
 
 from cpython.unicode cimport PyUnicode_Check
-from cpython.unicode cimport PyUnicode_AsUTF8String
 
 from cpython.bytes cimport PyBytes_Check
 from cpython.bytes cimport PyBytes_GET_SIZE
 from cpython.bytes cimport PyBytes_AS_STRING
 
 
-if _sys.version_info < (3, ):
-    def bytes2hex(bs: bytes) -> str:
-        return bs.encode("hex")
-else:
-    def bytes2hex(bs: bytes) -> str:
-        return bs.hex()
+cdef inline str bytes2hex(bytes bs):
+    return bs.hex()
 
 
 cdef object _type_error(argname: str, expected: object, value: object):
@@ -100,7 +102,7 @@ cdef object _type_error(argname: str, expected: object, value: object):
     )
 
 
-cpdef bytes hash64(data, uint64_t seed=0ULL):
+cpdef bytes hash64(data, uint64 seed=0ULL):
     """
 Obtain a 64-bit hash from data using MetroHash-64.
 
@@ -115,13 +117,13 @@ Raises:
     OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
-    cdef bytes obj
     cdef bytearray out = bytearray(8)
+    cdef const char* encoding
+    cdef Py_ssize_t encoding_size = 0
+
     if PyUnicode_Check(data):
-        obj = PyUnicode_AsUTF8String(data)
-        PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-        CCMetroHash64.Hash(<const uint8 *>buf.buf, buf.len, out, seed)
-        PyBuffer_Release(&buf)
+        encoding = PyUnicode_AsUTF8AndSize(data, &encoding_size)
+        CCMetroHash64.Hash(<const uint8*>encoding, encoding_size, out, seed)
     elif PyBytes_Check(data):
         CCMetroHash64.Hash(
             <const uint8 *>PyBytes_AS_STRING(data),
@@ -135,7 +137,7 @@ Raises:
     return bytes(out)
 
 
-cpdef bytes hash128(data, uint64_t seed=0ULL):
+cpdef bytes hash128(data, uint64 seed=0ULL):
     """
 Obtain a 128-bit hash from data using MetroHash-128.
 
@@ -150,13 +152,13 @@ Raises:
     OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
-    cdef bytes obj
     cdef bytearray out = bytearray(16)
+    cdef const char* encoding
+    cdef Py_ssize_t encoding_size = 0
+
     if PyUnicode_Check(data):
-        obj = PyUnicode_AsUTF8String(data)
-        PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-        CCMetroHash128.Hash(<const uint8 *>buf.buf, buf.len, out, seed)
-        PyBuffer_Release(&buf)
+        encoding = PyUnicode_AsUTF8AndSize(data, &encoding_size)
+        CCMetroHash128.Hash(<const uint8*>encoding, encoding_size, out, seed)
     elif PyBytes_Check(data):
         CCMetroHash128.Hash(
             <const uint8 *>PyBytes_AS_STRING(data),
@@ -171,7 +173,7 @@ Raises:
 
 
 
-def hash64_hex(data, uint64_t seed=0ULL) -> str:
+def hash64_hex(data, uint64 seed=0ULL) -> str:
     """
 Obtain a 64-bit hash from data using MetroHash-64.
 
@@ -188,7 +190,7 @@ Raises:
     return bytes2hex(hash64(data, seed=seed))
 
 
-def hash128_hex(data, uint64_t seed=0ULL) -> str:
+def hash128_hex(data, uint64 seed=0ULL) -> str:
     """
 Obtain a 128-bit hash from data using MetroHash-128.
 
@@ -220,16 +222,17 @@ Raises:
     OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
-    cdef bytes obj
     cdef uint64 result
+    cdef const char* encoding
+    cdef Py_ssize_t encoding_size = 0
+
     if PyUnicode_Check(data):
-        obj = PyUnicode_AsUTF8String(data)
-        PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-        result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
-        PyBuffer_Release(&buf)
+        encoding = PyUnicode_AsUTF8AndSize(data, &encoding_size)
+        result = c_metrohash64(<const uint8 *>encoding, encoding_size, seed)
     elif PyBytes_Check(data):
-        result = c_metrohash64(<const uint8 *>PyBytes_AS_STRING(data),
-                               PyBytes_GET_SIZE(data), seed)
+        result = c_metrohash64(
+            <const uint8 *>PyBytes_AS_STRING(data),
+            PyBytes_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash64(<const uint8 *>buf.buf, buf.len, seed)
@@ -254,16 +257,17 @@ Raises:
     OverflowError: if seed cannot be converted to unsigned int64
     """
     cdef Py_buffer buf
-    cdef bytes obj
     cdef uint128 result
+    cdef const char* encoding
+    cdef Py_ssize_t encoding_size = 0
+
     if PyUnicode_Check(data):
-        obj = PyUnicode_AsUTF8String(data)
-        PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-        result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
-        PyBuffer_Release(&buf)
+        encoding = PyUnicode_AsUTF8AndSize(data, &encoding_size)
+        result = c_metrohash128(<const uint8 *>encoding, encoding_size, seed)
     elif PyBytes_Check(data):
-        result = c_metrohash128(<const uint8 *>PyBytes_AS_STRING(data),
-                                PyBytes_GET_SIZE(data), seed)
+        result = c_metrohash128(
+            <const uint8 *>PyBytes_AS_STRING(data),
+            PyBytes_GET_SIZE(data), seed)
     elif PyObject_CheckBuffer(data):
         PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
         result = c_metrohash128(<const uint8 *>buf.buf, buf.len, seed)
@@ -320,15 +324,16 @@ Raises:
     ValueError: if input buffer is not C-contiguous
         """
         cdef Py_buffer buf
-        cdef bytes obj
+        cdef const char* encoding
+        cdef Py_ssize_t encoding_size = 0
+
         if PyUnicode_Check(data):
-            obj = PyUnicode_AsUTF8String(data)
-            PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-            self._m.Update(<const uint8 *>buf.buf, buf.len)
-            PyBuffer_Release(&buf)
+            encoding = PyUnicode_AsUTF8AndSize(data, &encoding_size)
+            self._m.Update(<const uint8 *>encoding, encoding_size)
         elif PyBytes_Check(data):
-            self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
-                           PyBytes_GET_SIZE(data))
+            self._m.Update(
+                <const uint8 *>PyBytes_AS_STRING(data),
+                PyBytes_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
@@ -415,15 +420,16 @@ Raises:
     ValueError: if input buffer is not C-contiguous
         """
         cdef Py_buffer buf
-        cdef bytes obj
+        cdef const char* encoding
+        cdef Py_ssize_t encoding_size = 0
+
         if PyUnicode_Check(data):
-            obj = PyUnicode_AsUTF8String(data)
-            PyObject_GetBuffer(obj, &buf, PyBUF_SIMPLE)
-            self._m.Update(<const uint8 *>buf.buf, buf.len)
-            PyBuffer_Release(&buf)
+            encoding = PyUnicode_AsUTF8AndSize(data, &encoding_size)
+            self._m.Update(<const uint8 *>encoding, encoding_size)
         elif PyBytes_Check(data):
-            self._m.Update(<const uint8 *>PyBytes_AS_STRING(data),
-                           PyBytes_GET_SIZE(data))
+            self._m.Update(
+                <const uint8 *>PyBytes_AS_STRING(data),
+                PyBytes_GET_SIZE(data))
         elif PyObject_CheckBuffer(data):
             PyObject_GetBuffer(data, &buf, PyBUF_SIMPLE)
             self._m.Update(<const uint8 *>buf.buf, buf.len)
