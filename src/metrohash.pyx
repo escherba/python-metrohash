@@ -10,7 +10,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.3.0"
+__version__ = "0.3.0.post0"
 __all__     = [
     "MetroHash64",
     "MetroHash128",
@@ -46,7 +46,7 @@ cdef extern from "<utility>" namespace "std" nogil:
 
 cdef extern from "Python.h":
     # Note that following functions can potentially raise an exception,
-    # thus they cannot be declared 'nogil'. Also PyUnicode_AsUTF8AndSize() can
+    # thus they cannot be declared 'nogil'. Also, PyUnicode_AsUTF8AndSize() can
     # potentially allocate memory inside in unlikely case of when underlying
     # unicode object was stored as non-utf8 and utf8 wasn't requested before.
     const char* PyUnicode_AsUTF8AndSize(object obj, Py_ssize_t* length) except NULL
