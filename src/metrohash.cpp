@@ -1462,7 +1462,7 @@ static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_seed[] = "seed";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_0_2_1[] = "0.2.1";
+static const char __pyx_k_0_3_0[] = "0.3.0";
 static const char __pyx_k_email[] = "__email__";
 static const char __pyx_k_author[] = "__author__";
 static const char __pyx_k_buffer[] = "buffer";
@@ -1499,7 +1499,7 @@ static const char __pyx_k_has_incorrect_type_expected[] = "' has incorrect type:
 static const char __pyx_k_escherba_metrohash_gmail_com[] = "escherba+metrohash@gmail.com";
 static const char __pyx_k_Python_wrapper_for_MetroHash_a[] = "\nPython wrapper for MetroHash, a fast non-cryptographic hashing algorithm\n";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
-static PyObject *__pyx_kp_u_0_2_1;
+static PyObject *__pyx_kp_u_0_3_0;
 static PyObject *__pyx_kp_u_Argument;
 static PyObject *__pyx_kp_u_Eugene_Scherba;
 static PyObject *__pyx_n_s_MemoryError;
@@ -5508,7 +5508,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_u_0_2_1, __pyx_k_0_2_1, sizeof(__pyx_k_0_2_1), 0, 1, 0, 0},
+  {&__pyx_kp_u_0_3_0, __pyx_k_0_3_0, sizeof(__pyx_k_0_3_0), 0, 1, 0, 0},
   {&__pyx_kp_u_Argument, __pyx_k_Argument, sizeof(__pyx_k_Argument), 0, 1, 0, 0},
   {&__pyx_kp_u_Eugene_Scherba, __pyx_k_Eugene_Scherba, sizeof(__pyx_k_Eugene_Scherba), 0, 1, 0, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
@@ -6030,7 +6030,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"             # <<<<<<<<<<<<<<
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.2.1"
+ * __version__ = "0.3.0"
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_author, __pyx_kp_u_Eugene_Scherba) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
 
@@ -6038,7 +6038,7 @@ if (!__Pyx_RefNanny) {
  * 
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"             # <<<<<<<<<<<<<<
- * __version__ = "0.2.1"
+ * __version__ = "0.3.0"
  * __all__     = [
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_email, __pyx_kp_u_escherba_metrohash_gmail_com) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
@@ -6046,15 +6046,15 @@ if (!__Pyx_RefNanny) {
   /* "metrohash.pyx":13
  * __author__  = "Eugene Scherba"
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.2.1"             # <<<<<<<<<<<<<<
+ * __version__ = "0.3.0"             # <<<<<<<<<<<<<<
  * __all__     = [
  *     "MetroHash64",
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_u_0_2_1) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_u_0_3_0) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
 
   /* "metrohash.pyx":14
  * __email__   = "escherba+metrohash@gmail.com"
- * __version__ = "0.2.1"
+ * __version__ = "0.3.0"
  * __all__     = [             # <<<<<<<<<<<<<<
  *     "MetroHash64",
  *     "MetroHash128",
