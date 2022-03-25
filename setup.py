@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
 import struct
+import os
 from os.path import join, dirname
 
 from setuptools import setup
@@ -116,7 +116,7 @@ EXT_MODULES = [
     ),
 ]
 
-VERSION = "0.3.0.post1"
+VERSION = "0.3.1"
 URL = "https://github.com/escherba/python-metrohash"
 
 
