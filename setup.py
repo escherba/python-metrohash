@@ -141,6 +141,7 @@ setup(
     download_url=URL + "/tarball/master/" + VERSION,
     name="metrohash",
     license="Apache License 2.0",
+    python_requires='>=3.6',
     zip_safe=False,
     cmdclass=CMDCLASS,
     ext_modules=EXT_MODULES,
