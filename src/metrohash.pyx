@@ -366,7 +366,7 @@ cdef class MetroHash128(object):
 
     def update(self, data) -> None:
         """Update digest with new data.
-:
+
         :param data: input data (either string or buffer type)
         :raises TypeError: if input data is not a string or a buffer
         :raises ValueError: if input buffer is not C-contiguous
