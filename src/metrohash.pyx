@@ -392,7 +392,7 @@ cdef class MetroHash128(object):
     cpdef bytes digest(self):
         """Obtain bytes digest.
 
-        :return: sixteen bytes representing the 128-bit hash (bytes)
+        :return: sixteen bytes representing the 128-bit hash
         """
         cdef bytearray out = bytearray(16)
         self._m.Finalize(out)
