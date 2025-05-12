@@ -41,7 +41,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest
           CIBW_TEST_COMMAND: 'pytest -s {project}/tests'
           CIBW_TEST_SKIP: '*-macosx_arm64'  # Until the day Apple silicon instances are available on GitHub Actions
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: ./wheelhouse/*.whl
   build_sdist:
@@ -58,7 +58,7 @@ jobs:
         run: |
           pip install py-cpuinfo
           python setup.py build sdist
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: dist/*.tar.gz
   publish:
