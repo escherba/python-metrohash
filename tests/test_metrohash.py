@@ -18,8 +18,7 @@ EMPTY_STRING = ""
 EMPTY_UNICODE = u""  # pylint: disable=redundant-u-string-prefix
 
 
-if sys.version_info[0] >= 3:
-    long = int
+long = int
 
 
 def random_string(n, alphabet=string.ascii_lowercase):
@@ -33,6 +32,16 @@ def random_splits(s, n, nsplits=2):
     splits = [0] + splits + [n]
     for begin, end in zip(splits, splits[1:]):
         yield s[begin:end]
+
+
+class TestBasic(unittest.TestCase):
+
+    """test basic methods"""
+
+    def test_basic_methods(self):
+        """Basic hash tests against known results"""
+        self.assertEqual(metrohash64("abc", seed=0), 17099979927131455419)
+        self.assertEqual(metrohash128("abc"), 182995299641628952910564950850867298725)
 
 
 class TestStateless(unittest.TestCase):
