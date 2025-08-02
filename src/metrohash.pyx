@@ -10,7 +10,7 @@ Python wrapper for MetroHash, a fast non-cryptographic hashing algorithm
 
 __author__  = "Eugene Scherba"
 __email__   = "escherba+metrohash@gmail.com"
-__version__ = "0.3.4"
+__version__ = "0.4.0"
 __all__     = [
     "MetroHash64",
     "MetroHash128",
@@ -76,8 +76,6 @@ cdef extern from "metro.h" nogil:
         @staticmethod
         void Hash(const uint8* key, const uint64 length, uint8* const out, const uint64 seed)
 
-
-from cpython cimport long
 
 from cpython.buffer cimport PyObject_CheckBuffer
 from cpython.buffer cimport PyObject_GetBuffer
@@ -250,7 +248,7 @@ def hash128_int(data, uint64 seed=0ULL) -> int:
         PyBuffer_Release(&buf)
     else:
         raise _type_error("data", ["basestring", "buffer"], data)
-    return (long(result.first) << 64ULL) + long(result.second)
+    return (int(result.first) << 64ULL) + int(result.second)
 
 
 cdef class MetroHash64(object):
@@ -413,4 +411,4 @@ cdef class MetroHash128(object):
         cdef uint8 buf[16]
         self._m.Finalize(buf)
         cdef uint128 result = c_bytes2int128(buf)
-        return (long(result.first) << 64ULL) + long(result.second)
+        return (int(result.first) << 64ULL) + int(result.second)
