@@ -117,7 +117,7 @@ EXT_MODULES = [
     ),
 ]
 
-VERSION = "0.3.3"
+VERSION = "0.3.4"
 URL = "https://github.com/escherba/python-metrohash"
 
 
@@ -162,6 +162,7 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Scientific/Engineering :: Information Analysis",
         "Topic :: Software Development :: Libraries",
         "Topic :: System :: Distributed Computing",
