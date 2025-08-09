@@ -4,12 +4,9 @@ Python wrapper for [MetroHash](https://github.com/jandrewrogers/MetroHash), a
 fast non-cryptographic hash function.
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/escherba/python-metrohash/build.yml?branch=master)](https://github.com/escherba/python-metrohash/actions/workflows/build.yml)
-[![Latest
-Version](https://img.shields.io/pypi/v/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
-[![Downloads](https://img.shields.io/pypi/dm/metrohash.svg)](https://pypistats.org/packages/metrohash)
+[![Latest Version](https://img.shields.io/pypi/v/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
 [![License](https://img.shields.io/pypi/l/metrohash.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Supported Python
-versions](https://img.shields.io/pypi/pyversions/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/metrohash.svg)](https://pypi.python.org/pypi/metrohash)
 
 ## Getting Started
 
